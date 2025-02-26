@@ -4,6 +4,7 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ligyu"]
 texture = ExtResource("1_0mokk")
+use_texture_padding = false
 0:0/0 = 0
 0:0/0/custom_data_1 = true
 1:0/0 = 0
