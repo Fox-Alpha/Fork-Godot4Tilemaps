@@ -5,6 +5,10 @@ extends Node2D
 @export var noise_texture : NoiseTexture2D
 @export var tree_noise_texture : NoiseTexture2D
 
+@export var _zoom_step := 0.12
+@export var _min_zoom := 1.0
+@export var _max_zoom := 3.0
+
 var width : int = 300
 var height : int =  300
 
@@ -75,14 +79,17 @@ func generate_world():
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
 	tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
 
-func _input(_event):
-	if Input.is_action_just_pressed("zoom_in"):
-		var zoom_val =camera_2d.zoom.x + 0.1
-		
-		camera_2d.zoom = Vector2(zoom_val, zoom_val)
-	elif Input.is_action_just_pressed("zoom_out"):
-		var zoom_val =camera_2d.zoom.x - 0.1
-		if zoom_val == 0:
-			zoom_val =camera_2d.zoom.x - 0.2
-			
-		camera_2d.zoom = Vector2(zoom_val, zoom_val)
+
+func _input(event):
+	if event.is_action_pressed("zoom_in"):
+		zoom_step(-1)
+	if event.is_action_pressed("zoom_out"):
+		zoom_step(1)
+
+func zoom_step(zoom_direction : int):
+	var zoom := Vector2.ZERO
+	if zoom_direction != 0:
+		zoom = Vector2(clamp(camera_2d.zoom.x + zoom_direction * camera_2d.zoom.x * _zoom_step, _min_zoom, _max_zoom),
+			clamp(camera_2d.zoom.y + zoom_direction * camera_2d.zoom.y * _zoom_step, _min_zoom, _max_zoom))
+		camera_2d.zoom = zoom
+	pass
