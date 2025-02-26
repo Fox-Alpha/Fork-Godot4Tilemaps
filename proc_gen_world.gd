@@ -6,11 +6,11 @@ extends Node2D
 @export var tree_noise_texture : NoiseTexture2D
 
 @export var _zoom_step := 0.12
-@export var _min_zoom := 1.0
+@export var _min_zoom := 0.01
 @export var _max_zoom := 3.0
 
-var width : int = 300
-var height : int =  300
+var width : int = 256
+var height : int =  256
 
 var noise : Noise
 var tree_noise : Noise
@@ -44,6 +44,7 @@ func _ready():
 	generate_world()
 	
 func generate_world():
+	print("%s Begin Terrain Generation ...." % [str(Time.get_ticks_msec())])
 	var noise_val
 	var tree_noise_val 
 	for x in range(floorf(-width/2.0), floorf(width/2.0)):
@@ -74,10 +75,19 @@ func generate_world():
 						tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas)
 
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
-
+	print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
+	
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(sand_arr, 3,0)
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
 	tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
+	
+	print("%s End Terrain Generation ...." % [str(Time.get_ticks_msec())])
+	
+	print("WaterLayer Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
+	print("Ground 1 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_1_layer].get_used_cells().size())])
+	print("Ground 2 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_2_layer].get_used_cells().size())])
+	print("Cliffs Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.cliff_layer].get_used_cells().size())])
+	print("Enviroment Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.environment_layer].get_used_cells().size())])
 
 
 func _input(event):
