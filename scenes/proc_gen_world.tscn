@@ -10,7 +10,9 @@ offsets = PackedFloat32Array(0, 0.5)
 colors = PackedColorArray(0.217716, 0.414628, 0.55, 1, 0.169919, 0.396875, 0.148271, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b7j00"]
-noise_type = 0
+noise_type = 3
+seed = 19771202
+fractal_octaves = 3
 cellular_distance_function = 3
 cellular_jitter = -4.105
 cellular_return_type = 3
@@ -29,6 +31,7 @@ noise = SubResource("FastNoiseLite_awwj8")
 
 [node name="proc_gen_world" type="Node2D" node_paths=PackedStringArray("tile_map_layers")]
 y_sort_enabled = true
+texture_filter = 1
 script = ExtResource("1_bdevv")
 tile_map_layers = [NodePath("TileMap/water"), NodePath("TileMap/ground"), NodePath("TileMap/ground2"), NodePath("TileMap/cliff"), NodePath("TileMap/environment")]
 noise_texture = SubResource("NoiseTexture2D_8ve5r")
@@ -37,34 +40,41 @@ tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
 [node name="TileMap" type="Node" parent="."]
 
 [node name="water" type="TileMapLayer" parent="TileMap"]
+visible = false
 z_index = -1
+y_sort_enabled = true
 texture_filter = 1
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
+collision_visibility_mode = 2
 
 [node name="ground" type="TileMapLayer" parent="TileMap"]
-z_index = -1
+y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
 [node name="ground2" type="TileMapLayer" parent="TileMap"]
-z_index = -1
+visible = false
+y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
 [node name="cliff" type="TileMapLayer" parent="TileMap"]
+visible = false
+z_index = 1
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 y_sort_origin = 16
 
 [node name="environment" type="TileMapLayer" parent="TileMap"]
-y_sort_enabled = true
+visible = false
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
 [node name="Player" parent="." instance=ExtResource("3_eowgc")]
-SPEED = 300.0
+position = Vector2(25, 21)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
+zoom = Vector2(0.1, 0.1)
