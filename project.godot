@@ -72,6 +72,18 @@ zoom_out={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Water"
+2d_physics/layer_2="Ground-1"
+2d_physics/layer_3="Ground-2"
+2d_physics/layer_4="Cliff"
+2d_physics/layer_5="Environment"
+2d_physics/layer_8="Border"
+2d_physics/layer_10="Player"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+viewport/hdr_2d=true
+viewport/transparent_background=true
