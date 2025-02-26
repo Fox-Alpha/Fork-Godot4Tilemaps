@@ -1,9 +1,6 @@
 extends Node2D
 
-
-@export var tile_map_layers : Array[TileMapLayer] = [$TileMap/water, $TileMap/ground, $TileMap/ground2, $TileMap/cliff, $TileMap/environment]
-
-
+@export var tile_map_layers : Array[TileMapLayer] = []
 
 @export var noise_texture : NoiseTexture2D
 @export var tree_noise_texture : NoiseTexture2D
@@ -45,8 +42,8 @@ func _ready():
 func generate_world():
 	var noise_val
 	var tree_noise_val 
-	for x in range(-width/2, width/2):
-		for y in range(-height/2, height/2):
+	for x in range(floorf(-width/2.0), floorf(width/2.0)):
+		for y in range(-height/2.0, height/2.0):
 			noise_val = noise.get_noise_2d(x,y)
 			tree_noise_val = tree_noise.get_noise_2d(x,y)
 			
@@ -71,16 +68,14 @@ func generate_world():
 				if noise_val < 0.18:
 					if tree_noise_val > 0.92:
 						tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas)
-				
-			
-				
+
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
 
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(sand_arr, 3,0)
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
 	tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("zoom_in"):
 		var zoom_val =camera_2d.zoom.x + 0.1
 		
