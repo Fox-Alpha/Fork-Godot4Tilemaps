@@ -34,20 +34,30 @@ enum LAYERS {
 	environment_layer =4	
 }
 
+signal World_Generated
+
 var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0)]
 @onready var camera_2d = $Player/Camera2D
+@onready var player: CharacterBody2D = $Player
 
 
 func _ready():
+	World_Generated.connect(func():  Spawn_Player())
 	noise = noise_texture.noise
 	tree_noise = tree_noise_texture.noise
-	generate_world()
+	print("%s Begin Terrain Generation ...." % [str(Time.get_ticks_msec())])
+	await self.generate_world()
+	#await self
+	print("%s End Terrain Generation ...." % [str(Time.get_ticks_msec())])
+	#Spawn_Player()
+	
 	
 func generate_world():
-	print("%s Begin Terrain Generation ...." % [str(Time.get_ticks_msec())])
 	var noise_val
 	var tree_noise_val 
-	for x in range(floorf(-width/2.0), floorf(width/2.0)):
+	#for x in range(floorf(-width/2.0), floorf(width/2.0)):
+		#for y in range(-height/2.0, height/2.0):
+	for x in range(-width/2.0, width/2.0):
 		for y in range(-height/2.0, height/2.0):
 			noise_val = noise.get_noise_2d(x,y)
 			tree_noise_val = tree_noise.get_noise_2d(x,y)
@@ -77,17 +87,29 @@ func generate_world():
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
 	print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
 	
+	print("%s Connect Terrain Generation .... Ground 1 => Sand" % [str(Time.get_ticks_msec())])
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(sand_arr, 3,0)
+	print("%s Connect Terrain Generation .... Ground 1 => Grass" % [str(Time.get_ticks_msec())])
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
-	tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
+	print("%s Connect Terrain Generation .... Ground 1 => Cliff" % [str(Time.get_ticks_msec())])
+	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(cliff_arr, 4,0)
 	
-	print("%s End Terrain Generation ...." % [str(Time.get_ticks_msec())])
+	print("%s Connect Terrain Generation .... Ground 1 => Water" % [str(Time.get_ticks_msec())])
+	var grnd_arr : Array = tile_map_layers[LAYERS.ground_1_layer].get_used_cells() 
+	for i in grnd_arr:
+		tile_map_layers[LAYERS.water_layer].set_cell(i)
+	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grnd_arr, 5,0)
 	
+	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(, 3,0)
+
 	print("WaterLayer Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
 	print("Ground 1 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_1_layer].get_used_cells().size())])
 	print("Ground 2 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_2_layer].get_used_cells().size())])
 	print("Cliffs Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.cliff_layer].get_used_cells().size())])
 	print("Enviroment Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.environment_layer].get_used_cells().size())])
+	
+	World_Generated.emit()
+	return true
 
 
 func _input(event):
@@ -103,3 +125,15 @@ func zoom_step(zoom_direction : int):
 			clamp(camera_2d.zoom.y + zoom_direction * camera_2d.zoom.y * _zoom_step, _min_zoom, _max_zoom))
 		camera_2d.zoom = zoom
 	pass
+
+func Spawn_Player() -> void:
+	var plypos : Vector2 = $TileMap/ground.to_local(player.global_position)
+	var loc_coord : Vector2i = $TileMap/ground.local_to_map(plypos)
+	#var td : TileData = $TileMap/ground.get_cell_tile_data(loc_coord)
+	var arr : Array = $TileMap/ground.get_used_cells()
+	var newtile = arr.pick_random()
+	
+	
+	player.global_position = $TileMap/ground.to_global(newtile)
+	
+	print("Respawn Player Position %s " % loc_coord)
