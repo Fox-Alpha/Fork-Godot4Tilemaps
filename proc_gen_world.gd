@@ -132,8 +132,19 @@ func Spawn_Player() -> void:
 	#var td : TileData = $TileMap/ground.get_cell_tile_data(loc_coord)
 	var arr : Array = $TileMap/ground.get_used_cells()
 	var newtile = arr.pick_random()
-	
+	print("New Random Position: %s " % [newtile])
+	var nst = $TileMap/ground.get_surrounding_cells(newtile)
+
+
+	while nst.size() != 4:
+		newtile = arr.pick_random()
+		nst = $TileMap/ground.get_surrounding_cells(newtile)
+		print("Next New Random Position: %s " % [nst])
+		
+	#for t in nst.size():
+		#var td : TileData = $TileMap/ground.get_cell_tile_data(t)
+		#pass
 	
 	player.global_position = $TileMap/ground.to_global(newtile)
 	
-	print("Respawn Player Position %s " % loc_coord)
+	print("Respawn Player Position %s / %s " % [loc_coord, newtile])
