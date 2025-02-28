@@ -40,7 +40,6 @@ tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
 [node name="TileMap" type="Node" parent="."]
 
 [node name="water" type="TileMapLayer" parent="TileMap"]
-visible = false
 z_index = -1
 y_sort_enabled = true
 texture_filter = 1
