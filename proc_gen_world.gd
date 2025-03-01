@@ -35,14 +35,18 @@ enum LAYERS {
 }
 
 signal World_Generated
+signal PLayer_Respawned
 
 var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0)]
 @onready var camera_2d = $Player/Camera2D
 @onready var player: CharacterBody2D = $Player
+@onready var tentpattern : TileMapPattern = $TileMap/ground.tile_set.get_pattern(0)
 
 
 func _ready():
 	World_Generated.connect(func():  Spawn_Player())
+	PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
+	
 	noise = noise_texture.noise
 	tree_noise = tree_noise_texture.noise
 	print("%s Begin Terrain Generation ...." % [str(Time.get_ticks_msec())])
@@ -148,3 +152,13 @@ func Spawn_Player() -> void:
 	player.global_position = $TileMap/ground.to_global(newtile)
 	
 	print("Respawn Player Position %s / %s " % [loc_coord, newtile])
+	PLayer_Respawned.emit(loc_coord)
+
+func Spawn_Tent(playerpos : Vector2i) -> void:
+	print("Spawn_Tent() => Player Position: %s " % [playerpos])
+	
+	if !tentpattern.is_empty():
+		$TileMap/ground.set_pattern(Vector2i(playerpos.x-5, playerpos.y), tentpattern)
+		pass
+	
+	pass
