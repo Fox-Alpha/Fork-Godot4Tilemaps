@@ -92,14 +92,18 @@ func generate_world():
 
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
 
-	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(sand_arr, 3,0)
-	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
-	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(cliff_arr, 4,0)
+	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(sand_arr, 5,0)
 
+#region Delete watertiles
+	## Delete all watertiles under Ground
 	var grnd_arr : Array = tile_map_layers[LAYERS.ground_1_layer].get_used_cells() 
 	for i in grnd_arr:
-		tile_map_layers[LAYERS.water_layer].set_cell(i)
-	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grnd_arr, 5,0)
+		tile_map_layers[LAYERS.water_layer].erase_cell(i)
+#endregion
+
+	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
+	#tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
+	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grnd_arr, 5,0)
 
 	World_Generated.emit()
 
