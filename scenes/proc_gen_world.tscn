@@ -41,7 +41,6 @@ tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
 [node name="TileMap" type="Node" parent="."]
 
 [node name="water" type="TileMapLayer" parent="TileMap"]
-visible = false
 z_index = -1
 y_sort_enabled = true
 texture_filter = 1
@@ -50,7 +49,6 @@ tile_set = ExtResource("2_5e5w1")
 collision_visibility_mode = 2
 
 [node name="ground" type="TileMapLayer" parent="TileMap"]
-visible = false
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
