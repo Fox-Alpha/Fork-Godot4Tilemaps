@@ -134,27 +134,29 @@ func zoom_step(zoom_direction : int):
 	pass
 
 func Spawn_Player() -> void:
+	var newtile := Vector2i.ZERO 
+	var nst : Array = [] #$TileMap/ground.get_surrounding_cells(newtile)
+	var test_tile : Array = []
+
 	var plypos : Vector2 = $TileMap/ground.to_local(player.global_position)
 	var loc_coord : Vector2i = $TileMap/ground.local_to_map(plypos)
 	#var td : TileData = $TileMap/ground.get_cell_tile_data(loc_coord)
 	var arr : Array = $TileMap/ground.get_used_cells()
-	var newtile = arr.pick_random()
-	print("New Random Position: %s " % [newtile])
-	var nst = $TileMap/ground.get_surrounding_cells(newtile)
 
-
-	while nst.size() != 4:
+	while test_tile.size() != 4:
 		newtile = arr.pick_random()
+		print("Picking Random Position: %s " % [newtile])
 		nst = $TileMap/ground.get_surrounding_cells(newtile)
-		print("Next New Random Position: %s " % [nst])
-		
-	#for t in nst.size():
-		#var td : TileData = $TileMap/ground.get_cell_tile_data(t)
-		#pass
+		test_tile = nst.filter(func(coord): 
+			var sid : int = $TileMap/ground.get_cell_source_id(coord)
+			var atl_coords = $TileMap/ground.get_cell_atlas_coords(coord)
+			print("Surround Tile %s ID: %s / Atlas: %s" % [coord, str(sid), atl_coords])
+			return atl_coords != Vector2i(0,1))
+
+	var gpp  = $TileMap/ground.to_global(newtile)
+	player.global_position = gpp
 	
-	player.global_position = $TileMap/ground.to_global(newtile)
-	
-	print("Respawn Player Position %s / %s " % [loc_coord, newtile])
+	print("Respawn Player Position %s / %s " % [gpp, newtile])
 	PLayer_Respawned.emit(loc_coord)
 
 func Spawn_Tent(playerpos : Vector2i) -> void:
