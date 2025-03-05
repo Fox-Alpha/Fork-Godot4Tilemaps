@@ -41,6 +41,7 @@ var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i
 @onready var camera_2d = $Player/Camera2D
 @onready var player: CharacterBody2D = $Player
 @onready var tentpattern : TileMapPattern = $TileMap/ground.tile_set.get_pattern(0)
+@onready var rng = RandomNumberGenerator.new()
 
 
 func _ready():
@@ -59,8 +60,9 @@ func _ready():
 func generate_world():
 	var noise_val
 	var tree_noise_val 
-	#for x in range(floorf(-width/2.0), floorf(width/2.0)):
-		#for y in range(-height/2.0, height/2.0):
+	rng.randomize()
+	noise_texture.noise.seed = rng.randi()
+
 	for x in range(-width/2.0, width/2.0):
 		for y in range(-height/2.0, height/2.0):
 			noise_val = noise.get_noise_2d(x,y)
