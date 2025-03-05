@@ -46,7 +46,7 @@ var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i
 
 func _ready():
 	World_Generated.connect(func():  Spawn_Player())
-	PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
+	#PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
 	
 	noise = noise_texture.noise
 	tree_noise = tree_noise_texture.noise
