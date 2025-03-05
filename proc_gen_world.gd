@@ -91,30 +91,31 @@ func generate_world():
 						tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas)
 
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
-	print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
-	
-	print("%s Connect Terrain Generation .... Ground 1 => Sand" % [str(Time.get_ticks_msec())])
+
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(sand_arr, 3,0)
-	print("%s Connect Terrain Generation .... Ground 1 => Grass" % [str(Time.get_ticks_msec())])
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
-	print("%s Connect Terrain Generation .... Ground 1 => Cliff" % [str(Time.get_ticks_msec())])
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(cliff_arr, 4,0)
-	
-	print("%s Connect Terrain Generation .... Ground 1 => Water" % [str(Time.get_ticks_msec())])
+
 	var grnd_arr : Array = tile_map_layers[LAYERS.ground_1_layer].get_used_cells() 
 	for i in grnd_arr:
 		tile_map_layers[LAYERS.water_layer].set_cell(i)
 	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grnd_arr, 5,0)
-	
-	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(, 3,0)
 
+	World_Generated.emit()
+
+#region Debug Prints
+	print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
+	#print("%s Connect Terrain Generation .... Ground 1 => Sand" % [str(Time.get_ticks_msec())])
+	#print("%s Connect Terrain Generation .... Ground 1 => Grass" % [str(Time.get_ticks_msec())])
+	#print("%s Connect Terrain Generation .... Ground 1 => Cliff" % [str(Time.get_ticks_msec())])
+	#print("%s Connect Terrain Generation .... Ground 1 => Water" % [str(Time.get_ticks_msec())])
 	print("WaterLayer Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
 	print("Ground 1 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_1_layer].get_used_cells().size())])
 	print("Ground 2 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_2_layer].get_used_cells().size())])
 	print("Cliffs Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.cliff_layer].get_used_cells().size())])
 	print("Enviroment Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.environment_layer].get_used_cells().size())])
-	
-	World_Generated.emit()
+#endregion
+
 	return true
 
 
