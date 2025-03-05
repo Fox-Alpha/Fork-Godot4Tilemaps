@@ -86,6 +86,7 @@ func generate_world():
 			# setting sand and palm trees between water and grass
 			if noise_val > 0:
 				sand_arr.append(Vector2(x,y))
+				tile_map_layers[LAYERS.ground_1_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
 				if noise_val < 0.18:
 					if tree_noise_val > 0.92:
 						tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas)
