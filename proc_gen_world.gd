@@ -109,7 +109,6 @@ func generate_world():
 
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
 
-	tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(sand_arr, 5,0)
 
 #region Delete watertiles
 	## Delete all watertiles under Ground
@@ -160,26 +159,27 @@ func zoom_step(zoom_direction : int):
 	pass
 
 func Spawn_Player() -> void:
+	var tml : TileMapLayer = tile_map_layers[0]
 	var newtile := Vector2i.ZERO 
 	var nst : Array = [] #$TileMap/ground.get_surrounding_cells(newtile)
 	var test_tile : Array = []
 
-	var plypos : Vector2 = $TileMap/ground.to_local(player.global_position)
-	var loc_coord : Vector2i = $TileMap/ground.local_to_map(plypos)
+	var plypos : Vector2 = tml.to_local(player.global_position)
+	var loc_coord : Vector2i = tml.local_to_map(plypos)
 	#var td : TileData = $TileMap/ground.get_cell_tile_data(loc_coord)
-	var arr : Array = $TileMap/ground.get_used_cells()
+	var arr : Array = tml.get_used_cells()
 
 	while test_tile.size() != 4:
 		newtile = arr.pick_random()
 		print("Picking Random Position: %s " % [newtile])
-		nst = $TileMap/ground.get_surrounding_cells(newtile)
+		nst = tml.get_surrounding_cells(newtile)
 		test_tile = nst.filter(func(coord): 
-			var sid : int = $TileMap/ground.get_cell_source_id(coord)
-			var atl_coords = $TileMap/ground.get_cell_atlas_coords(coord)
+			var sid : int = tml.get_cell_source_id(coord)
+			var atl_coords = tml.get_cell_atlas_coords(coord)
 			print("Surround Tile %s ID: %s / Atlas: %s" % [coord, str(sid), atl_coords])
 			return atl_coords != Vector2i(0,1))
 
-	var gpp  = $TileMap/ground.to_global(newtile)
+	var gpp  = tml.to_global(tml.map_to_local(newtile))
 	player.global_position = gpp
 	
 	print("Respawn Player Position %s / %s " % [gpp, newtile])
