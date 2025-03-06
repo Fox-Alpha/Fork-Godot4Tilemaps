@@ -75,4 +75,33 @@ tile_set = ExtResource("2_5e5w1")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
-zoom = Vector2(0.1, 0.1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -112.0
+offset_top = -46.0
+offset_right = -7.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Re-Generate
+"
+
+[node name="LabelMousePosition" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_GenerateButton_pressed"]
