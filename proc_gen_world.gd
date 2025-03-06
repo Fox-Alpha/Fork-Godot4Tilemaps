@@ -9,8 +9,8 @@ extends Node2D
 @export var _min_zoom := 0.01
 @export var _max_zoom := 3.0
 
-var width : int = 256
-var height : int =  256
+@export var width : int = 256
+@export var height : int =  256
 
 var noise : Noise
 var tree_noise : Noise
