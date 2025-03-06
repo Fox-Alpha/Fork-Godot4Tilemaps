@@ -89,19 +89,23 @@ func generate_world():
 				grass_arr.append(Vector2(x,y))
 				if noise_val > 0.3:
 					#random grass
-					tile_map_layers[LAYERS.ground_2_layer].set_cell(Vector2(x,y), 0,random_grass_atlas_arr.pick_random())
+					#tile_map_layers[LAYERS.ground_2_layer].set_cell(Vector2(x,y), 0,random_grass_atlas_arr.pick_random())
+					pass
 			
 			#setting trees where there are no cliffs
 			if (tree_noise_val > 0.9) and (noise_val > 0.3) and (noise_val < 0.5):
-				tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas2)
+				#tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas2)
+				pass
 		
 			# setting sand and palm trees between water and grass
 			if noise_val > 0:
 				sand_arr.append(Vector2(x,y))
-				tile_map_layers[LAYERS.ground_1_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
+				#tile_map_layers[LAYERS.ground_1_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
 				if noise_val < 0.18:
 					if tree_noise_val > 0.92:
-						tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas)
+						#tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas)
+						pass
+				pass
 
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
 
@@ -109,10 +113,14 @@ func generate_world():
 
 #region Delete watertiles
 	## Delete all watertiles under Ground
-	var grnd_arr : Array = tile_map_layers[LAYERS.ground_1_layer].get_used_cells() 
-	for i in grnd_arr:
+	#var grnd_arr : Array = tile_map_layers[LAYERS.ground_1_layer].get_used_cells() 
+	var watr_arr : Array = tile_map_layers[LAYERS.water_layer].get_used_cells() 
+	for i in sand_arr:
 		tile_map_layers[LAYERS.water_layer].erase_cell(i)
 #endregion
+
+	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(watr_arr, 5,0)
+	tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(sand_arr, 5,0)
 
 	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
 	#tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
@@ -121,16 +129,17 @@ func generate_world():
 	World_Generated.emit()
 
 #region Debug Prints
-	print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
+	#print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
 	#print("%s Connect Terrain Generation .... Ground 1 => Sand" % [str(Time.get_ticks_msec())])
 	#print("%s Connect Terrain Generation .... Ground 1 => Grass" % [str(Time.get_ticks_msec())])
 	#print("%s Connect Terrain Generation .... Ground 1 => Cliff" % [str(Time.get_ticks_msec())])
 	#print("%s Connect Terrain Generation .... Ground 1 => Water" % [str(Time.get_ticks_msec())])
-	print("WaterLayer Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
-	print("Ground 1 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_1_layer].get_used_cells().size())])
-	print("Ground 2 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_2_layer].get_used_cells().size())])
-	print("Cliffs Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.cliff_layer].get_used_cells().size())])
-	print("Enviroment Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.environment_layer].get_used_cells().size())])
+	#print("WaterLayer Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
+	print("PreGeneratad Sand Count Used Tiles: %s / %s ...." % [str(sand_arr.size()), str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
+	#print("Ground 1 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_1_layer].get_used_cells().size())])
+	#print("Ground 2 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_2_layer].get_used_cells().size())])
+	#print("Cliffs Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.cliff_layer].get_used_cells().size())])
+	#print("Enviroment Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.environment_layer].get_used_cells().size())])
 #endregion
 
 	return true
