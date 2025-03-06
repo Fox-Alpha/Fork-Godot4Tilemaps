@@ -41,6 +41,7 @@ var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i
 @onready var camera_2d = $Player/Camera2D
 @onready var player: CharacterBody2D = $Player
 @onready var tentpattern : TileMapPattern = $TileMap/ground.tile_set.get_pattern(0)
+@onready var label_mouse_position: Label = $CanvasLayer/LabelMousePosition
 @onready var rng = RandomNumberGenerator.new()
 
 
@@ -55,8 +56,19 @@ func _ready():
 	#await self
 	print("%s End Terrain Generation ...." % [str(Time.get_ticks_msec())])
 	#Spawn_Player()
-	
-	
+
+
+func _process(_delta: float) -> void:
+	var GlMoPos := get_global_mouse_position()
+	var tml : TileMapLayer = tile_map_layers[0]
+	var loc_mouse_coord : Vector2i = tml.local_to_map(GlMoPos)
+	var sml : TileMapLayer = tile_map_layers[4]
+	sml.clear()
+	sml.set_cell(loc_mouse_coord,4, Vector2i(0,0))
+	label_mouse_position.text = "Mouse Position in Map: %s" % str(loc_mouse_coord)
+	pass
+
+
 func generate_world():
 	var noise_val
 	var tree_noise_val 
