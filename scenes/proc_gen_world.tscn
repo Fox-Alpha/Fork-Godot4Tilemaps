@@ -11,14 +11,13 @@ colors = PackedColorArray(0.217716, 0.414628, 0.55, 1, 0.169919, 0.396875, 0.148
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b7j00"]
 noise_type = 3
-seed = 19771202
-frequency = 0.05
-fractal_octaves = 3
 cellular_distance_function = 3
 cellular_jitter = -4.105
 cellular_return_type = 3
+metadata/_preview_in_3d_space_ = true
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ve5r"]
+generate_mipmaps = false
 color_ramp = SubResource("Gradient_y5bgd")
 noise = SubResource("FastNoiseLite_b7j00")
 
@@ -37,6 +36,9 @@ script = ExtResource("1_bdevv")
 tile_map_layers = [NodePath("TileMap/water"), NodePath("TileMap/ground"), NodePath("TileMap/ground2"), NodePath("TileMap/cliff"), NodePath("TileMap/environment")]
 noise_texture = SubResource("NoiseTexture2D_8ve5r")
 tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
+_max_zoom = 8.84
+width = 64
+height = 64
 
 [node name="TileMap" type="Node" parent="."]
 
@@ -49,6 +51,7 @@ tile_set = ExtResource("2_5e5w1")
 collision_visibility_mode = 2
 
 [node name="ground" type="TileMapLayer" parent="TileMap"]
+visible = false
 y_sort_enabled = true
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
@@ -60,6 +63,7 @@ use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
 [node name="cliff" type="TileMapLayer" parent="TileMap"]
+visible = false
 z_index = 1
 y_sort_enabled = true
 use_parent_material = true
@@ -67,7 +71,6 @@ tile_set = ExtResource("2_5e5w1")
 y_sort_origin = 16
 
 [node name="environment" type="TileMapLayer" parent="TileMap"]
-visible = false
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
