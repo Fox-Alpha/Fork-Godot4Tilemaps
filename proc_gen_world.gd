@@ -184,3 +184,19 @@ func Spawn_Tent(playerpos : Vector2i) -> void:
 		pass
 	
 	pass
+
+
+func _on_GenerateButton_pressed() -> void:
+	print("%s Start Terrain Re-Generation ...." % [str(Time.get_ticks_msec())])
+	await ClearTileMapFirst()
+	await self.generate_world()
+	print("%s End Terrain Re-Generation ...." % [str(Time.get_ticks_msec())])
+
+
+func ClearTileMapFirst() -> void :
+	sand_arr.clear()
+	tile_map_layers.map(func(element): 
+		element.clear()
+		element.update_internals()
+		return true
+		)
