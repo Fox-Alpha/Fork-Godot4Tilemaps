@@ -30,8 +30,8 @@ enum preset{
 	size2048,
 }
 @export var mapsize : preset = preset.size64
-@export var width : int = 256
-@export var height : int =  256
+@export var width : int = 64
+@export var height : int =  64
 
 var noise : Noise
 var tree_noise : Noise
