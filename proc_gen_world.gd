@@ -129,12 +129,15 @@ func generate_world():
 				pass
 		
 			# setting sand and palm trees between water and grass
-			if noise_val > 0:
+			if noise_val > -0.125:
 				sand_arr.append(Vector2(x,y))
+				tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
+
 				if lasttile != tiles.GROUNDTILE:
 					tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y-1)], 5,0)
 					#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(nb, 5,0)
 					lasttile = tiles.GROUNDTILE
+				continue
 
 				#tile_map_layers[LAYERS.ground_1_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
 				if noise_val < 0.18:
@@ -155,13 +158,13 @@ func generate_world():
 #region Delete watertiles
 	## Delete all watertiles under Ground
 	#var grnd_arr : Array = tile_map_layers[LAYERS.ground_1_layer].get_used_cells() 
-	var watr_arr : Array = tile_map_layers[LAYERS.water_layer].get_used_cells() 
-	for i in sand_arr:
-		tile_map_layers[LAYERS.water_layer].erase_cell(i)
+	#var watr_arr : Array = tile_map_layers[LAYERS.water_layer].get_used_cells() 
+	#for i in sand_arr:
+		#tile_map_layers[LAYERS.water_layer].erase_cell(i)
 #endregion
 
 	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(watr_arr, 5,0)
-	tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(sand_arr, 5,0)
+	#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(sand_arr, 5,0)
 
 	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
 	#tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
