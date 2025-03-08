@@ -5,10 +5,6 @@ extends Node2D
 @export var noise_texture : NoiseTexture2D
 @export var tree_noise_texture : NoiseTexture2D
 
-@export var _zoom_step := 0.12
-@export var _min_zoom := 0.01
-@export var _max_zoom := 3.0
-
 @export_category("MapSize")
 @export var mapsizepreeset : Array[Vector2i] = []
 
@@ -59,7 +55,6 @@ signal World_Generated
 signal PLayer_Respawned
 
 var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0)]
-@onready var camera_2d = $Player/Camera2D
 @onready var player: CharacterBody2D = $Player
 @onready var tentpattern : TileMapPattern = $TileMap/ground.tile_set.get_pattern(0)
 @onready var label_mouse_position: Label = $CanvasLayer/LabelMousePosition
@@ -190,20 +185,6 @@ func generate_world():
 
 	return true
 
-
-func _input(event):
-	if event.is_action_pressed("zoom_in"):
-		zoom_step(-1)
-	if event.is_action_pressed("zoom_out"):
-		zoom_step(1)
-
-func zoom_step(zoom_direction : int):
-	var zoom := Vector2.ZERO
-	if zoom_direction != 0:
-		zoom = Vector2(clamp(camera_2d.zoom.x + zoom_direction * camera_2d.zoom.x * _zoom_step, _min_zoom, _max_zoom),
-			clamp(camera_2d.zoom.y + zoom_direction * camera_2d.zoom.y * _zoom_step, _min_zoom, _max_zoom))
-		camera_2d.zoom = zoom
-	pass
 
 func Spawn_Player() -> void:
 	var tml : TileMapLayer = tile_map_layers[0]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://nt74txyyhp2d"]
+[gd_scene load_steps=29 format=3 uid="uid://nt74txyyhp2d"]
 
 [ext_resource type="Script" uid="uid://bgv5gb7w6a248" path="res://scripts/player.gd" id="1_88qcy"]
 [ext_resource type="Texture2D" uid="uid://1tsrkrwoexmj" path="res://assets/new_character.png" id="2_saggl"]
+[ext_resource type="PackedScene" uid="uid://ca4hc1u1gs8oq" path="res://scenes/player/player_camera_2d.tscn" id="3_gmlin"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yni73"]
 radius = 1.0
@@ -331,4 +332,4 @@ parameters/conditions/is_moving = false
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerCamera2D" parent="." instance=ExtResource("3_gmlin")]

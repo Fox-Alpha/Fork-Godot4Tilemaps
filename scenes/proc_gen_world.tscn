@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://da1cjojoxlax0" path="res://proc_gen_world.gd" id="1_bdevv"]
 [ext_resource type="TileSet" uid="uid://0c6kxpetkkr0" path="res://data/tileset.tres" id="2_5e5w1"]
-[ext_resource type="PackedScene" uid="uid://nt74txyyhp2d" path="res://scenes/player.tscn" id="3_eowgc"]
+[ext_resource type="PackedScene" uid="uid://nt74txyyhp2d" path="res://scenes/player/player.tscn" id="3_eowgc"]
 
 [sub_resource type="Gradient" id="Gradient_y5bgd"]
 interpolation_mode = 1
@@ -36,7 +36,6 @@ script = ExtResource("1_bdevv")
 tile_map_layers = [NodePath("TileMap/water"), NodePath("TileMap/ground"), NodePath("TileMap/ground2"), NodePath("TileMap/cliff"), NodePath("TileMap/environment")]
 noise_texture = SubResource("NoiseTexture2D_8ve5r")
 tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
-_max_zoom = 8.84
 mapsizepreeset = Array[Vector2i]([Vector2i(0, 0), Vector2i(64, 64), Vector2i(128, 128), Vector2i(256, 256), Vector2i(384, 384), Vector2i(512, 512), Vector2i(768, 768), Vector2i(1024, 1024), Vector2i(2048, 2048)])
 mapsize = 2
 width = 50
