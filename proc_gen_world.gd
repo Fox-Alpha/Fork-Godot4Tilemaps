@@ -102,7 +102,7 @@ func generate_world():
 	var tree_noise_val 
 	rng.randomize()
 	noise_texture.noise.seed = rng.randi()
-
+	var lasttile : tiles = tiles.NOTHING
 	var tickstart : int = Time.get_ticks_msec()
 	print("%s Begin Terrain Generation ...." % [str(tickstart)])
 
@@ -131,6 +131,11 @@ func generate_world():
 			# setting sand and palm trees between water and grass
 			if noise_val > 0:
 				sand_arr.append(Vector2(x,y))
+				if lasttile != tiles.GROUNDTILE:
+					tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y-1)], 5,0)
+					#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(nb, 5,0)
+					lasttile = tiles.GROUNDTILE
+
 				#tile_map_layers[LAYERS.ground_1_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
 				if noise_val < 0.18:
 					if tree_noise_val > 0.92:
@@ -138,8 +143,14 @@ func generate_world():
 						pass
 				pass
 
-			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
+			#if noise_val < 0:
+				#tile_map_layers[LAYERS.cliff_layer].set_cell(Vector2(x,y), 0,Vector2i(12, 0))
+				#print("Negative noise: %s" % str(noise_val))
 
+			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
+			if lasttile != tiles.WATERTILE:
+				tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y-1)], 5,0)
+				lasttile = tiles.WATERTILE
 
 #region Delete watertiles
 	## Delete all watertiles under Ground
