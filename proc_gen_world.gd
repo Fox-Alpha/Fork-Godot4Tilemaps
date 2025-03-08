@@ -103,6 +103,7 @@ func generate_world():
 	rng.randomize()
 	noise_texture.noise.seed = rng.randi()
 	var lasttile : tiles = tiles.NOTHING
+	
 	var tickstart : int = Time.get_ticks_msec()
 	print("%s Begin Terrain Generation ...." % [str(tickstart)])
 
@@ -113,11 +114,12 @@ func generate_world():
 			
 			#setting cliffs
 			if noise_val > 0.6:
-				cliff_arr.append(Vector2(x,y))
+				#cliff_arr.append(Vector2(x,y))
+				pass
 			
 			#setting all grass tiles
 			if noise_val > 0.2:
-				grass_arr.append(Vector2(x,y))
+				#grass_arr.append(Vector2(x,y))
 				if noise_val > 0.3:
 					#random grass
 					#tile_map_layers[LAYERS.ground_2_layer].set_cell(Vector2(x,y), 0,random_grass_atlas_arr.pick_random())
