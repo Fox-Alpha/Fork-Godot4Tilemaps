@@ -126,8 +126,8 @@ func generate_world():
 				sand_arr.append(Vector2(x,y))
 				tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
 
+				#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y)], 5,0)
 				if lasttile != tiles.GROUNDTILE:
-					tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y-1)], 5,0)
 					#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(nb, 5,0)
 					lasttile = tiles.GROUNDTILE
 				continue
@@ -144,8 +144,8 @@ func generate_world():
 				#print("Negative noise: %s" % str(noise_val))
 
 			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
+			#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y)], 5,0)
 			if lasttile != tiles.WATERTILE:
-				tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y-1)], 5,0)
 				lasttile = tiles.WATERTILE
 
 #region Delete watertiles
@@ -202,7 +202,6 @@ func Spawn_Player() -> void:
 
 		nst = tml.get_surrounding_cells(newtile)
 		test_tile = nst.filter(func(coord): 
-			var sid : int = tml.get_cell_source_id(coord)
 			var atl_coords = tml.get_cell_atlas_coords(coord)
 
 			return atl_coords != Vector2i(0,1))
@@ -213,7 +212,7 @@ func Spawn_Player() -> void:
 	print("Respawn Player Position %s / %s " % [gpp, newtile])
 	PLayer_Respawned.emit(loc_coord)
 
-func Spawn_Tent(playerpos : Vector2i) -> void:
+func Spawn_Tent(_playerpos : Vector2i) -> void:
 	#print("Spawn_Tent() => Player Position: %s " % [playerpos])
 #
 	#if !tentpattern.is_empty():
@@ -228,8 +227,8 @@ func _on_GenerateButton_pressed() -> void:
 		height = mapsizepreeset[mapsize].y
 	print("%s Start Terrain Re-Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
 	
-	await ClearTileMapFirst()
-	await self.generate_world()
+	ClearTileMapFirst()
+	generate_world()
 	
 	print("%s End Terrain Re-Generation ...." % [str(Time.get_ticks_msec())])
 
