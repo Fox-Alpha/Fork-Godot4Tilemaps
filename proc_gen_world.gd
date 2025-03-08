@@ -68,22 +68,18 @@ var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i
 
 func _ready():
 	World_Generated.connect(func():  Spawn_Player())
-	#PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
-	
+	PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
+
 	if mapsize != preset.sizecustom:
 		width = mapsizepreeset[mapsize].x
 		height = mapsizepreeset[mapsize].y
 
-	
 	print("%s Terrain Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
 	
 	noise = noise_texture.noise
 	tree_noise = tree_noise_texture.noise
 
 	await self.generate_world()
-	#await self
-
-	#Spawn_Player()
 
 
 func _process(_delta: float) -> void:
@@ -212,22 +208,22 @@ func zoom_step(zoom_direction : int):
 func Spawn_Player() -> void:
 	var tml : TileMapLayer = tile_map_layers[0]
 	var newtile := Vector2i.ZERO 
-	var nst : Array = [] #$TileMap/ground.get_surrounding_cells(newtile)
-	var test_tile : Array = []
+	var nst : Array[Vector2i] = [] 
+	var test_tile : Array[Vector2i] = []
 
 	var plypos : Vector2 = tml.to_local(player.global_position)
 	var loc_coord : Vector2i = tml.local_to_map(plypos)
-	#var td : TileData = $TileMap/ground.get_cell_tile_data(loc_coord)
+
 	var arr : Array = tml.get_used_cells()
 
 	while test_tile.size() != 4:
 		newtile = arr.pick_random()
-		#print("Picking Random Position: %s " % [newtile])
+
 		nst = tml.get_surrounding_cells(newtile)
 		test_tile = nst.filter(func(coord): 
 			var sid : int = tml.get_cell_source_id(coord)
 			var atl_coords = tml.get_cell_atlas_coords(coord)
-			#print("Surround Tile %s ID: %s / Atlas: %s" % [coord, str(sid), atl_coords])
+
 			return atl_coords != Vector2i(0,1))
 
 	var gpp  = tml.to_global(tml.map_to_local(newtile))
@@ -237,12 +233,11 @@ func Spawn_Player() -> void:
 	PLayer_Respawned.emit(loc_coord)
 
 func Spawn_Tent(playerpos : Vector2i) -> void:
-	print("Spawn_Tent() => Player Position: %s " % [playerpos])
-	
-	if !tentpattern.is_empty():
-		$TileMap/ground.set_pattern(Vector2i(playerpos.x-5, playerpos.y), tentpattern)
-		pass
-	
+	#print("Spawn_Tent() => Player Position: %s " % [playerpos])
+#
+	#if !tentpattern.is_empty():
+		#$TileMap/ground.set_pattern(Vector2i(playerpos.x-5, playerpos.y), tentpattern)
+		#pass
 	pass
 
 
@@ -250,10 +245,11 @@ func _on_GenerateButton_pressed() -> void:
 	if mapsize != preset.sizecustom:
 		width = mapsizepreeset[mapsize].x
 		height = mapsizepreeset[mapsize].y
-	print("%s Terrain Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
-	print("%s Start Terrain Re-Generation ...." % [str(Time.get_ticks_msec())])
+	print("%s Start Terrain Re-Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
+	
 	await ClearTileMapFirst()
 	await self.generate_world()
+	
 	print("%s End Terrain Re-Generation ...." % [str(Time.get_ticks_msec())])
 
 
@@ -261,6 +257,6 @@ func ClearTileMapFirst() -> void :
 	sand_arr.clear()
 	tile_map_layers.map(func(element): 
 		element.clear()
-		element.update_internals()
+		#element.update_internals()
 		return true
-		)
+	)
