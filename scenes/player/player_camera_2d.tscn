@@ -3,4 +3,10 @@
 [ext_resource type="Script" uid="uid://cg0ho5d74dhqg" path="res://scenes/player/player_camera_2d.gd" id="1_l7t50"]
 
 [node name="PlayerCamera2D" type="Camera2D"]
+limit_left = -1030
+limit_top = -1030
+limit_right = 1030
+limit_bottom = 1030
 script = ExtResource("1_l7t50")
+_min_zoom = 0.6
+_max_zoom = 2.0
