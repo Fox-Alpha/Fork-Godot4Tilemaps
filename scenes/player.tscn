@@ -330,3 +330,5 @@ parameters/conditions/is_idle = false
 parameters/conditions/is_moving = false
 parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
