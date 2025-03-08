@@ -13,7 +13,7 @@ config_version=5
 config/name="Godot4Tilemaps"
 run/main_scene="uid://dhptvycu3kb8x"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.png"
+config/icon="uid://db2o8pn8oh2y4"
 
 [display]
 
