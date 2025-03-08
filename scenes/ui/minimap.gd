@@ -1,0 +1,45 @@
+extends Control
+
+var gamecam : Camera2D
+var currcam : Camera2D
+
+var fullscreenmapactive : bool = false
+
+@onready var minimap := $TextureRectMinimap
+@onready var cam2dmap : Camera2D = $SubViewport/Camera2DMinimap
+@onready var sub_viewport: SubViewport = $SubViewport
+@onready var vp = get_viewport()
+@onready var vpsize : Vector2 = vp.get_visible_rect().size
+@onready var tilemap : TileMapLayer = get_tree().current_scene.get_node("TileMap/water")
+
+
+func _ready():	
+	await RenderingServer.frame_post_draw
+	vpsize = vp.get_visible_rect().size
+
+	cam2dmap.position = vp.get_visible_rect().get_center()
+
+	gamecam = vp.get_camera_2d()
+	currcam = gamecam
+	print(tilemap.get_used_rect().size * tilemap.tile_set.tile_size)
+
+	sub_viewport.world_2d = vp.world_2d
+	sub_viewport.size = vp.size * 1.2
+	minimap.texture = sub_viewport.get_texture()
+
+
+func _process(_delta):
+	if fullscreenmapactive:
+		gamecam.global_position = Vector2(0,0) # get_parent().get_node("Ground").global_position
+		vp.content_scale_size = tilemap.get_used_rect().size * tilemap.tile_set.tile_size
+		vp.size = vpsize
+		gamecam.zoom = Vector2(0.575, 0.575)
+	else:
+		vp.content_scale_size = vpsize
+		vp.size = vpsize
+	cam2dmap.global_position = vp.get_camera_2d().global_position
+
+
+func _input(_event):
+	if Input.is_action_just_pressed("SwitchFullScreenMap"):
+		fullscreenmapactive = !fullscreenmapactive

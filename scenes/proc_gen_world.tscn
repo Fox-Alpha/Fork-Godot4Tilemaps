@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhptvycu3kb8x"]
+[gd_scene load_steps=10 format=3 uid="uid://dhptvycu3kb8x"]
 
 [ext_resource type="Script" uid="uid://da1cjojoxlax0" path="res://proc_gen_world.gd" id="1_bdevv"]
 [ext_resource type="TileSet" uid="uid://0c6kxpetkkr0" path="res://data/tileset.tres" id="2_5e5w1"]
 [ext_resource type="PackedScene" uid="uid://nt74txyyhp2d" path="res://scenes/player/player.tscn" id="3_eowgc"]
+[ext_resource type="PackedScene" uid="uid://c2jydhkkjxepj" path="res://scenes/ui/minimap.tscn" id="4_xgrcs"]
 
 [sub_resource type="Gradient" id="Gradient_y5bgd"]
 interpolation_mode = 1
@@ -74,7 +75,6 @@ tile_set = ExtResource("2_5e5w1")
 y_sort_origin = 16
 
 [node name="environment" type="TileMapLayer" parent="TileMap"]
-visible = false
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
@@ -89,10 +89,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -112.0
-offset_top = -46.0
-offset_right = -7.0
-offset_bottom = -15.0
+offset_left = -122.0
+offset_top = -288.0
+offset_right = -12.0
+offset_bottom = -257.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -108,5 +108,11 @@ offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 23.0
 grow_horizontal = 2
+
+[node name="Minimap" parent="CanvasLayer" instance=ExtResource("4_xgrcs")]
+offset_left = -280.0
+offset_top = -280.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_GenerateButton_pressed"]
