@@ -79,10 +79,10 @@ func _ready():
 	
 	noise = noise_texture.noise
 	tree_noise = tree_noise_texture.noise
-	print("%s Begin Terrain Generation ...." % [str(Time.get_ticks_msec())])
+
 	await self.generate_world()
 	#await self
-	print("%s End Terrain Generation ...." % [str(Time.get_ticks_msec())])
+
 	#Spawn_Player()
 
 
@@ -102,6 +102,9 @@ func generate_world():
 	var tree_noise_val 
 	rng.randomize()
 	noise_texture.noise.seed = rng.randi()
+
+	var tickstart : int = Time.get_ticks_msec()
+	print("%s Begin Terrain Generation ...." % [str(tickstart)])
 
 	for x in range(-width/2.0, width/2.0):
 		for y in range(-height/2.0, height/2.0):
@@ -153,6 +156,10 @@ func generate_world():
 	#tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
 	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grnd_arr, 5,0)
 
+	var tickend : int = Time.get_ticks_msec()
+	print("%s End Terrain Generation ...." % [str(tickend)])
+	print("%s Duration Terrain Generation ...." % [str(tickend - tickstart)])
+
 	World_Generated.emit()
 
 #region Debug Prints
@@ -199,12 +206,12 @@ func Spawn_Player() -> void:
 
 	while test_tile.size() != 4:
 		newtile = arr.pick_random()
-		print("Picking Random Position: %s " % [newtile])
+		#print("Picking Random Position: %s " % [newtile])
 		nst = tml.get_surrounding_cells(newtile)
 		test_tile = nst.filter(func(coord): 
 			var sid : int = tml.get_cell_source_id(coord)
 			var atl_coords = tml.get_cell_atlas_coords(coord)
-			print("Surround Tile %s ID: %s / Atlas: %s" % [coord, str(sid), atl_coords])
+			#print("Surround Tile %s ID: %s / Atlas: %s" % [coord, str(sid), atl_coords])
 			return atl_coords != Vector2i(0,1))
 
 	var gpp  = tml.to_global(tml.map_to_local(newtile))
