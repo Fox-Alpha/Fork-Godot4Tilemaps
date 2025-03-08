@@ -9,6 +9,27 @@ extends Node2D
 @export var _min_zoom := 0.01
 @export var _max_zoom := 3.0
 
+@export_category("MapSize")
+@export var mapsizepreeset : Array[Vector2i] = []
+
+enum tiles {
+	NOTHING,
+	WATERTILE,
+	GROUNDTILE
+}
+
+enum preset{
+	sizecustom,
+	size64,
+	size128,
+	size256,
+	size384,
+	size512,
+	size768,
+	size1024,
+	size2048,
+}
+@export var mapsize : preset = preset.size64
 @export var width : int = 256
 @export var height : int =  256
 
@@ -48,6 +69,13 @@ var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i
 func _ready():
 	World_Generated.connect(func():  Spawn_Player())
 	#PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
+	
+	if mapsize != preset.sizecustom:
+		width = mapsizepreeset[mapsize].x
+		height = mapsizepreeset[mapsize].y
+
+	
+	print("%s Terrain Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
 	
 	noise = noise_texture.noise
 	tree_noise = tree_noise_texture.noise
@@ -196,6 +224,10 @@ func Spawn_Tent(playerpos : Vector2i) -> void:
 
 
 func _on_GenerateButton_pressed() -> void:
+	if mapsize != preset.sizecustom:
+		width = mapsizepreeset[mapsize].x
+		height = mapsizepreeset[mapsize].y
+	print("%s Terrain Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
 	print("%s Start Terrain Re-Generation ...." % [str(Time.get_ticks_msec())])
 	await ClearTileMapFirst()
 	await self.generate_world()
