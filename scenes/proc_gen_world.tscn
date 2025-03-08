@@ -37,10 +37,15 @@ tile_map_layers = [NodePath("TileMap/water"), NodePath("TileMap/ground"), NodePa
 noise_texture = SubResource("NoiseTexture2D_8ve5r")
 tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
 _max_zoom = 8.84
-width = 64
-height = 64
+mapsizepreeset = Array[Vector2i]([Vector2i(0, 0), Vector2i(64, 64), Vector2i(128, 128), Vector2i(256, 256), Vector2i(384, 384), Vector2i(512, 512), Vector2i(768, 768), Vector2i(1024, 1024), Vector2i(2048, 2048)])
+mapsize = 2
+width = 50
+height = 50
 
 [node name="TileMap" type="Node" parent="."]
+process_thread_group = 2
+process_thread_group_order = -1
+process_thread_messages = 1
 
 [node name="water" type="TileMapLayer" parent="TileMap"]
 z_index = -1
@@ -48,7 +53,6 @@ y_sort_enabled = true
 texture_filter = 1
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
-collision_visibility_mode = 2
 
 [node name="ground" type="TileMapLayer" parent="TileMap"]
 visible = false
@@ -71,10 +75,12 @@ tile_set = ExtResource("2_5e5w1")
 y_sort_origin = 16
 
 [node name="environment" type="TileMapLayer" parent="TileMap"]
+visible = false
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
 [node name="Player" parent="." instance=ExtResource("3_eowgc")]
+collision_mask = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -6)
