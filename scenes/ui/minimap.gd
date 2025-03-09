@@ -31,6 +31,7 @@ func _ready():
 
 
 func _process(_delta):
+#region Neue Code-Region
 	#if fullscreenmapactive:
 		##gamecam.global_position = Vector2(0,0) # get_parent().get_node("Ground").global_position
 		#vp.size = vp.get_visible_rect().size
@@ -40,17 +41,21 @@ func _process(_delta):
 		#vp.content_scale_size = vp.get_visible_rect().size
 		#vp.size = vp.get_visible_rect().size #vpsize
 		#pass
+#endregion
 	cam2dmap.global_position = vp.get_camera_2d().global_position
 
 
 func _input(_event):
 	if Input.is_action_just_pressed("SwitchFullScreenMap"):
-		fullscreenmapactive = !fullscreenmapactive
-		if fullscreenmapactive:
-			gamecamposition = gamecam.global_position
-			gamecam.zoom = Vector2(0.575, 0.575)
-			gamecam.global_position = Vector2(0,0)
-		else:
-			gamecam.zoom = Vector2(1.0, 1.0)
-			gamecam.global_position = gamecamposition
-			gamecam.position
+#region Fullscreenmap
+		#fullscreenmapactive = !fullscreenmapactive
+		#if fullscreenmapactive:
+			#gamecamposition = gamecam.global_position
+			#gamecam.zoom = Vector2(0.575, 0.575)
+			#gamecam.global_position = Vector2(0,0)
+		#else:
+			#gamecam.zoom = Vector2(1.0, 1.0)
+			#gamecam.global_position = gamecamposition
+			#gamecam.position
+#endregion
+		pass
