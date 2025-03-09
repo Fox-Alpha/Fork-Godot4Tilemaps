@@ -31,15 +31,15 @@ func _ready():
 
 
 func _process(_delta):
-	if fullscreenmapactive:
-		#gamecam.global_position = Vector2(0,0) # get_parent().get_node("Ground").global_position
-		vp.size = vp.get_visible_rect().size
-		gamecam.zoom = Vector2(0.575, 0.575)
-		vp.content_scale_size = tilemap.get_used_rect().size * tilemap.tile_set.tile_size
-	else:
-		vp.content_scale_size = vp.get_visible_rect().size
-		vp.size = vp.get_visible_rect().size #vpsize
-		pass
+	#if fullscreenmapactive:
+		##gamecam.global_position = Vector2(0,0) # get_parent().get_node("Ground").global_position
+		#vp.size = vp.get_visible_rect().size
+		#gamecam.zoom = Vector2(0.575, 0.575)
+		#vp.content_scale_size = tilemap.get_used_rect().size * tilemap.tile_set.tile_size
+	#else:
+		#vp.content_scale_size = vp.get_visible_rect().size
+		#vp.size = vp.get_visible_rect().size #vpsize
+		#pass
 	cam2dmap.global_position = vp.get_camera_2d().global_position
 
 
