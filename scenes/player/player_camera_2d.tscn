@@ -8,5 +8,5 @@ limit_top = -1030
 limit_right = 1030
 limit_bottom = 1030
 script = ExtResource("1_l7t50")
-_min_zoom = 0.6
+_min_zoom = 0.3
 _max_zoom = 2.0

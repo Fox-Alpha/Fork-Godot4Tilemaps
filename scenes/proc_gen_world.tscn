@@ -7,11 +7,16 @@
 
 [sub_resource type="Gradient" id="Gradient_y5bgd"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.5)
+offsets = PackedFloat32Array(0, 0.344595)
 colors = PackedColorArray(0.217716, 0.414628, 0.55, 1, 0.169919, 0.396875, 0.148271, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b7j00"]
 noise_type = 3
+frequency = 0.0101
+fractal_type = 2
+fractal_octaves = 1
+fractal_lacunarity = 1.0
+fractal_weighted_strength = 0.1
 cellular_distance_function = 3
 cellular_jitter = -4.105
 cellular_return_type = 3
@@ -38,9 +43,9 @@ tile_map_layers = [NodePath("TileMap/water"), NodePath("TileMap/ground"), NodePa
 noise_texture = SubResource("NoiseTexture2D_8ve5r")
 tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
 mapsizepreeset = Array[Vector2i]([Vector2i(0, 0), Vector2i(64, 64), Vector2i(128, 128), Vector2i(256, 256), Vector2i(384, 384), Vector2i(512, 512), Vector2i(768, 768), Vector2i(1024, 1024), Vector2i(2048, 2048)])
-mapsize = 2
-width = 50
-height = 50
+mapsize = 0
+width = 550
+height = 250
 
 [node name="TileMap" type="Node" parent="."]
 process_thread_group = 2
