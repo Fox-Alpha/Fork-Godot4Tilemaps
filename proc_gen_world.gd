@@ -51,9 +51,6 @@ enum LAYERS {
 	environment_layer =4	
 }
 
-signal World_Generated
-signal PLayer_Respawned
-
 var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i(4,0),Vector2i(5,0)]
 @onready var player: CharacterBody2D = $Player
 @onready var tentpattern : TileMapPattern = $TileMap/ground.tile_set.get_pattern(0)
@@ -194,25 +191,25 @@ func Spawn_Player() -> void:
 	var nst : Array[Vector2i] = [] 
 	var test_tile : Array[Vector2i] = []
 
-	var plypos : Vector2 = tml.to_local(player.global_position)
-	var loc_coord : Vector2i = tml.local_to_map(plypos)
+	#var plypos : Vector2 = tml.to_local(player.global_position)
+	#var loc_coord : Vector2i = tml.local_to_map(plypos)
 
 	var arr : Array = tml.get_used_cells()
 
 	while test_tile.size() != 4:
 		newtile = arr.pick_random()
-
 		nst = tml.get_surrounding_cells(newtile)
+
 		test_tile = nst.filter(func(coord): 
 			var atl_coords = tml.get_cell_atlas_coords(coord)
-
 			return atl_coords != Vector2i(0,1))
 
 	var gpp  = tml.to_global(tml.map_to_local(newtile))
 	player.global_position = gpp
 	
 	print("Respawn Player Position %s / %s " % [gpp, newtile])
-	PLayer_Respawned.emit(loc_coord)
+	GlobalSignalBus.PLayer_Respawned.emit(gpp)
+
 
 func Spawn_Tent(_playerpos : Vector2i) -> void:
 	#print("Spawn_Tent() => Player Position: %s " % [playerpos])
