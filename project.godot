@@ -15,6 +15,10 @@ run/main_scene="uid://dhptvycu3kb8x"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://db2o8pn8oh2y4"
 
+[autoload]
+
+GlobalSignalBus="*res://scripts/globals/SignalBus.tscn"
+
 [display]
 
 window/size/viewport_width=1600
