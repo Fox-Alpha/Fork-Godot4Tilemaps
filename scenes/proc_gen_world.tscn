@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhptvycu3kb8x"]
+[gd_scene load_steps=11 format=3 uid="uid://dhptvycu3kb8x"]
 
 [ext_resource type="Script" uid="uid://da1cjojoxlax0" path="res://proc_gen_world.gd" id="1_bdevv"]
 [ext_resource type="TileSet" uid="uid://0c6kxpetkkr0" path="res://data/tileset.tres" id="2_5e5w1"]
 [ext_resource type="PackedScene" uid="uid://nt74txyyhp2d" path="res://scenes/player/player.tscn" id="3_eowgc"]
 [ext_resource type="PackedScene" uid="uid://c2jydhkkjxepj" path="res://scenes/ui/minimap.tscn" id="4_xgrcs"]
+[ext_resource type="PackedScene" uid="uid://bihb43bpsnreg" path="res://scenes/world/world_boundarys.tscn" id="5_xgrcs"]
 
 [sub_resource type="Gradient" id="Gradient_y5bgd"]
 interpolation_mode = 1
@@ -43,7 +44,7 @@ tile_map_layers = [NodePath("TileMap/water"), NodePath("TileMap/ground"), NodePa
 noise_texture = SubResource("NoiseTexture2D_8ve5r")
 tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
 mapsizepreeset = Array[Vector2i]([Vector2i(0, 0), Vector2i(64, 64), Vector2i(128, 128), Vector2i(256, 256), Vector2i(384, 384), Vector2i(512, 512), Vector2i(768, 768), Vector2i(1024, 1024), Vector2i(2048, 2048)])
-mapsize = 0
+mapsizepreset = 0
 width = 550
 height = 250
 
@@ -117,5 +118,7 @@ text = "Re-Generate
 
 [node name="Minimap" parent="CanvasLayer/VBoxMinimap" instance=ExtResource("4_xgrcs")]
 layout_mode = 2
+
+[node name="WorldBoundarys" parent="." instance=ExtResource("5_xgrcs")]
 
 [connection signal="pressed" from="CanvasLayer/VBoxMinimap/Button" to="." method="_on_GenerateButton_pressed"]
