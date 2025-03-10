@@ -25,7 +25,7 @@ enum preset{
 	size1024,
 	size2048,
 }
-@export var mapsize : preset = preset.size64
+@export var mapsizepreset : preset = preset.size64
 @export var width : int = 64
 @export var height : int =  64
 
@@ -62,12 +62,13 @@ var random_grass_atlas_arr = [Vector2i(1,0),Vector2i(2,0),Vector2i(3,0),Vector2i
 
 
 func _ready():
-	World_Generated.connect(func():  Spawn_Player())
-	PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
+	GlobalSignalBus.World_Generated.connect(func(_mapsize):  Spawn_Player())
+	GlobalSignalBus.World_Generated.connect(ResetCamAndWorldBorderLimits)
+	GlobalSignalBus.PLayer_Respawned.connect(func(p : Vector2i):  Spawn_Tent(p))
 
-	if mapsize != preset.sizecustom:
-		width = mapsizepreeset[mapsize].x
-		height = mapsizepreeset[mapsize].y
+	if mapsizepreset != preset.sizecustom:
+		width = mapsizepreeset[mapsizepreset].x
+		height = mapsizepreeset[mapsizepreset].y
 
 	print("%s Terrain Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
 	
@@ -167,7 +168,8 @@ func generate_world():
 	print("%s End Terrain Generation ...." % [str(tickend)])
 	print("%s Duration Terrain Generation ...." % [str(tickend - tickstart)])
 
-	World_Generated.emit()
+	var mapsize := tile_map_layers[LAYERS.water_layer].get_used_rect().size * tile_map_layers[LAYERS.water_layer].tile_set.tile_size
+	GlobalSignalBus.World_Generated.emit(mapsize)
 
 #region Debug Prints
 	#print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
@@ -222,9 +224,9 @@ func Spawn_Tent(_playerpos : Vector2i) -> void:
 
 
 func _on_GenerateButton_pressed() -> void:
-	if mapsize != preset.sizecustom:
-		width = mapsizepreeset[mapsize].x
-		height = mapsizepreeset[mapsize].y
+	if mapsizepreset != preset.sizecustom:
+		width = mapsizepreeset[mapsizepreset].x
+		height = mapsizepreeset[mapsizepreset].y
 	print("%s Start Terrain Re-Generation .... MapSize: %s" % [str(Time.get_ticks_msec()), Vector2i(width, height)])
 	
 	ClearTileMapFirst()
@@ -240,3 +242,12 @@ func ClearTileMapFirst() -> void :
 		#element.update_internals()
 		return true
 	)
+
+
+func ResetCamAndWorldBorderLimits(maprect):
+	var vpcam := get_viewport().get_camera_2d()
+	vpcam.limit_top = -maprect.y / 2	#-2000
+	vpcam.limit_left = -maprect.x / 2	#-4400
+	vpcam.limit_bottom = maprect.y / 2	#2000
+	vpcam.limit_right = maprect.x / 2	#4400
+	pass
