@@ -85,7 +85,6 @@ use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
 [node name="Player" parent="." instance=ExtResource("3_eowgc")]
-collision_mask = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
