@@ -10,16 +10,6 @@ y_sort_enabled = true
 script = ExtResource("1_dmdjc")
 worldborders = [NodePath("WorldBoundaryLeftBorder"), NodePath("WorldBoundaryTopBorder"), NodePath("WorldBoundaryRightBorder"), NodePath("WorldBoundaryBottomBorder")]
 
-[node name="WorldBoundaryLeftBorder" type="StaticBody2D" parent="."]
-z_index = 25
-position = Vector2(-64, 0)
-rotation = 1.5708
-collision_layer = 128
-collision_mask = 512
-
-[node name="Collision" type="CollisionShape2D" parent="WorldBoundaryLeftBorder"]
-shape = SubResource("WorldBoundaryShape2D_ph30p")
-
 [node name="WorldBoundaryTopBorder" type="StaticBody2D" parent="."]
 z_index = 25
 position = Vector2(0, -64)
@@ -30,14 +20,14 @@ collision_mask = 512
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_ph30p")
 
-[node name="WorldBoundaryRightBorder" type="StaticBody2D" parent="."]
+[node name="WorldBoundaryLeftBorder" type="StaticBody2D" parent="."]
 z_index = 25
-position = Vector2(64, 0)
-rotation = -1.5708
+position = Vector2(-64, 0)
+rotation = 1.5708
 collision_layer = 128
 collision_mask = 512
 
-[node name="Collision" type="CollisionShape2D" parent="WorldBoundaryRightBorder"]
+[node name="Collision" type="CollisionShape2D" parent="WorldBoundaryLeftBorder"]
 shape = SubResource("WorldBoundaryShape2D_ph30p")
 
 [node name="WorldBoundaryBottomBorder" type="StaticBody2D" parent="."]
@@ -47,4 +37,14 @@ collision_layer = 128
 collision_mask = 512
 
 [node name="Collision" type="CollisionShape2D" parent="WorldBoundaryBottomBorder"]
+shape = SubResource("WorldBoundaryShape2D_ph30p")
+
+[node name="WorldBoundaryRightBorder" type="StaticBody2D" parent="."]
+z_index = 25
+position = Vector2(64, 0)
+rotation = -1.5708
+collision_layer = 128
+collision_mask = 512
+
+[node name="Collision" type="CollisionShape2D" parent="WorldBoundaryRightBorder"]
 shape = SubResource("WorldBoundaryShape2D_ph30p")
