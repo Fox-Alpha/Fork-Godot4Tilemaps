@@ -15,7 +15,9 @@ var gamecamposition : Vector2i
 
 
 func _ready():	
+	GlobalSignalBus.World_Generated.connect(ResetCamMinimapBorderLimits)
 	await RenderingServer.frame_post_draw
+	
 	vpsize = vp.get_visible_rect().size
 
 	cam2dmap.position = vp.get_visible_rect().get_center()
@@ -42,7 +44,8 @@ func _process(_delta):
 		#vp.size = vp.get_visible_rect().size #vpsize
 		#pass
 #endregion
-	cam2dmap.global_position = vp.get_camera_2d().global_position
+	var campos = vp.get_camera_2d().global_position
+	cam2dmap.global_position = campos
 
 
 func _input(_event):
@@ -59,3 +62,12 @@ func _input(_event):
 			#gamecam.position
 #endregion
 		pass
+
+
+func ResetCamMinimapBorderLimits(maprect):
+	#var vpcam := get_viewport().get_camera_2d()
+	cam2dmap.limit_top = -maprect.y / 2	#-2000
+	cam2dmap.limit_left = -maprect.x / 2	#-4400
+	cam2dmap.limit_bottom = maprect.y / 2	#2000
+	cam2dmap.limit_right = maprect.x / 2	#4400
+	pass

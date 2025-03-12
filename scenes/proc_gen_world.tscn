@@ -63,12 +63,14 @@ tile_set = ExtResource("2_5e5w1")
 [node name="ground" type="TileMapLayer" parent="TileMap"]
 visible = false
 y_sort_enabled = true
+texture_filter = 1
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
 [node name="ground2" type="TileMapLayer" parent="TileMap"]
 visible = false
 y_sort_enabled = true
+texture_filter = 1
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
@@ -76,11 +78,13 @@ tile_set = ExtResource("2_5e5w1")
 visible = false
 z_index = 1
 y_sort_enabled = true
+texture_filter = 1
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 y_sort_origin = 16
 
 [node name="environment" type="TileMapLayer" parent="TileMap"]
+texture_filter = 1
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
 
