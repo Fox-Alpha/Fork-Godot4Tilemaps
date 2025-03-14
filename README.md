@@ -1,4 +1,30 @@
-# Godot4Tilemaps
+# Modifications
+This is now a base for some Kind of games
+
+- RPG
+- Survival
+- Multiplayer
+- Rogue Like
+- RTS
+
+
+
+## Changes
+- Add Minimap
+- Add Map Boundarys
+  - Dynamic sets position depend on Map size
+- Optimize Mapgeneration
+- Using seed for Generation
+- Reposition player only on land tiles after generation
+- Add Button for ingame regenerate Map
+- Add Mapsize presets in Inspector for quick choice or Custom size
+- Adding mouseselection
+- Add some more tilessets and sprites
+- using signals
+
+
+
+### Fork of Godot4Tilemaps
  
 *** LISCENSE ***
 * You can only use the assets for non-commercial projects.
