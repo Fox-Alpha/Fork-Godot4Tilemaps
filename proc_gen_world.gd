@@ -92,107 +92,47 @@ func generate_world():
 	rng.randomize()
 	noise_texture.noise.seed = rng.randi()
 	var lasttile : tiles = tiles.NOTHING
-	
+	dirt_arr.clear()
 	var tickstart : int = Time.get_ticks_msec()
 	print("%s Begin Terrain Generation ...." % [str(tickstart)])
 
+#region terain Generation
 	for x in range(-width/2.0, width/2.0):
 		for y in range(-height/2.0, height/2.0):
 			noise_val = noise.get_noise_2d(x,y)
 			tree_noise_val = tree_noise.get_noise_2d(x,y)
-			
-			#setting cliffs
-			if noise_val > 0.6:
-				#cliff_arr.append(Vector2(x,y))
-				pass
-			
-			#setting all grass tiles
-			if noise_val > 0.2:
-				#grass_arr.append(Vector2(x,y))
-				if noise_val > 0.3:
-					#random grass
-					#tile_map_layers[LAYERS.ground_2_layer].set_cell(Vector2(x,y), 0,random_grass_atlas_arr.pick_random())
-					pass
-			
-			#setting trees where there are no cliffs
-			if (tree_noise_val > 0.9) and (noise_val > 0.3) and (noise_val < 0.5):
-				#tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas2)
-				pass
-		
+
 			# setting sand and palm trees between water and grass
 			if noise_val > -0.125:
-				sand_arr.append(Vector2(x,y))
-				tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
-
-				#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y)], 5,0)
-				if lasttile != tiles.GROUNDTILE:
-					#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(nb, 5,0)
-					lasttile = tiles.GROUNDTILE
+				tile_map_layers[LAYERS.water_layer].set_cell(Vector2i(x,y), 0,Vector2i(6, 0))
+				tile_map_layers[LAYERS.ground_1_layer].set_cell(Vector2i(x,y), 0,Vector2i(6, 0))
 				continue
 
-				#tile_map_layers[LAYERS.ground_1_layer].set_cell(Vector2(x,y), 0,Vector2i(6, 0))
-				if noise_val < 0.18:
-					if tree_noise_val > 0.92:
-						#tile_map_layers[LAYERS.environment_layer].set_cell(Vector2(x,y), 0,tree_atlas)
-						pass
-				pass
-
-			#if noise_val < 0:
-				#tile_map_layers[LAYERS.cliff_layer].set_cell(Vector2(x,y), 0,Vector2i(12, 0))
-				#print("Negative noise: %s" % str(noise_val))
-
-			tile_map_layers[LAYERS.water_layer].set_cell(Vector2(x,y), 0,water_tile_atlas)
-			#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect([Vector2i(x,y)], 5,0)
-			if lasttile != tiles.WATERTILE:
-				lasttile = tiles.WATERTILE
-
-#region Delete watertiles
-	## Delete all watertiles under Ground
-	#var grnd_arr : Array = tile_map_layers[LAYERS.ground_1_layer].get_used_cells() 
-	#var watr_arr : Array = tile_map_layers[LAYERS.water_layer].get_used_cells() 
-	#for i in sand_arr:
-		#tile_map_layers[LAYERS.water_layer].erase_cell(i)
+			tile_map_layers[LAYERS.water_layer].set_cell(Vector2i(x,y), 0,water_tile_atlas)
 #endregion
-
-	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(watr_arr, 5,0)
-	#tile_map_layers[LAYERS.water_layer].set_cells_terrain_connect(sand_arr, 5,0)
-
-	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grass_arr, 1,0)
-	#tile_map_layers[LAYERS.cliff_layer].set_cells_terrain_connect(cliff_arr, 4,0)
-	#tile_map_layers[LAYERS.ground_1_layer].set_cells_terrain_connect(grnd_arr, 5,0)
-
+	await RenderingServer.frame_post_draw
+	ReplaceCoastTiles(LAYERS.water_layer)
+	
 	var tickend : int = Time.get_ticks_msec()
 	print("%s End Terrain Generation ...." % [str(tickend)])
 	print("%s Duration Terrain Generation ...." % [str(tickend - tickstart)])
 
 	var mapsize := tile_map_layers[LAYERS.water_layer].get_used_rect().size * tile_map_layers[LAYERS.water_layer].tile_set.tile_size
+	await RenderingServer.frame_post_draw
 	GlobalSignalBus.World_Generated.emit(mapsize)
 
 #region Debug Prints
-	#print("%s Begin Terrain Generation ... End X/Y Loop" % [str(Time.get_ticks_msec())])
-	#print("%s Connect Terrain Generation .... Ground 1 => Sand" % [str(Time.get_ticks_msec())])
-	#print("%s Connect Terrain Generation .... Ground 1 => Grass" % [str(Time.get_ticks_msec())])
-	#print("%s Connect Terrain Generation .... Ground 1 => Cliff" % [str(Time.get_ticks_msec())])
-	#print("%s Connect Terrain Generation .... Ground 1 => Water" % [str(Time.get_ticks_msec())])
-	#print("WaterLayer Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
-	print("PreGeneratad Sand Count Used Tiles: %s / %s ...." % [str(sand_arr.size()), str(tile_map_layers[LAYERS.water_layer].get_used_cells().size())])
-	#print("Ground 1 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_1_layer].get_used_cells().size())])
-	#print("Ground 2 Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.ground_2_layer].get_used_cells().size())])
-	#print("Cliffs Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.cliff_layer].get_used_cells().size())])
-	#print("Enviroment Count Used Tiles: %s ...." % [str(tile_map_layers[LAYERS.environment_layer].get_used_cells().size())])
+	print("PreGeneratad Sand Count Used Tiles: %s / %s / %s...." % [str(sand_arr.size()), str(tile_map_layers[LAYERS.water_layer].get_used_cells().size()), cliff_arr.size()])
 #endregion
 
 	return true
 
 
 func Spawn_Player() -> void:
-	var tml : TileMapLayer = tile_map_layers[0]
+	var tml : TileMapLayer = tile_map_layers[1]
 	var newtile := Vector2i.ZERO 
 	var nst : Array[Vector2i] = [] 
 	var test_tile : Array[Vector2i] = []
-
-	#var plypos : Vector2 = tml.to_local(player.global_position)
-	#var loc_coord : Vector2i = tml.local_to_map(plypos)
 
 	var arr : Array = tml.get_used_cells()
 
@@ -236,9 +176,9 @@ func ClearTileMapFirst() -> void :
 	sand_arr.clear()
 	tile_map_layers.map(func(element): 
 		element.clear()
-		#element.update_internals()
 		return true
 	)
+	await RenderingServer.frame_post_draw
 
 
 func ResetCamAndWorldBorderLimits(maprect):
@@ -248,3 +188,60 @@ func ResetCamAndWorldBorderLimits(maprect):
 	vpcam.limit_bottom = maprect.y / 2	#2000
 	vpcam.limit_right = maprect.x / 2	#4400
 	pass
+
+## Get the surrounding tiles arround water
+func ReplaceCoastTiles(layer : LAYERS) -> void :
+	var tml : TileMapLayer = tile_map_layers[layer]
+	var tilecoords = tml.get_used_cells_by_id(0, Vector2i(0, 1))
+
+	var sct : Array[Vector2i] = []	#tml.get_surrounding_cells(coord)
+	var coastline : Array[Vector2i] = []
+
+	for coord in tilecoords:
+		if coord.x <= -width/2.0 or coord.y <= -height/2.0:
+			continue
+		sct.clear()
+
+#region 8 neighbors notused
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_SIDE))
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_LEFT_CORNER))
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_LEFT_SIDE))
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER))
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_SIDE))
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER))
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_RIGHT_SIDE))
+		#sct.append(tml.get_neighbor_cell(coord, TileSet.CellNeighbor.CELL_NEIGHBOR_TOP_RIGHT_CORNER))
+#endregion
+
+		## Alle Nachbarn
+		sct = getneighbours(coord, 2)
+		
+		## Filtern aller leeren Nachbarfelder
+		var test_tile : Array[Vector2i] = sct.filter(func(c): 
+			var atl_coords = tml.get_cell_atlas_coords(c)
+			return atl_coords == Vector2i(6, 0))
+		if test_tile.size() > 0:
+			coastline.append_array(test_tile)
+		pass
+
+	print("Coastline: Coastline marker Count -> %s" % [coastline.size()])
+
+	for ct in coastline:
+		tile_map_layers[LAYERS.cliff_layer].set_cell(Vector2i(ct.x,ct.y), 0,Vector2i(12, 0))
+		pass
+
+	tile_map_layers[layer].set_cells_terrain_connect(tile_map_layers[LAYERS.ground_1_layer].get_used_cells(), 5,0, false)
+	pass
+
+
+## get all neighbor at all 8 direction * X surroundings
+## TILE = The base Tile Coordnates
+## X = Tiles Count in direction
+func getneighbours(TILE,X) :
+	var surroundingtiles : Array[Vector2i]= []
+	for a in range(TILE.x-X,TILE.x+X):
+		for b in range(TILE.y-X,TILE.y+X):
+			var currenttile = Vector2i(a,b)
+			if not surroundingtiles.has(currenttile) and not currenttile == TILE  :
+				surroundingtiles.append(currenttile)
+	return surroundingtiles
