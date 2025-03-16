@@ -40,11 +40,11 @@ noise = SubResource("FastNoiseLite_awwj8")
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_bdevv")
-tile_map_layers = [NodePath("TileMap/water"), NodePath("TileMap/ground"), NodePath("TileMap/ground2"), NodePath("TileMap/cliff"), NodePath("TileMap/environment")]
+tile_map_layers = [NodePath("TileMap/TestQuadrantsize"), NodePath("TileMap/ground"), NodePath("TileMap/ground2"), NodePath("TileMap/cliff"), NodePath("TileMap/environment"), NodePath("TileMap/water")]
 noise_texture = SubResource("NoiseTexture2D_8ve5r")
 tree_noise_texture = SubResource("NoiseTexture2D_0a6k0")
 mapsizepreeset = Array[Vector2i]([Vector2i(0, 0), Vector2i(64, 64), Vector2i(128, 128), Vector2i(256, 256), Vector2i(384, 384), Vector2i(512, 512), Vector2i(768, 768), Vector2i(1024, 1024), Vector2i(2048, 2048)])
-mapsizepreset = 0
+mapsizepreset = 2
 width = 550
 height = 250
 
@@ -84,9 +84,14 @@ tile_set = ExtResource("2_5e5w1")
 y_sort_origin = 16
 
 [node name="environment" type="TileMapLayer" parent="TileMap"]
+visible = false
 texture_filter = 1
 use_parent_material = true
 tile_set = ExtResource("2_5e5w1")
+
+[node name="TestQuadrantsize" type="TileMapLayer" parent="TileMap"]
+tile_set = ExtResource("2_5e5w1")
+rendering_quadrant_size = 1
 
 [node name="Player" parent="." instance=ExtResource("3_eowgc")]
 
