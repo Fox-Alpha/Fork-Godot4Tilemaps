@@ -1,11 +1,15 @@
 # Modifications
 This is now a base for some Kind of games
 
-- RPG
-- Survival
-- Multiplayer
-- Rogue Like
+- RPG like World of Pirates
+- Survival like Aska
+- Rogue Like endless battler
 - RTS
+- Farming Game
+  - Characterbased  
+  - Vehiclebase like Farming Simulator
+
+- Multiplayer
 
 
 
