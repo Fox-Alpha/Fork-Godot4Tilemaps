@@ -4,7 +4,13 @@ extends Camera2D
 @export var _min_zoom := 0.01
 @export var _max_zoom := 3.0
 
+@onready var LayerGroupNode : Node = get_node_or_null("/root/LayerGroup")
+var tile_map_layers : Array[TileMapLayer] = []
+
 func _ready() -> void:
+	GlobalSignalBus.World_Generated.connect(ResetCamLimits)
+	if LayerGroupNode:
+		tile_map_layers.append_array(LayerGroupNode.get_children())
 	pass
 
 func _input(event):
@@ -18,3 +24,9 @@ func zoom_step(zoom_direction : int):
 		zoom = Vector2(clamp(zoom.x + zoom_direction * zoom.x * _zoom_step, _min_zoom, _max_zoom),
 			clamp(zoom.y + zoom_direction * zoom.y * _zoom_step, _min_zoom, _max_zoom))
 	pass
+
+func ResetCamLimits(mapsize : Vector2i, _LayerIdx : int) -> void :
+	limit_top = 0 #-mapsize.y / 2	#-2000
+	limit_left = 0 #-mapsize.x / 2	#-4400
+	limit_bottom = mapsize.y #mapsize.y / 2	#2000
+	limit_right = mapsize.x #mapsize.x / 2	#4400
