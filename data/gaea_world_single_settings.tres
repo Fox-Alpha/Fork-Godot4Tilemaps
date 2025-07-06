@@ -17,11 +17,7 @@ fractal_weighted_strength = 0.1
 [sub_resource type="Resource" id="Resource_sdpej"]
 script = ExtResource("4_3gcmj")
 type = 1
-tilemap_layer = 0
 terrain_set = 6
-terrain = 0
-id = ""
-layer = 0
 metadata/_custom_type_script = "uid://dx113xlb08npw"
 
 [sub_resource type="Resource" id="Resource_685nx"]
@@ -29,17 +25,12 @@ resource_name = "Water_Sand"
 script = ExtResource("3_haebr")
 title = "Water_Sand"
 tile = SubResource("Resource_sdpej")
-min = -1.0
 max = 0.05
 
 [sub_resource type="Resource" id="Resource_haebr"]
 script = ExtResource("4_3gcmj")
 type = 1
-tilemap_layer = 0
 terrain_set = 1
-terrain = 0
-id = ""
-layer = 0
 metadata/_custom_type_script = "uid://dx113xlb08npw"
 
 [sub_resource type="Resource" id="Resource_3gcmj"]
@@ -48,17 +39,10 @@ script = ExtResource("3_haebr")
 title = "Sand_Grass"
 tile = SubResource("Resource_haebr")
 min = 0.25
-max = 1.0
 
 [sub_resource type="Resource" id="Resource_c8vte"]
 script = ExtResource("4_3gcmj")
-type = 0
-tilemap_layer = 0
-source_id = 0
 atlas_coord = Vector2i(6, 0)
-alternative_tile = 0
-id = ""
-layer = 0
 metadata/_custom_type_script = "uid://dx113xlb08npw"
 
 [sub_resource type="Resource" id="Resource_3b7dj"]
@@ -74,8 +58,5 @@ resource_name = "Settings"
 script = ExtResource("2_685nx")
 tiles = Array[ExtResource("3_haebr")]([SubResource("Resource_685nx"), SubResource("Resource_3gcmj"), SubResource("Resource_3b7dj")])
 noise = SubResource("FastNoiseLite_o53rm")
-infinite = false
 world_size = Vector2i(64, 64)
-falloff_enabled = false
-modifiers = Array[ExtResource("1_sdpej")]([])
 metadata/_custom_type_script = "uid://be4vkhx6uafmy"
