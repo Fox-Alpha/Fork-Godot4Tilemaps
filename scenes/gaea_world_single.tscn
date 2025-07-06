@@ -23,34 +23,18 @@ fractal_weighted_strength = 0.1
 
 [sub_resource type="Resource" id="Resource_voqb1"]
 script = ExtResource("6_d5ovh")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 0
-id = ""
-layer = 0
 metadata/_custom_type_script = "uid://dx113xlb08npw"
 
 [sub_resource type="Resource" id="Resource_b1kx7"]
 script = ExtResource("6_d5ovh")
-type = 0
-tilemap_layer = 0
-source_id = 0
 atlas_coord = Vector2i(6, 0)
-alternative_tile = 0
-id = ""
-layer = 0
 metadata/_custom_type_script = "uid://dx113xlb08npw"
 
 [sub_resource type="Resource" id="Resource_jwkqr"]
 script = ExtResource("4_i8u8s")
 tiles = Array[ExtResource("5_lpo14")]([SubResource("Resource_voqb1"), SubResource("Resource_b1kx7")])
-use_weights = true
 weight_0 = 1.0
 weight_1 = 0.1
-id = ""
-layer = 0
 metadata/_custom_type_script = "uid://blu01bimij7ga"
 
 [sub_resource type="Resource" id="Resource_oqrdi"]
@@ -62,7 +46,6 @@ world_length = 256
 height_offset = 64
 height_intensity = 25
 min_height = 30
-air_layer = true
 modifiers = Array[ExtResource("2_temhi")]([null])
 metadata/_custom_type_script = "uid://bgr68c4n7qf0c"
 
@@ -83,7 +66,7 @@ metadata/_custom_type_script = "uid://bm34rin7hpjpg"
 
 [node name="ThreadedTilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
 script = ExtResource("10_temhi")
-tile_map_layers = [null]
+tile_map_layers = [NodePath("../TileMapLayer")]
 terrain_gap_fix = true
 generator = NodePath("../NoiseGenerator")
 metadata/_custom_type_script = "uid://ch5ykxoejwwgp"
@@ -91,4 +74,5 @@ metadata/_custom_type_script = "uid://ch5ykxoejwwgp"
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("11_ln5fk")
 
+[connection signal="generation_finished" from="HeightmapGenerator2D" to="." method="_on_heightmap_generator_2d_generation_finished"]
 [connection signal="generation_finished" from="NoiseGenerator" to="." method="_on_noise_generator_generation_finished"]
