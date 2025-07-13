@@ -8,6 +8,7 @@ func _ready() -> void:
 
 
 func ResetWorldBorderPositions(maprect : Vector2i, _l) -> void:
+	print("ResetWorldBorderPositions: %s" % [maprect])
 	if worldborders.size() != 4:
 		return
 
