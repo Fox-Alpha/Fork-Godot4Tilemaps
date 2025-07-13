@@ -58,5 +58,5 @@ resource_name = "Settings"
 script = ExtResource("2_685nx")
 tiles = Array[ExtResource("3_haebr")]([SubResource("Resource_685nx"), SubResource("Resource_3gcmj"), SubResource("Resource_3b7dj")])
 noise = SubResource("FastNoiseLite_o53rm")
-world_size = Vector2i(64, 64)
+infinite = true
 metadata/_custom_type_script = "uid://be4vkhx6uafmy"
