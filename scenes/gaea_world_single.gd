@@ -26,3 +26,28 @@ func _on_heightmap_generator_2d_generation_finished() -> void:
 		var mapsize := tml.get_used_rect().size * tml.tile_set.tile_size
 		GlobalSignalBus.World_Generated.emit(mapsize, 0)
 	pass # Replace with function body.
+
+
+func _on_heightmap_generator_2d_chunk_generation_finished(_chunk_position: Vector2i) -> void:
+	if LayerGroupNode and tile_map_layers.size() > 0:
+		var tml : TileMapLayer = tile_map_layers[0]
+		var mapsize := tml.get_used_rect().size * tml.tile_set.tile_size
+		GlobalSignalBus.World_Generated.emit(mapsize, 0)
+	pass # Replace with function body.
+
+
+func _on_threaded_tilemap_gaea_renderer_area_rendered(area: Rect2i) -> void:
+	var tml : TileMapLayer = tile_map_layers[0]
+	var mapsize := tml.get_used_rect().size * tml.tile_set.tile_size
+	print(area)
+	print(mapsize)
+	pass # Replace with function body.
+
+
+func _on_threaded_tilemap_gaea_renderer_chunk_rendered(chunk_position: Vector2i) -> void:
+	print(chunk_position)
+	pass # Replace with function body.
+
+
+func _on_threaded_tilemap_gaea_renderer_grid_rendered() -> void:
+	pass # Replace with function body.
