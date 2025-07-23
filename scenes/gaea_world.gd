@@ -2,10 +2,11 @@ extends Node
 @onready var gaea_generator: GaeaGenerator = $GaeaGenerator
 @onready var ground_tile_layer: TileMapLayer = $"../LayerGroup/GroundTileLayer"
 
+
 var last_grid: GaeaGrid
 
 func _ready() -> void:
-	GlobalSignalBus.World_Generated.connect(func(mapsize): print("GlobalSignalBus.World_Generated emitted: %s" % [mapsize]))
+	GlobalSignalBus.World_Generated.connect(func(mapsize,_l): print("GlobalSignalBus.World_Generated emitted: %s" % [mapsize]))
 	gaea_generator.generation_finished.connect(
 		func(grid): 
 			last_grid = grid
@@ -14,6 +15,9 @@ func _ready() -> void:
 	gaea_generator.generate()
 	await gaea_generator.generation_finished
 	pass
+
+
+
 
 func _on_gaea_generator_generation_finished(grid: GaeaGrid) -> void:
 	#var d = last_grid.get_layer(0)
@@ -25,7 +29,7 @@ func _on_gaea_generator_generation_finished(grid: GaeaGrid) -> void:
 	pass # Replace with function body.
 
 
-func _on_gaea_generator_area_erased(area: AABB) -> void:
+func _on_gaea_generator_area_erased(_area: AABB) -> void:
 	print("_on_gaea_generator_area_erased")
 	pass # Replace with function body.
 
