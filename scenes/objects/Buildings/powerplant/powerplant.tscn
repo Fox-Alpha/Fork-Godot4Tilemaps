@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://5fce7i4il0ok"]
+
+[ext_resource type="Texture2D" uid="uid://dn3fynsr6njjq" path="res://assets/buildings/powerplant.png" id="1_6ykn0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k88yi"]
+size = Vector2(96, 90)
+
+[node name="Powerplant" type="StaticBody2D"]
+
+[node name="Picture" type="Sprite2D" parent="."]
+texture = ExtResource("1_6ykn0")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k88yi")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dryt1143aijbt"]
+
+[ext_resource type="Texture2D" uid="uid://bvoixbu6kojrj" path="res://assets/buildings/radar.png" id="1_vkwvf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k88yi"]
+size = Vector2(110, 98)
+
+[node name="Radar" type="StaticBody2D"]
+
+[node name="Picture" type="Sprite2D" parent="."]
+texture = ExtResource("1_vkwvf")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k88yi")
