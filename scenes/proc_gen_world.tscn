@@ -217,7 +217,7 @@ node_data = Array[Dictionary]([{
 }, {
 &"arguments": {
 &"range": {
-"max": 0.9500000000000001,
+"max": 0.95,
 "min": 0.3
 }
 },
@@ -432,10 +432,12 @@ SPEED = 150.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-custom_minimum_size = Vector2(1, 1)
-offset_right = 530.0
-offset_bottom = 33.0
+custom_minimum_size = Vector2(1, 40)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color(0.1254902, 0.1764706, 0.3529412, 1)
 
 [node name="LabelMousePosition" type="Label" parent="CanvasLayer/ColorRect"]
