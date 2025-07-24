@@ -11,10 +11,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1152.0
-offset_top = -648.0
-offset_right = -872.0
-offset_bottom = -368.0
+offset_left = -280.0
+offset_top = -280.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("1_4bivy")
@@ -38,7 +36,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qqvxh")
-region_rect = Rect2(0, 0, 128, 128)
+draw_center = false
+region_rect = Rect2(4, 4, 120, 120)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -54,15 +57,13 @@ color = Color(0.14902, 1, 1, 1)
 [node name="TextureRectMinimap" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
@@ -70,13 +71,9 @@ stretch_mode = 6
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
-size = Vector2i(256, 256)
+handle_input_locally = false
+canvas_cull_mask = 4294967279
 
 [node name="Camera2DMinimap" type="Camera2D" parent="SubViewport"]
-ignore_rotation = false
-zoom = Vector2(1.5, 1.5)
-limit_left = -1024
-limit_top = -1024
-limit_right = 1024
-limit_bottom = 1024
-position_smoothing_speed = 50.0
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true

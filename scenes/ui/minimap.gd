@@ -11,24 +11,26 @@ var gamecamposition : Vector2i
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var vp = get_viewport()
 @onready var vpsize : Vector2 = vp.get_visible_rect().size
-@onready var tilemap : TileMapLayer = get_tree().current_scene.get_node("TileMap/water")
+@onready var gaea_generator: GaeaGenerator = $/root/World/GAEA_World/GaeaGenerator
+#@onready var tilemap : Vector3i = get_tree().current_scene.get_node("GAEA_World/GaeaGenerator")
 
 
 func _ready():	
-	GlobalSignalBus.World_Generated.connect(ResetCamMinimapBorderLimits)
+	GlobalVars.GSB.World_Generated.connect(ResetCamMinimapBorderLimits)
 	await RenderingServer.frame_post_draw
 	
 	vpsize = vp.get_visible_rect().size
 
-	cam2dmap.position = vp.get_visible_rect().get_center()
+	#cam2dmap.position = vp.get_visible_rect().get_center()
 
 	gamecam = vp.get_camera_2d()
-	gamecamposition = gamecam.global_position
+	#gamecamposition = gamecam.global_position
+	cam2dmap.position = gamecam.global_position
 	currcam = gamecam
-	print(tilemap.get_used_rect().size * tilemap.tile_set.tile_size)
+	#print(tilemap.get_used_rect().size * tilemap.tile_set.tile_size)
 
 	sub_viewport.world_2d = vp.world_2d
-	sub_viewport.size = vp.size * 1.2
+	#sub_viewport.size = vp.size #* 1.2
 	minimap.texture = sub_viewport.get_texture()
 
 
@@ -64,10 +66,10 @@ func _input(_event):
 		pass
 
 
-func ResetCamMinimapBorderLimits(maprect):
+func ResetCamMinimapBorderLimits(maprect, _layer):
 	#var vpcam := get_viewport().get_camera_2d()
-	cam2dmap.limit_top = -maprect.y / 2	#-2000
-	cam2dmap.limit_left = -maprect.x / 2	#-4400
-	cam2dmap.limit_bottom = maprect.y / 2	#2000
-	cam2dmap.limit_right = maprect.x / 2	#4400
+	cam2dmap.limit_top = 0 # -maprect.y / 2	#-2000
+	cam2dmap.limit_left = 0 # -maprect.x / 2	#-4400
+	cam2dmap.limit_bottom = maprect.y # / 2	#2000
+	cam2dmap.limit_right = maprect.x # / 2	#4400
 	pass
