@@ -15,7 +15,7 @@ enum LAYERS {
 var direction : Vector2 = Vector2.ZERO
 
 func _ready():
-	GlobalSignalBus.World_Generated.connect(ResetPlayerPosition)
+	GlobalVars.GSB.World_Generated.connect(ResetPlayerPosition)
 	animation_tree.active = true
 
 func _process(_delta):
@@ -64,5 +64,5 @@ func ResetPlayerPosition(_mapsize, layer) -> void:
 	global_position = gpp
 	
 	print("Respawn Player Position %s / %s " % [gpp, newtile])
-	GlobalSignalBus.PLayer_Respawned.emit(gpp)
+	GlobalVars.GSB.PLayer_Respawned.emit(gpp)
 	pass
