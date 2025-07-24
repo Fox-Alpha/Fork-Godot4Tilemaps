@@ -22,10 +22,16 @@ func _process(_delta):
 	update_animation_parameters()
 
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.is_pressed():
+		pass
+
 func _physics_process(_delta):
 	direction = Input.get_vector("left", "right","up","down").normalized()
 	if direction:
 		velocity = direction * SPEED
+		if Input.is_key_pressed(KEY_SHIFT):
+			velocity = velocity * 2.5
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
