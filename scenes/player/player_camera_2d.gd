@@ -8,22 +8,29 @@ extends Camera2D
 var tile_map_layers : Array[TileMapLayer] = []
 
 func _ready() -> void:
-	GlobalSignalBus.World_Generated.connect(ResetCamLimits)
+	GlobalVars.GSB.World_Generated.connect(ResetCamLimits)
 	if LayerGroupNode:
 		tile_map_layers.append_array(LayerGroupNode.get_children())
 	pass
 
-func _input(event):
+func _input(event: InputEvent):
+	HandleZoom(event)
+
+
+#region MOUSE_ZOOM
+func HandleZoom(event: InputEvent):
 	if event.is_action_pressed("zoom_in"):
 		zoom_step(-1)
 	if event.is_action_pressed("zoom_out"):
 		zoom_step(1)
+
 
 func zoom_step(zoom_direction : int):
 	if zoom_direction != 0:
 		zoom = Vector2(clamp(zoom.x + zoom_direction * zoom.x * _zoom_step, _min_zoom, _max_zoom),
 			clamp(zoom.y + zoom_direction * zoom.y * _zoom_step, _min_zoom, _max_zoom))
 	pass
+#endregion
 
 func ResetCamLimits(mapsize : Vector2i, _LayerIdx : int) -> void :
 	limit_top = 0 #-mapsize.y / 2	#-2000
