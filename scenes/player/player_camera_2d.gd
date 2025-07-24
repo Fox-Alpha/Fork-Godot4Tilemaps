@@ -13,8 +13,14 @@ func _ready() -> void:
 		tile_map_layers.append_array(LayerGroupNode.get_children())
 	pass
 
+
 func _input(event: InputEvent):
 	HandleZoom(event)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		pass
 
 
 #region MOUSE_ZOOM
@@ -33,6 +39,7 @@ func zoom_step(zoom_direction : int):
 #endregion
 
 func ResetCamLimits(mapsize : Vector2i, _LayerIdx : int) -> void :
+	pass
 	limit_top = 0 #-mapsize.y / 2	#-2000
 	limit_left = 0 #-mapsize.x / 2	#-4400
 	limit_bottom = mapsize.y #mapsize.y / 2	#2000
