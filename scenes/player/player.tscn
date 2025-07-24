@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://nt74txyyhp2d"]
+[gd_scene load_steps=30 format=3 uid="uid://nt74txyyhp2d"]
 
 [ext_resource type="Script" uid="uid://bgv5gb7w6a248" path="res://scripts/player.gd" id="1_88qcy"]
 [ext_resource type="Texture2D" uid="uid://1tsrkrwoexmj" path="res://assets/new_character.png" id="2_saggl"]
 [ext_resource type="PackedScene" uid="uid://ca4hc1u1gs8oq" path="res://scenes/player/player_camera_2d.tscn" id="3_gmlin"]
+[ext_resource type="Texture2D" uid="uid://c7bcq63c2q30v" path="res://assets/Player_Finder.png" id="4_lvxji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 size = Vector2(10, 16)
@@ -306,7 +307,7 @@ collision_mask = 128
 motion_mode = 1
 platform_wall_layers = 128
 script = ExtResource("1_88qcy")
-SPEED = 250.0
+SPEED = 350.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 5
@@ -327,6 +328,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_r8onw")
+}
 tree_root = SubResource("AnimationNodeStateMachine_pxaul")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_idle = false
@@ -335,3 +339,13 @@ parameters/idle/blend_position = Vector2(0, 0)
 parameters/walk/blend_position = Vector2(0, 0)
 
 [node name="PlayerCamera2D" parent="." instance=ExtResource("3_gmlin")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+self_modulate = Color(0.054901954, 0.10980393, 1, 1)
+visibility_layer = 2
+position = Vector2(1, -14)
+scale = Vector2(0.255, 0.255)
+texture = ExtResource("4_lvxji")
