@@ -45,7 +45,7 @@ func update_animation_parameters():
 
 
 func ResetPlayerPosition(_mapsize, layer) -> void:
-	var tml : TileMapLayer = get_node_or_null("/root/World/LayerGroup").get_children(layer)[0] as TileMapLayer
+	var tml : TileMapLayer = get_node_or_null("/root/World/LayerGroup").get_children(layer)[1] as TileMapLayer
 	var newtile := Vector2i.ZERO 
 	var nst : Array[Vector2i] = [] 
 	var test_tile : Array[Vector2i] = []
@@ -55,7 +55,6 @@ func ResetPlayerPosition(_mapsize, layer) -> void:
 	while test_tile.size() != 4 and arr.size() > 0:
 		newtile = arr.pick_random()
 		nst = tml.get_surrounding_cells(newtile)
-
 		test_tile = nst.filter(func(coord): 
 			var atl_coords = tml.get_cell_atlas_coords(coord)
 			return atl_coords != Vector2i(0,1))
