@@ -2682,7 +2682,6 @@ texture = ExtResource("4_2w5se")
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_2w5se"]
 scenes/1/scene = ExtResource("6_que1i")
 scenes/2/scene = ExtResource("7_2w5se")
-scenes/2/display_placeholder = ExtResource("7_2w5se")
 
 [resource]
 physics_layer_0/collision_layer = 1
