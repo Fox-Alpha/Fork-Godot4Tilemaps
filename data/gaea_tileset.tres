@@ -1879,6 +1879,8 @@ use_texture_padding = false
 15:6/0/y_sort_origin = 6
 15:6/0/physics_layer_4/polygon_0/points = PackedVector2Array(-14.1121, 5.93924, -8, 0.152287, 8, -0.0507622, 11.8785, 5.73619, 3.14729, 6.5484, -4.3656, 5.63467, -8, 7.3606)
 12:0/0 = 0
+3:1/0 = 0
+11:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o6r7u"]
 resource_name = "Sand_In_Water_Tiles"
