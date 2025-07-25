@@ -2,7 +2,9 @@
 class_name Globals extends Node
 
 ## Globale Mouse Position
-@onready var GlobalMousePosition : Vector2 = Vector2.ZERO
+@onready var GlobalMousePosition : Vector2i = Vector2i.ZERO
+@onready var GlobalPlayerPosition : Vector2i = Vector2i.ZERO
+@onready var astarpath : Array[Vector2i] = []
 
 ## Referenz auf den Globalen Signal Bus
 var GSB : GlobalSignalBus
