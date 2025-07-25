@@ -59,8 +59,41 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func SetNavigationLayer(_LayerSize : Vector2i, _l) -> void:
-	var guc := get_used_rect()
-	astar_grid.region = guc #Rect2i(0, 0, guc.x, guc.y)
+	var guc_rect := get_used_rect()
+	astar_grid.region = guc_rect #Rect2i(0, 0, guc.x, guc.y)
 	astar_grid.cell_size = Vector2(1, 1)
 	astar_grid.update()
+	#astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	
+	#var guc_cnt := get_used_cells().size()
+	#var guc_all := get_used_cells()
+
+	#var guc_id := get_used_cells_by_id()
+	#var guc_id_0 := get_used_cells_by_id(-1, Vector2i(-1,-1), -1)
+#
+	#var gucs_id_0_0 := get_cell_source_id(Vector2i(0, 0))
+	#var guca_id_0_0 := get_cell_atlas_coords(Vector2i(0, 0))
+	## Getting not empty cells
+	var guc_necp : Array[Vector2i] = []
+	guc_necp = get_empty_cell_positions_in_rect(guc_rect)
+
+	for s in guc_necp.size():
+		astar_grid.set_point_solid(guc_necp[s])
+		
+	print()
 	pass
+
+
+func get_empty_cell_positions_in_rect(rect2: Rect2) -> Array[Vector2i]:
+	var empty_cell_positions : Array[Vector2i] = []
+
+	for y in rect2.size.y:
+		for x in rect2.size.x:
+			var cell_pos : Vector2i = (rect2.position + Vector2(x, y)) as Vector2i
+			#if get_cellv(cell_pos) == INVALID_CELL:
+			if get_cell_atlas_coords(cell_pos) != Vector2i(-1,-1):
+				empty_cell_positions.append(cell_pos)
+			#var ecp := get_cell_atlas_coords(cell_pos)
+			#empty_cell_positions.append(ecp)
+			#print("Emptys: %s" % str(empty_cell_positions.size()))
+	return empty_cell_positions
