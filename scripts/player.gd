@@ -13,6 +13,7 @@ enum LAYERS {
 
 @onready var animation_tree = $AnimationTree
 var direction : Vector2 = Vector2.ZERO
+@onready var pathdir : Vector2 = Vector2i.ZERO
 
 func _ready():
 	GlobalVars.GSB.World_Generated.connect(ResetPlayerPosition)
@@ -27,7 +28,18 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		pass
 
 func _physics_process(_delta):
-	direction = Input.get_vector("left", "right","up","down").normalized()
+	if GlobalVars.astarpath.size() > 0:
+		print("id Path: %s (%s)" % [str(GlobalVars.astarpath[0]), GlobalVars.astarpath.size()])
+		if global_position.floor() as Vector2i == GlobalVars.astarpath[0] or global_position.distance_to( GlobalVars.astarpath[0]) <= 2 :
+			GlobalVars.astarpath.pop_front()
+		else:
+			print("GlobPos: %s " % str(global_position.floor() as Vector2i))
+			direction = global_position.direction_to(GlobalVars.astarpath.front())
+		
+		pass
+	else:
+		direction = Input.get_vector("left", "right","up","down").normalized()
+		
 	if direction:
 		velocity = direction * SPEED
 		if Input.is_key_pressed(KEY_SHIFT):
@@ -35,6 +47,8 @@ func _physics_process(_delta):
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
+	GlobalVars.GlobalPlayerPosition = global_position
+	pass
 
 
 func update_animation_parameters():
