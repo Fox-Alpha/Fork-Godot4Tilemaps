@@ -8,13 +8,21 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
+func _physics_process(delta: float) -> void:
+	
+	pass
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	var tml : TileMapLayer = ground_tile_layer
-	var tml_lmp := tml.get_local_mouse_position()
-	text = "Mouse Position in Map: Tile on Map: %s" % [
-		str(tml.local_to_map(tml_lmp))
+	var tml_lmp : Vector2i = tml.get_local_mouse_position()
+	text = "Mouse Position in Map: Tile on Map: %s (%s)" % [
+		str(tml.local_to_map(tml_lmp)),
+		str(tml_lmp)
 	]
+	GlobalVars.GlobalMousePosition = tml_lmp
+	pass
 
 
 #func _unhandled_key_input(event: InputEvent) -> void:
