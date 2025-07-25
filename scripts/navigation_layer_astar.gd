@@ -70,10 +70,10 @@ func get_empty_cell_positions_in_rect(rect2: Rect2, returnnotemptytiles : bool =
 	for y in rect2.size.y:
 		for x in rect2.size.x:
 			var cell_pos : Vector2i = (rect2.position + Vector2(x, y)) as Vector2i
-			#if get_cellv(cell_pos) == INVALID_CELL:
-			if get_cell_atlas_coords(cell_pos) != Vector2i(-1,-1):
-				empty_cell_positions.append(cell_pos)
-			#var ecp := get_cell_atlas_coords(cell_pos)
-			#empty_cell_positions.append(ecp)
-			#print("Emptys: %s" % str(empty_cell_positions.size()))
+			if returnnotemptytiles:
+				if get_cell_atlas_coords(cell_pos) != Vector2i(-1,-1):
+					empty_cell_positions.append(cell_pos)
+			else:
+				if get_cell_atlas_coords(cell_pos) == Vector2i(-1,-1):
+					empty_cell_positions.append(cell_pos)
 	return empty_cell_positions
