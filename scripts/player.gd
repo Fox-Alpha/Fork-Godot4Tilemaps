@@ -29,11 +29,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _physics_process(_delta):
 	if GlobalVars.astarpath.size() > 0:
-		print("id Path: %s (%s)" % [str(GlobalVars.astarpath[0]), GlobalVars.astarpath.size()])
+		#print("id Path: %s (%s)" % [str(GlobalVars.astarpath[0]), GlobalVars.astarpath.size()])
 		if global_position.floor() as Vector2i == GlobalVars.astarpath[0] or global_position.distance_to( GlobalVars.astarpath[0]) < 16 :
 			GlobalVars.astarpath.pop_front()
 		else:
-			print("GlobPos: %s " % str(global_position.floor() as Vector2i))
+			#print("GlobPos: %s " % str(global_position.floor() as Vector2i))
 			direction = global_position.direction_to(GlobalVars.astarpath.front())
 		
 		pass
