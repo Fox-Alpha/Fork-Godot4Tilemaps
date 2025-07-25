@@ -23,8 +23,6 @@ GlobalVars="*res://scripts/globals/globals.tscn"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
-window/size/window_width_override=1280
-window/size/window_height_override=720
 window/stretch/mode="viewport"
 
 [editor_plugins]
