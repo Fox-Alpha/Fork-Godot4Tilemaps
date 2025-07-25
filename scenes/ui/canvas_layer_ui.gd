@@ -1,7 +1,6 @@
 extends Label
 
 @onready var ground_tile_layer: TileMapLayer = $"/root/World/LayerGroup/GroundTileLayer"
-#@onready var label_mouse_position: Label = $"/root/World/CanvasLayer/LabelMousePosition"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

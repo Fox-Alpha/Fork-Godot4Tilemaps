@@ -1,8 +1,10 @@
 ## Hallo Welt
-class_name Globals extends Node
+#class_name Globals 
+extends Node
 
 ## Globale Mouse Position
 @onready var GlobalMousePosition : Vector2i = Vector2i.ZERO
+## Globale Player Position
 @onready var GlobalPlayerPosition : Vector2i = Vector2i.ZERO
 @onready var astarpath : Array[Vector2i] = []
 

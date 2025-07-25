@@ -13,7 +13,7 @@ func _ready() -> void:
 	GlobalVars.GSB.World_Generated.connect(SetNavigationLayer)
 	pass # Replace with function body.
 
-
+#region unusef prebuild funcs
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(_delta: float) -> void:
 	#pass
@@ -21,70 +21,50 @@ func _ready() -> void:
 
 #func _unhandled_key_input(event: InputEvent) -> void:
 	#if event is InputEventKey and event.is_pressed():
-		### if CTRL is pressed, use ASTAR Navigation
-		#ctrl_pressed = event.keycode == KEY_CTRL
 		#pass
+#endregion
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		#if ctrl_pressed:
 		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 			mouse_pos = local_to_map(GlobalVars.GlobalMousePosition)
 			player_pos = local_to_map(GlobalVars.GlobalPlayerPosition)
 
 			idpath = astar_grid.get_id_path(player_pos, mouse_pos)
 			if idpath.size() > 0:
-			#var pointpath = astar_grid.get_point_path(player_pos, mouse_pos)
-
-			#print("Point Path: %s" % str(pointpath))
-				#print("id Path: %s" % str(idpath))
 				path_line_2d.points.clear()
 				var pv2di : PackedVector2Array
 				GlobalVars.astarpath.clear()
 				for i in idpath.size():
 					pv2di.append(map_to_local(idpath[i]))
 					GlobalVars.astarpath.append(to_global(map_to_local(idpath[i])) as Vector2i)
-					
-				path_line_2d.points = pv2di #idpath.duplicate(true)
+				path_line_2d.points = pv2di
 				path_line_2d.queue_redraw()
-				#GlobalVars.astarpath = pv2di
 			idpath.clear()
-			#queue_redraw()
-	#if event is InputEventMouseButton and event.is_released():
-	#if event is InputEventMouseButton and event.is_released():
-		#if !ctrl_pressed and idpath.size() > 0:
-			#idpath.clear()
-			
 		pass
 
-
+## 
 func SetNavigationLayer(_LayerSize : Vector2i, _l) -> void:
 	var guc_rect := get_used_rect()
-	astar_grid.region = guc_rect #Rect2i(0, 0, guc.x, guc.y)
+	
+	# creating astargrid2d
+	astar_grid.region = guc_rect
 	astar_grid.cell_size = Vector2(1, 1)
 	astar_grid.update()
-	#astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	
-	#var guc_cnt := get_used_cells().size()
-	#var guc_all := get_used_cells()
 
-	#var guc_id := get_used_cells_by_id()
-	#var guc_id_0 := get_used_cells_by_id(-1, Vector2i(-1,-1), -1)
-#
-	#var gucs_id_0_0 := get_cell_source_id(Vector2i(0, 0))
-	#var guca_id_0_0 := get_cell_atlas_coords(Vector2i(0, 0))
-	## Getting not empty cells
+	# Getting not empty cells
 	var guc_necp : Array[Vector2i] = []
 	guc_necp = get_empty_cell_positions_in_rect(guc_rect)
 
+	# set solid tiles
 	for s in guc_necp.size():
 		astar_grid.set_point_solid(guc_necp[s])
-		
-	print()
+
 	pass
 
 
-func get_empty_cell_positions_in_rect(rect2: Rect2) -> Array[Vector2i]:
+func get_empty_cell_positions_in_rect(rect2: Rect2, returnnotemptytiles : bool = true) -> Array[Vector2i]:
 	var empty_cell_positions : Array[Vector2i] = []
 
 	for y in rect2.size.y:
