@@ -28,6 +28,9 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+			if GlobalVars.BuildingMode:
+				return
+
 			mouse_pos = local_to_map(GlobalVars.GlobalMousePosition)
 			player_pos = local_to_map(GlobalVars.GlobalPlayerPosition)
 
@@ -77,3 +80,20 @@ func get_empty_cell_positions_in_rect(rect2: Rect2, returnnotemptytiles : bool =
 				if get_cell_atlas_coords(cell_pos) == Vector2i(-1,-1):
 					empty_cell_positions.append(cell_pos)
 	return empty_cell_positions
+
+
+func AddSolidTilesFromPlacedBuilding(BuildingPosition : Vector2i) -> void:
+	var tileArr : Array[Vector2i] = []
+	var BuildingRectStart : Vector2i = Vector2i(BuildingPosition.x-3, BuildingPosition.y-3)
+	var BuildingRectEnd : Vector2i = Vector2i(BuildingPosition.x+3, BuildingPosition.y+3)
+	
+	for y in range(7):
+		for x in range(7):
+			set_cell(Vector2i(BuildingRectStart.x + x, BuildingRectStart.y + y), 0, Vector2i(11, 0))
+			astar_grid.set_point_solid(Vector2i(BuildingRectStart.x + x, BuildingRectStart.y + y))
+			pass
+	
+	
+	#astar_grid.update()
+	
+	pass
