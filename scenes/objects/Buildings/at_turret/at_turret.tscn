@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://5fce7i4il0ok"]
+[gd_scene load_steps=3 format=3 uid="uid://eat2llon1o45"]
 
 [ext_resource type="Texture2D" uid="uid://in5hlqkluri2" path="res://assets/buildings/turret.png" id="1_6jvjg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k88yi"]
 size = Vector2(128, 128)
 
-[node name="AT_Turret" type="StaticBody2D"]
+[node name="CommandCenter" type="StaticBody2D"]
 
 [node name="Picture" type="Sprite2D" parent="."]
 texture = ExtResource("1_6jvjg")

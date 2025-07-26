@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://5fce7i4il0ok"]
+[gd_scene load_steps=3 format=3 uid="uid://by63gvow87yi3"]
 
 [ext_resource type="Texture2D" uid="uid://de26njbgda56v" path="res://assets/buildings/wall_vertical.png" id="1_pa1sw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k88yi"]
 size = Vector2(70, 128)
 
-[node name="Wall_Vertical" type="StaticBody2D"]
+[node name="CommandCenter" type="StaticBody2D"]
 
 [node name="Picture" type="Sprite2D" parent="."]
 texture = ExtResource("1_pa1sw")
