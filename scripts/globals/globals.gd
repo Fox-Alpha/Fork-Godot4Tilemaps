@@ -63,7 +63,7 @@ func _ready() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
-		BuildingMode = checkBuildingKey(event.keyode)
+		BuildingMode = checkBuildingKey(event.keycode)
 		if BuildingMode:
 			GSB.Enter_Buildmode.emit()
 		pass
@@ -74,23 +74,23 @@ func checkBuildingKey(keycode : Key) -> bool:
 		KEY_1:
 			print("Key 1 verwendet: Command Center")
 			BuildingToPlace = COMMAND_CENTER.instantiate()
-			return false
+			return true
 		KEY_2:
 			print("Key 2 verwendet: Powerplant")
 			BuildingToPlace = POWERPLANT.instantiate()
-			return false
+			return true
 		KEY_3:
 			print("Key 3 verwendet: Refinery")
 			BuildingToPlace = REFINERY.instantiate()
-			return false
+			return true
 		KEY_4:
 			print("Key 4 verwendet: Barracks")
 			BuildingToPlace = BARRACKS.instantiate()
-			return false
+			return true
 		KEY_5:
 			print("Key 5 verwendet: Radar")
 			BuildingToPlace = RADAR.instantiate()
-			return false
+			return true
 		KEY_ESCAPE:
 			if not BuildingToPlace.is_queued_for_deletion():
 			#if is_instance_valid(BuildingToPlace):
