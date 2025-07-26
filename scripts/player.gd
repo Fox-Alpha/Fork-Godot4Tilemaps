@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 @export var tile_map_layer : TileMapLayer
 enum LAYERS {
-	water_layer_0 = 0,
-	ground_layer_1 = 1,
-	building_layer_2 = 2,
-	tree_layer = 3,
-	navigation_layer =4
+	navigation_layer =0,
+	water_layer_0 = 1,
+	ground_layer_1 = 2,
+	building_layer_2 = 3,
+	tree_layer = 4,
 }
 
 @export var SPEED : float = 300.0
