@@ -1,6 +1,7 @@
 extends Label
 
 @onready var ground_tile_layer: TileMapLayer = $"/root/World/LayerGroup/GroundTileLayer"
+@onready var gaea_generator: GaeaGenerator = $"../../../GAEA_World/GaeaGenerator"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,6 +10,10 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	pass
+	
+func _GetMapSize() -> Vector2i:
+	var guc = gaea_generator.world_size * gaea_generator.cell_size
+	return Vector2i(guc.x, guc.y)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
