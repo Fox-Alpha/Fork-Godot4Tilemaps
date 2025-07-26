@@ -40,20 +40,14 @@ var BuildingMode : bool :
 			GSB.Leave_Buildmode.emit()
 	get: return BuildingMode
 
-const BARRACKS = preload("uid://dijgpdkai6m20")
-const COMMAND_CENTER = preload("uid://c8q5s3mdfbhp0")
-const RADAR = preload("uid://dryt1143aijbt")
-const REFINERY = preload("uid://bm40tsnfhlvxc")
-const POWERPLANT = preload("uid://soue6jtn4lpw")
 
 ## Referenz auf den Globalen Signal Bus
-var GSB : GlobalSignalBus
+@onready var GSB : GlobalSignalBus = GlobalSignalBus.new()
 @onready var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func _init() -> void:
 	print("Globals => _init()")
-	GSB = GlobalSignalBus.new()
 
 
 func _ready() -> void:
@@ -61,43 +55,10 @@ func _ready() -> void:
 	print("Globals => _ready()")
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		BuildingMode = checkBuildingKey(event.keycode)
-		if BuildingMode:
-			GSB.Enter_Buildmode.emit()
-		pass
-
-
-func checkBuildingKey(keycode : Key) -> bool:
-	match keycode:
-		KEY_1:
-			print("Key 1 verwendet: Command Center")
-			BuildingToPlace = COMMAND_CENTER.instantiate()
-			return true
-		KEY_2:
-			print("Key 2 verwendet: Powerplant")
-			BuildingToPlace = POWERPLANT.instantiate()
-			return true
-		KEY_3:
-			print("Key 3 verwendet: Refinery")
-			BuildingToPlace = REFINERY.instantiate()
-			return true
-		KEY_4:
-			print("Key 4 verwendet: Barracks")
-			BuildingToPlace = BARRACKS.instantiate()
-			return true
-		KEY_5:
-			print("Key 5 verwendet: Radar")
-			BuildingToPlace = RADAR.instantiate()
-			return true
-		KEY_ESCAPE:
-			if not BuildingToPlace.is_queued_for_deletion():
-			#if is_instance_valid(BuildingToPlace):
-				BuildingToPlace.queue_free()
-			return false
-		_:
-			return false
+#func _unhandled_key_input(_event: InputEvent) -> void:
+	#if event is InputEventKey and event.is_pressed():
+	# Maybe Pause Key
+	#pass
 
 
 func _Game_State_Has_Changed(new_gs : GameStates) -> void:
