@@ -9,9 +9,9 @@ light_mode = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gljsh"]
 size = Vector2(96, 96)
 
-[node name="BuildingBase" type="StaticBody2D"]
+[node name="PowerPlant" type="StaticBody2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Picture" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 z_index = 10
 material = SubResource("CanvasItemMaterial_mu2f3")
