@@ -27,5 +27,4 @@ func _input(event):
 			GlobalVars.BuildingMode = false
 			NavigationLayer.AddSolidTilesFromPlacedBuilding(tile_coords)
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and GlobalVars.BuildingMode:
-			GlobalVars.BuildingToPlace.queue_free()
 			GlobalVars.BuildingMode = false
