@@ -7,9 +7,13 @@ signal World_Generated
 ## Ausgelöst wenn der Spieler auf dem Spielfeld platziert wurde
 signal PLayer_Respawned
 
+signal Enter_Buildmode
+signal Leave_Buildmode
 
 func _ready() -> void:
 	print("GlobalSignalBus => _ready()")
 
 	World_Generated.connect(func(): pass )
 	PLayer_Respawned.connect(func(): pass )
+	Enter_Buildmode.connect(func(): pass )
+	Leave_Buildmode.connect(func(): pass )
