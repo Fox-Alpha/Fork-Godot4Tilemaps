@@ -5,14 +5,20 @@ extends Camera2D
 @export var _max_zoom := 3.0
 
 @onready var LayerGroupNode : Node = get_node_or_null("/root/LayerGroup")
+
+
 var tile_map_layers : Array[TileMapLayer] = []
 
 func _ready() -> void:
 	GlobalVars.GSB.World_Generated.connect(ResetCamLimits)
+
 	if LayerGroupNode:
 		tile_map_layers.append_array(LayerGroupNode.get_children())
 	pass
 
+
+#func _physics_process(delta: float) -> void:
+	#pass
 
 func _input(event: InputEvent):
 	HandleZoom(event)
@@ -21,6 +27,7 @@ func _input(event: InputEvent):
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		pass
+
 
 
 #region MOUSE_ZOOM
