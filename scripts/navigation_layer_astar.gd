@@ -27,7 +27,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		if event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+		if event.button_index == MouseButton.MOUSE_BUTTON_RIGHT:
 			if GlobalVars.BuildingMode:
 				return
 
