@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dhptvycu3kb8x"]
+[gd_scene load_steps=27 format=4 uid="uid://dhptvycu3kb8x"]
 
 [ext_resource type="Script" uid="uid://b8cckd0ebbggv" path="res://scenes/gaea_world.gd" id="1_2rjyd"]
 [ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/nodes/renderers/tilemap_renderer.gd" id="1_g5ie2"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bhor06fpbtxqn" path="res://scenes/ui/canvas_layer_ui.gd" id="10_iuhyi"]
 [ext_resource type="TileSet" uid="uid://bh8qdt70s2epm" path="res://data/gaea_tileset.tres" id="10_voqb1"]
 [ext_resource type="PackedScene" uid="uid://c2jydhkkjxepj" path="res://scenes/ui/minimap.tscn" id="11_3gr1v"]
+[ext_resource type="Script" uid="uid://bpi30rif1ydat" path="res://scripts/placer.gd" id="14_50dtl"]
 
 [sub_resource type="Resource" id="Resource_o6pru"]
 script = ExtResource("3_iuhyi")
@@ -33,9 +34,23 @@ metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 script = ExtResource("3_iuhyi")
 metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 
+[sub_resource type="Resource" id="Resource_jwkqr"]
+script = ExtResource("4_3gr1v")
+source_id = -1
+atlas_coord = Vector2i(-1, -1)
+alternative_tile = -1
+preview_color = Color(0.86557835, 0.935166, 0.23093024, 1)
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
 [sub_resource type="Resource" id="Resource_g5ie2"]
 script = ExtResource("4_3gr1v")
 preview_color = Color(0.07058822, 0.9490196, 0.227451, 1)
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_oqrdi"]
+script = ExtResource("4_3gr1v")
+atlas_coord = Vector2i(11, 0)
+preview_color = Color(0.7424412, 0.3396838, 0.28800276, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
 [sub_resource type="Resource" id="Resource_50dtl"]
@@ -55,20 +70,6 @@ metadata/_custom_type_script = "uid://e45byecr4gi6"
 script = ExtResource("4_3gr1v")
 atlas_coord = Vector2i(0, 1)
 preview_color = Color(0.16470589, 0.5137255, 0.9490196, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
-
-[sub_resource type="Resource" id="Resource_jwkqr"]
-script = ExtResource("4_3gr1v")
-source_id = -1
-atlas_coord = Vector2i(-1, -1)
-alternative_tile = -1
-preview_color = Color(0.86557835, 0.935166, 0.23093024, 1)
-metadata/_custom_type_script = "uid://e45byecr4gi6"
-
-[sub_resource type="Resource" id="Resource_oqrdi"]
-script = ExtResource("4_3gr1v")
-atlas_coord = Vector2i(11, 0)
-preview_color = Color(0.7424412, 0.3396838, 0.28800276, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
 [sub_resource type="Resource" id="Resource_rqxsm"]
@@ -459,7 +460,7 @@ node_data = Array[Dictionary]([{
 }, {
 &"arguments": {
 &"range": {
-"max": 0.9500000000000001,
+"max": 0.95,
 "min": 0.2
 }
 },
@@ -712,7 +713,7 @@ node_data = Array[Dictionary]([{
 }, {
 &"arguments": {
 &"range": {
-"max": 0.9500000000000001,
+"max": 0.95,
 "min": 0.2
 }
 },
@@ -859,7 +860,7 @@ other = {
 &"autoshrink": true,
 &"name": &"_GraphFrame_31003",
 &"position": Vector2(-10, 1579),
-&"size": Vector2(1250.0005, 526),
+&"size": Vector2(1250, 498),
 &"tint_color": Color(0.3, 0.3, 0.3, 0.75),
 &"tint_color_enabled": true,
 &"title": "Blank Tiles"
@@ -868,7 +869,7 @@ other = {
 &"autoshrink": true,
 &"name": &"_GraphFrame_179336",
 &"position": Vector2(-2800, 359),
-&"size": Vector2(263, 1518.0002),
+&"size": Vector2(263, 1324),
 &"tint_color": Color(0.3, 0.3, 0.3, 0.75),
 &"tint_color_enabled": false,
 &"title": "Title"
@@ -877,7 +878,7 @@ other = {
 &"autoshrink": true,
 &"name": &"_GraphFrame_205223",
 &"position": Vector2(-1960, 1749),
-&"size": Vector2(973, 559.0002),
+&"size": Vector2(973, 498),
 &"tint_color": Color(0.3, 0.3, 0.3, 0.75),
 &"tint_color_enabled": false,
 &"title": "Title"
@@ -895,7 +896,7 @@ other = {
 &"autoshrink": true,
 &"name": &"_GraphFrame_205296",
 &"position": Vector2(1000, -131),
-&"size": Vector2(240.00049, 1634.0001),
+&"size": Vector2(240, 1498),
 &"tint_color": Color(0.3, 0.3, 0.3, 0.75),
 &"tint_color_enabled": false,
 &"title": "Title"
@@ -986,3 +987,8 @@ anchor_right = 0.0
 offset_left = 0.0
 offset_right = 280.0
 grow_horizontal = 1
+
+[node name="Placer" type="Node2D" parent="."]
+script = ExtResource("14_50dtl")
+
+[node name="BuildGhost" type="Sprite2D" parent="Placer"]
