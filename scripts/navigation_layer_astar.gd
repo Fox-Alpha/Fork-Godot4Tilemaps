@@ -1,6 +1,6 @@
 extends TileMapLayer
 
-@onready var path_line_2d: Line2D = $PathLine2D
+@onready var path_line_2d: Line2D = $"../AStarPathLine"
 
 @onready var astar_grid := AStarGrid2D.new()
 var ctrl_pressed : bool = false
@@ -36,14 +36,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 			idpath = astar_grid.get_id_path(player_pos, mouse_pos)
 			if idpath.size() > 0:
-				path_line_2d.points.clear()
-				var pv2di : PackedVector2Array
 				GlobalVars.astarpath.clear()
 				for i in idpath.size():
-					pv2di.append(map_to_local(idpath[i]))
 					GlobalVars.astarpath.append(to_global(map_to_local(idpath[i])) as Vector2i)
-				path_line_2d.points = pv2di
-				path_line_2d.queue_redraw()
 			idpath.clear()
 		pass
 
