@@ -40,11 +40,11 @@ func _process(_delta: float) -> void:
 
 func EnterBuildMode() -> void:
 	if GlobalVars.BuildingMode:
-		var BuildImage : Image = Image.load_from_file(Buildings[BuildingToPlace].Image)
+		#var BuildImage : Image = Image.load_from_file(Buildings[BuildingToPlace].Image)
 		#GlobalVars.BuildingToPlace.get_node("Picture").texture
-		var texture = ImageTexture.create_from_image(BuildImage)
+		#var texture = ImageTexture.create_from_image(BuildImage)
 
-		build_ghost.texture = texture
+		build_ghost.texture = load(Buildings[BuildingToPlace].Image) as Texture2D
 		build_ghost.show()
 	pass
 
