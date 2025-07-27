@@ -1,4 +1,5 @@
-extends TileMapLayer
+extends TileMapLayerExtension
+#extends TileMapLayer
 
 @export var NavigationLayer : TileMapLayer
 
