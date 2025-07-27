@@ -8,10 +8,16 @@ func _ready() -> void:
 		func(iid:int, coords:Vector2i):
 			var instance = instance_from_id(iid)
 			if is_instance_valid(instance):
-				instance.position = to_local(coords)
+				var local2map = local_to_map(to_local(coords))
+				instance.position = map_to_local(local2map)
 				add_child(instance)
 				instance.owner = self
 				GlobalVars.BuildingMode = false
+
+				#print("Clickpoint: %s" % coords)
+				#var local = to_local(coords)
+				#print("Local in TileMap: %s" % local)
+				#print("Map Coord: %s" % local2map)
 			pass
 	)
 	pass # Replace with function body.
