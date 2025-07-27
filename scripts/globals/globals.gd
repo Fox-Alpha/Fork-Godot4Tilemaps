@@ -27,7 +27,7 @@ signal Game_State_Changed(gs : GameStates)
 @onready var GlobalPlayerPosition : Vector2i = Vector2i.ZERO
 @onready var astarpath : Array[Vector2i] = []
 
-var BuildingToPlace : Node = null
+
 
 # TODO: Getter / Setter
 # Invalidate BuildingToPlace, if false
