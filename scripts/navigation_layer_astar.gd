@@ -84,8 +84,8 @@ func get_empty_cell_positions_in_rect(rect2: Rect2, returnnotemptytiles : bool =
 func AddSolidTilesFromPlacedBuilding(BuildingPosition : Vector2i) -> void:
 	var BuildingRectStart : Vector2i = Vector2i(BuildingPosition.x-3, BuildingPosition.y-3)
 
-	for y in range(6):
-		for x in range(6):
+	for y in range(7):
+		for x in range(7):
 			set_cell(Vector2i(BuildingRectStart.x + x, BuildingRectStart.y + y), 0, Vector2i(11, 0))
 			astar_grid.set_point_solid(Vector2i(BuildingRectStart.x + x, BuildingRectStart.y + y))
 			pass
