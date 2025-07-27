@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8q5s3mdfbhp0"]
+[gd_scene load_steps=4 format=3 uid="uid://c8q5s3mdfbhp0"]
 
 [ext_resource type="Texture2D" uid="uid://cr2kl5lqmgdye" path="res://assets/buildings/commandcenter.png" id="1_7ymjk"]
+[ext_resource type="Texture2D" uid="uid://de6b00kylh7dp" path="res://assets/buildings/crosshair118.png" id="2_k88yi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k88yi"]
 size = Vector2(96, 90)
@@ -12,3 +13,11 @@ texture = ExtResource("1_7ymjk")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_k88yi")
+
+[node name="Marker2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+z_index = 10
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_k88yi")
+region_enabled = true
+region_rect = Rect2(52, 52, 24, 24)
