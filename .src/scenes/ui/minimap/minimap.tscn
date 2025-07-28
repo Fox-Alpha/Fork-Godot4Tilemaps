@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2jydhkkjxepj"]
 
-[ext_resource type="Script" uid="uid://0wxrhkvji15g" path="res://scenes/ui/minimap.gd" id="1_4bivy"]
+[ext_resource type="Script" uid="uid://0wxrhkvji15g" path="res://scenes/ui/minimap/minimap.gd" id="1_4bivy"]
 [ext_resource type="Texture2D" uid="uid://dc04iwoecmvwm" path="res://assets/minimap/panel_brown.png" id="2_qqvxh"]
 
 [node name="Minimap" type="Control"]
