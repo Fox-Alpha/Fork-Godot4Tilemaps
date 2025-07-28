@@ -10,10 +10,16 @@ config_version=5
 
 [application]
 
-config/name="Godot4Tilemaps"
+config/name="GD4 Mini RTS Game"
+config/description="Minmal RTS CnC like Game Clone"
+config/version="0.1"
+config/tags=PackedStringArray("2d", "develop", "godot4.5beta", "projekt", "singleplayer")
 run/main_scene="uid://dhptvycu3kb8x"
 config/features=PackedStringArray("4.5", "Forward Plus")
+run/flush_stdout_on_print=true
 config/icon="uid://db2o8pn8oh2y4"
+config/macos_native_icon="uid://db2o8pn8oh2y4"
+config/windows_native_icon="uid://db2o8pn8oh2y4"
 
 [autoload]
 
