@@ -1,0 +1,70 @@
+name: Generate Changelog
+
+on:
+  # Manuelle Ausführung über GitHub Actions Interface
+  workflow_dispatch:
+  # Automatische Ausführung bei Push auf diese Branches
+  push:
+    branches: [ "main", "GitHub-Changelog-Generator-Test" ]
+  # Automatische Ausführung bei Pull Requests zu diesen Branches
+  pull_request:
+    branches: [ "main", "GitHub-Changelog-Generator-Test" ]
+
+jobs:
+  changelog:
+    name: Generate Changelog
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog
+        uses: github-changelog-generator/github-changelog-generator@v1.16.4
+        env:
+          CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          user: Fox-Alpha
+          project: Fork-Godot4Tilemaps
+          output: CHANGELOG.md
+          base: CHANGELOG.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Konfiguration der Sektionen für Godot-spezifische Kategorien
+          configure-sections: >
+            {
+              "feature":{"prefix":"### ✨ Neue Features","labels":["feature","enhancement"]},
+              "bugfix":{"prefix":"### 🐛 Bugfixes","labels":["bug","fix"]},
+              "documentation":{"prefix":"### 📚 Dokumentation","labels":["documentation"]},
+              "performance":{"prefix":"### ⚡ Performance","labels":["performance"]},
+              "refactor":{"prefix":"### 🔨 Refactoring","labels":["refactor"]},
+              "ui":{"prefix":"### 🎨 UI/UX","labels":["ui","ux"]},
+              "godot":{"prefix":"### 🎮 Godot-Spezifisch","labels":["godot","engine"]},
+              "breaking":{"prefix":"### ⚠️ Breaking Changes","labels":["breaking"]}
+            }
+          # Zusätzliche Konfigurationsoptionen
+          unreleased: true
+          unreleased-label: "🚧 Unveröffentlicht"
+          future-release: "v1.0.0"
+          release-branch: "main"
+          breaking-labels: breaking,Breaking Change
+          enhancement-labels: feature,enhancement
+          bug-labels: bug,fix
+          exclude-labels: duplicate,question,invalid,wontfix
+          breaking-label: "### ⚠️ Breaking Changes"
+          enhancement-label: "### ✨ Verbesserungen"
+          bugs-label: "### 🐛 Bugfixes"
+          author: true
+          compare-link: true
+          issue-line-labels: ALL
+          exclude-tags-regex: "^(?!v).*$"
+          add-sections: '{"documentation":{"prefix":"### 📚 Dokumentation","labels":["documentation"]}}'
+
+      - name: Commit and Push Changelog
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CHANGELOG.md
+          git commit -m "docs: Update Changelog" || exit 0
+          git push
