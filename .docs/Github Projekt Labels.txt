@@ -1,0 +1,32 @@
+
+
+> Internal: 
+	Build
+	Documentation
+> External
+	Plugin
+> : 
+> UI
+	Ingame
+	Menu
+	Settings
+> Status: 
+	Pending
+		Is ready to be worked on
+	Aproved
+		Is not to be executed as it currently is
+	In Progress
+	Resolved
+	Triage
+	Wont Fix
+	Canceled
+> Roadmap
+> Type: 
+	Bug / Error
+	Breaking Change
+	Feature
+	Enhancement
+	Other
+	Question
+	Refactoring
+	Proposal
