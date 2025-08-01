@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2jydhkkjxepj"]
+
+[ext_resource type="Script" uid="uid://0wxrhkvji15g" path="res://scenes/ui/minimap/minimap.gd" id="1_4bivy"]
+[ext_resource type="Texture2D" uid="uid://dc04iwoecmvwm" path="res://assets/minimap/panel_brown.png" id="2_qqvxh"]
+
+[node name="Minimap" type="Control"]
+custom_minimum_size = Vector2(280, 280)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -280.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_4bivy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qqvxh")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qqvxh")
+draw_center = false
+region_rect = Rect2(4, 4, 120, 120)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14902, 1, 1, 1)
+
+[node name="TextureRectMinimap" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = -3.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+stretch_mode = 6
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+canvas_cull_mask = 4294967279
+
+[node name="Camera2DMinimap" type="Camera2D" parent="SubViewport"]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
