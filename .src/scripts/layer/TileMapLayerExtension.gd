@@ -9,6 +9,7 @@ const _TILE_EMPTY : Vector3i = Vector3i(-1, -1, -1)
 const _TILE_UNPASSABLE : Vector3i = Vector3i(4, 0, 0)
 const _TILE_BUILDING : Vector3i = Vector3i(4, 1, 0)
 const _TILE_MARKER : Vector3i = Vector3i(4, 0, 1)
+const _TILE_TREE : Vector3i = Vector3i(5, 2, 0)
 
 # Modulate Color for Placeable
 const COLOR_BUILDING_POSSIBLE : Color = Color.LAWN_GREEN
@@ -16,6 +17,14 @@ const COLOR_BUILDING_NOTPOSSIBLE : Color = Color.DARK_RED
 
 ## Reference to astar instance if needed to set solid tiles
 var _astar : AStarGrid2D = null
+
+var placement_possible : bool = true :
+	set(value):
+		if placement_possible != value:
+			placement_possible = value
+			GlobalVars.GSB.Building_Placement_Possible.emit(placement_possible)
+	get():
+		return placement_possible
 
 
 func _init() -> void:
@@ -49,6 +58,13 @@ func get_tile_neighbours(TilePosition : Vector2i, TileCnt) -> Array[Vector2i]:
 			if not surroundingtiles.has(currenttile) and not currenttile == TilePosition  :
 				surroundingtiles.append(currenttile)
 	return surroundingtiles
+
+
+func get_tile_neighbours_rect(TilePosition : Vector2i, TileCnt) -> Rect2i:
+	var TileRect : Rect2i
+	TileRect.position = Vector2i(TilePosition.x - TileCnt, TilePosition.y - TileCnt)
+	TileRect.size = Vector2i(TileCnt +2, TileCnt * 2)
+	return TileRect
 
 
 func AddTileRectToMap(TilePosition : Vector2i, TileCnt : int = 0, astarsolid : bool = false, tile2set: Vector3i = _TILE_BUILDING) -> void:

@@ -3,6 +3,7 @@ extends TileMapLayerExtension
 
 @export var NavigationLayer : TileMapLayer
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GlobalVars.GSB.Building_Structure_Placed.connect(
@@ -21,6 +22,11 @@ func _ready() -> void:
 				#print("Map Coord: %s" % local2map)
 			pass
 	)
+	GlobalVars.GSB.Building_Placement_Possible.connect(
+		func(possible : bool):
+			placement_possible = possible
+			pass
+	)
 	pass # Replace with function body.
 
 
@@ -34,6 +40,12 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			pass
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			pass
+
+	# Checking if Building is Placeable
+	if event is InputEventMouseMotion:
+		if GlobalVars.BuildingMode:
+			# global_position = GlobalVars.GlobalMousePosition
 			pass
 
 
