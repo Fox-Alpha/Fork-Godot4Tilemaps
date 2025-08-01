@@ -1,0 +1,43 @@
+> Globals -> BuildingManager
+	Tastendruck [1-5]
+		-Emit Signal REQUEST_BUILD_MODE(BuildingID | Building IID | Building Dictionary)
+
+> Placer Node
+	Event: - Receive Signal REQUEST_BUILD_MODE
+		OnBuildModeRequested (BuildingID | Building IID | Building Dictionary)
+		Load Building Image
+		Calculate|Get Image Size
+		- Emit Signal BUILD_MODE_STARTED(ImageSize)
+		SetGlobalBuildMode = True
+	Event: InputMouseMove:
+		SetImageToMouseCursor()
+		SetGlobalMousePosition / UpdateGlobalMousePosition
+
+> Building Layer
+	Event: - Receive Signal BUILD_MODE_STARTED
+	AWAIT MouseLeftClick()
+
+> Navigation Layer
+	Event: - Receive Signal BUILD_MODE_STARTED
+		Calculate Buildingsize to TileMap
+		Check Building Size in Layer, if can (NOT) placed
+		{
+			ImageWidth / TileSize
+			ImageHeight / TileSize
+			Calculate TileCount
+		}
+		-Emit Signal BUILD_MODE_CAN_PLACED(True|False)
+
+> BuildingManager
+	Event: - Receive Signal BUILD_MODE_STARTED
+	Preparing Building Instance
+	AWAIT MouseLeftClick()
+
+> Building Layer
+	Event: - Receive Signal BUILD_MODE_STARTED
+	AWAIT MouseLeftClick()
+	Instantiate the Building on Coordinates
+	Set as Child
+	-Emit Signal BUILD_MODE_LEAVED()
+	
+	
