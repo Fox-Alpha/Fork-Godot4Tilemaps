@@ -1,0 +1,21 @@
+on:
+  # Manuelle Ausführung über GitHub Actions Interface
+  workflow_dispatch:
+  # Automatische Ausführung bei Push auf diese Branches
+  push:
+    branches: [ "develope", "GitHub-Changelog-Generator-Test" ]
+  # Automatische Ausführung bei Pull Requests zu diesen Branches
+  pull_request:
+    branches: [ "develope", "GitHub-Changelog-Generator-Test" ]
+jobs:
+  generate_changelog:
+    runs-on: ubuntu-latest # Configure this based on your needs
+    name: Update Changelog
+    steps:
+      - name: Create Changelog.md
+        id: changelog
+        uses: nextreleaseio/changelog-generator-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Required
+          changelog: 'CHANGELOG.md' # optional, default: CHANGELOG.md
+          use_pullrequest: false # default false, use true to create changelog in a PR
