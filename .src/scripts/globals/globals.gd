@@ -31,18 +31,12 @@ signal Game_State_Changed(gs : GameStates)
 
 # TODO: Getter / Setter
 # Invalidate BuildingToPlace, if false
-var BuildingMode : bool :
-	set(value):
-		BuildingMode = value
-		if value:
-			GSB.Enter_Buildmode.emit()
-		else:
-			GSB.Leave_Buildmode.emit()
-	get: return BuildingMode
+var BuildingMode : bool : set = SetBuildMode, get = GetBuildMode
 
 
 ## Referenz auf den Globalen Signal Bus
 @onready var GSB : GlobalSignalBus = GlobalSignalBus.new()
+@onready var GBM : ManagerBase = ManagerBase.new()
 @onready var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 
@@ -87,3 +81,11 @@ func _Connect_Signals() -> void:
 	get_tree().get_root().size_changed.connect(func(): Game_Window_Size_Changed.emit())
 	Game_State_Changed.connect(_Game_State_Has_Changed, CONNECT_DEFERRED)
 	pass
+
+
+func GetBuildMode() -> bool:
+	return GBM.BuildingMode
+
+
+func SetBuildMode(value) -> void:
+		GBM.BuildingMode = value
