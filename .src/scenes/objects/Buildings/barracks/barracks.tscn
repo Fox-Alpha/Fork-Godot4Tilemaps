@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dijgpdkai6m20"]
+
+[ext_resource type="Texture2D" uid="uid://bpf0hipk81txy" path="res://assets/buildings/barracks.png" id="1_pwbki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k88yi"]
+size = Vector2(108, 100)
+
+[node name="Barracks" type="StaticBody2D"]
+
+[node name="Picture" type="Sprite2D" parent="."]
+texture = ExtResource("1_pwbki")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k88yi")

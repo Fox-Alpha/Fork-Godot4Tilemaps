@@ -384,4 +384,6 @@ $RECYCLE.BIN/
 *.lnk
 .godot/editor/project_metadata.cfg
 .godot/editor/filesystem_cache8
-/assets/.unused/
+# /.assets/
+# /.unused/
+/.git.ignore/

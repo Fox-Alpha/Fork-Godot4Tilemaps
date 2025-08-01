@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm40tsnfhlvxc"]
+
+[ext_resource type="Texture2D" uid="uid://l2laj4nrrvgv" path="res://assets/buildings/refinery.png" id="1_8f7u3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k88yi"]
+size = Vector2(160, 88)
+
+[node name="Refinery" type="StaticBody2D"]
+
+[node name="Picture" type="Sprite2D" parent="."]
+texture = ExtResource("1_8f7u3")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k88yi")

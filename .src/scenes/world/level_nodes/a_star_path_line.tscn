@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dusbgic6ffk1a"]
+
+[ext_resource type="Script" uid="uid://oaycdt3km1tf" path="res://scenes/world/level_nodes/astar_path_line.gd" id="1_scggf"]
+
+[sub_resource type="Gradient" id="Gradient_50dtl"]
+
+[node name="AStarPathLine" type="Line2D"]
+z_index = 5
+width = 2.0
+default_color = Color(1.0588765e-06, 0.7339665, 0.73517567, 1)
+gradient = SubResource("Gradient_50dtl")
+joint_mode = 2
+antialiased = true
+script = ExtResource("1_scggf")

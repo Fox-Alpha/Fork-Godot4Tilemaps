@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bijafwwwim3uq"]
+
+[ext_resource type="Script" uid="uid://bmetlu8et85o0" path="res://scripts/globals/globals.gd" id="1_1kk6l"]
+[ext_resource type="Script" uid="uid://e8yubaf8tgkh" path="res://scripts/globals/signal_bus.gd" id="2_a766f"]
+
+[node name="Globals" type="Node"]
+script = ExtResource("1_1kk6l")
+
+[node name="SignalBus" type="Node" parent="."]
+script = ExtResource("2_a766f")
+metadata/_custom_type_script = "uid://e8yubaf8tgkh"
+
+[node name="Manager" type="Node" parent="."]

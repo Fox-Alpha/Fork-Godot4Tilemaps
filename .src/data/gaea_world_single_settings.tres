@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="NoiseGeneratorSettings" load_steps=12 format=3 uid="uid://d101qej3lbexa"]
+
+[ext_resource type="Script" uid="uid://d0qy4864bhpm7" path="res://addons/gaea/modifiers/2D/modifier_2d.gd" id="1_sdpej"]
+[ext_resource type="Script" uid="uid://be4vkhx6uafmy" path="res://addons/gaea/generators/2D/noise_generator/noise_generator_settings.gd" id="2_685nx"]
+[ext_resource type="Script" uid="uid://cujd683ufhthp" path="res://addons/gaea/generators/2D/noise_generator/noise_generator_data.gd" id="3_haebr"]
+[ext_resource type="Script" uid="uid://dx113xlb08npw" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="4_3gcmj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o53rm"]
+noise_type = 3
+seed = -310572230
+frequency = 0.02
+fractal_type = 2
+fractal_octaves = 1
+fractal_lacunarity = 1.0
+fractal_weighted_strength = 0.1
+
+[sub_resource type="Resource" id="Resource_sdpej"]
+script = ExtResource("4_3gcmj")
+type = 1
+terrain_set = 6
+metadata/_custom_type_script = "uid://dx113xlb08npw"
+
+[sub_resource type="Resource" id="Resource_685nx"]
+resource_name = "Water_Sand"
+script = ExtResource("3_haebr")
+title = "Water_Sand"
+tile = SubResource("Resource_sdpej")
+max = 0.05
+
+[sub_resource type="Resource" id="Resource_haebr"]
+script = ExtResource("4_3gcmj")
+type = 1
+terrain_set = 1
+metadata/_custom_type_script = "uid://dx113xlb08npw"
+
+[sub_resource type="Resource" id="Resource_3gcmj"]
+resource_name = "Sand_Grass"
+script = ExtResource("3_haebr")
+title = "Sand_Grass"
+tile = SubResource("Resource_haebr")
+min = 0.25
+
+[sub_resource type="Resource" id="Resource_c8vte"]
+script = ExtResource("4_3gcmj")
+atlas_coord = Vector2i(6, 0)
+metadata/_custom_type_script = "uid://dx113xlb08npw"
+
+[sub_resource type="Resource" id="Resource_3b7dj"]
+resource_name = "Sand"
+script = ExtResource("3_haebr")
+title = "Sand"
+tile = SubResource("Resource_c8vte")
+min = 0.05
+max = 0.25
+
+[resource]
+resource_name = "Settings"
+script = ExtResource("2_685nx")
+tiles = Array[ExtResource("3_haebr")]([SubResource("Resource_685nx"), SubResource("Resource_3gcmj"), SubResource("Resource_3b7dj")])
+noise = SubResource("FastNoiseLite_o53rm")
+infinite = true
+metadata/_custom_type_script = "uid://be4vkhx6uafmy"

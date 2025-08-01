@@ -1,0 +1,43 @@
+extends Label
+
+@onready var ground_tile_layer: TileMapLayer = $"/root/World/LayerGroup/GroundTileLayer"
+@onready var gaea_generator: GaeaGenerator = $"../../../GAEA_World/GaeaGenerator"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+func _physics_process(_delta: float) -> void:
+	pass
+	
+func _GetMapSize() -> Vector2i:
+	var guc = gaea_generator.world_size * gaea_generator.cell_size
+	return Vector2i(guc.x, guc.y)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	var tml : TileMapLayer = ground_tile_layer
+	var tml_lmp : Vector2i = tml.get_local_mouse_position()
+	text = "Mouse Position in Map: Tile on Map: %s (%s)" % [
+		str(tml.local_to_map(tml_lmp)),
+		str(tml_lmp)
+	]
+	GlobalVars.GlobalMousePosition = tml_lmp
+	pass
+
+
+#func _unhandled_key_input(event: InputEvent) -> void:
+	#if event is InputEventKey and event.is_pressed():
+		#match event.keycode:
+			#KEY_1:
+				#print("Key 1 verwendet: Command Center")
+			#KEY_2:
+				#print("Key 2 verwendet: Powerplant")
+			#KEY_3:
+				#print("Key 3 verwendet: Refinery")
+			#KEY_4:
+				#print("Key 4 verwendet: Barracks")
+			#KEY_5:
+				#print("Key 5 verwendet: Radar")

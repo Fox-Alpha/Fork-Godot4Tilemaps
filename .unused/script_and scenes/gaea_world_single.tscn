@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd3x0s4gxxj2p"]
+
+[ext_resource type="Script" uid="uid://cl8etsl4k8c4k" path="res://scenes/gaea_world_single.gd" id="1_temhi"]
+[ext_resource type="Script" uid="uid://datt2xny7d4r3" path="res://addons/gaea/others/threaded_chunk_loader_2d.gd" id="5_ieycn"]
+[ext_resource type="Script" uid="uid://bm34rin7hpjpg" path="res://addons/gaea/generators/2D/noise_generator/noise_generator.gd" id="7_kwtd1"]
+[ext_resource type="Resource" uid="uid://d101qej3lbexa" path="res://data/gaea_world_single_settings.tres" id="9_o53rm"]
+[ext_resource type="Script" uid="uid://ch5ykxoejwwgp" path="res://addons/gaea/renderers/2D/threaded_tilemap_gaea_renderer.gd" id="10_temhi"]
+[ext_resource type="TileSet" uid="uid://bh8qdt70s2epm" path="res://data/gaea_tileset.tres" id="11_ln5fk"]
+
+[node name="Gaea_World_Single" type="Node2D"]
+script = ExtResource("1_temhi")
+
+[node name="ThreadedTilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
+script = ExtResource("10_temhi")
+tile_map_layers = [NodePath("../TileMapLayer")]
+terrain_gap_fix = true
+generator = NodePath("../NoiseGenerator")
+metadata/_custom_type_script = "uid://ch5ykxoejwwgp"
+
+[node name="NoiseGenerator" type="Node" parent="."]
+script = ExtResource("7_kwtd1")
+settings = ExtResource("9_o53rm")
+metadata/_custom_type_script = "uid://bm34rin7hpjpg"
+
+[node name="ThreadedChunkLoader2D" type="Node2D" parent="NoiseGenerator" node_paths=PackedStringArray("generator")]
+script = ExtResource("5_ieycn")
+generator = NodePath("..")
+metadata/_custom_type_script = "uid://datt2xny7d4r3"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("11_ln5fk")
+
+[connection signal="area_rendered" from="ThreadedTilemapGaeaRenderer" to="." method="_on_threaded_tilemap_gaea_renderer_area_rendered"]
+[connection signal="chunk_rendered" from="ThreadedTilemapGaeaRenderer" to="." method="_on_threaded_tilemap_gaea_renderer_chunk_rendered"]
+[connection signal="grid_rendered" from="ThreadedTilemapGaeaRenderer" to="." method="_on_threaded_tilemap_gaea_renderer_grid_rendered"]
