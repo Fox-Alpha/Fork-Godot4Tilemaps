@@ -2,21 +2,26 @@
 class_name GlobalSignalBus extends Node
 
 ## Ausgelöst wenn die Kartegernerierung beendet ist
-signal World_Generated
+signal WORLD_GENERATED
 
 ## Ausgelöst wenn der Spieler auf dem Spielfeld platziert wurde
-signal PLayer_Respawned
+signal PLAYER_RESPAWNED
 
-signal Enter_Buildmode
-signal Leave_Buildmode
+## 
+signal BUILDMODE_REQUESTED(requestedbuilding : Dictionary)
+signal BUILDMODE_ENTER
+signal BUILDMODE_LEAVED
 
-signal Building_Structure_Placed(structure_iid : int, MousePos : Vector2i)
+signal BUILDMODE_STRUCTURE_PLACED(structure_iid : int, MousePos : Vector2i)
+signal BUILDMODE_PLACEMENT_POSSIBLE(possible : bool)
 
 func _ready() -> void:
 	print("GlobalSignalBus => _ready()")
 
-	World_Generated.connect(func(): pass )
-	PLayer_Respawned.connect(func(): pass )
-	Enter_Buildmode.connect(func(): pass )
-	Leave_Buildmode.connect(func(): pass )
-	Building_Structure_Placed.connect(func(): pass )
+	WORLD_GENERATED.connect(func(): pass )
+	PLAYER_RESPAWNED.connect(func(): pass )
+	BUILDMODE_ENTER.connect(func(): pass )
+	BUILDMODE_LEAVED.connect(func(): pass )
+	BUILDMODE_REQUESTED.connect(func(): pass )
+	BUILDMODE_PLACEMENT_POSSIBLE.connect(func(): pass )
+	BUILDMODE_STRUCTURE_PLACED.connect(func(): pass )
