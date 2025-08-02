@@ -2668,16 +2668,21 @@ texture = ExtResource("4_ypgn8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0jvm"]
 texture = ExtResource("4_2w5se")
-0:0/next_alternative_id = 2
+0:0/next_alternative_id = 3
 0:0/0 = 0
 0:0/0/modulate = Color(0.215686, 1, 1, 1)
 0:0/1 = 1
+0:0/2 = 2
+0:1/next_alternative_id = 3
 0:1/animation_frame_0/duration = 0.5
 0:1/animation_frame_1/duration = 0.2
 0:1/animation_frame_2/duration = 0.2
 0:1/animation_frame_3/duration = 0.3
 0:1/0 = 0
-0:1/0/modulate = Color(0.866287, 0.17093, 0.335975, 1)
+0:1/1 = 1
+0:1/1/modulate = Color(0, 0.47058824, 0.02745098, 1)
+0:1/2 = 2
+0:1/2/modulate = Color(1, 0.2784314, 0.32156864, 1)
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
