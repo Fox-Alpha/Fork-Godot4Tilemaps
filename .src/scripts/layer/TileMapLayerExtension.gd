@@ -33,16 +33,16 @@ func _init() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GlobalVars.GSB.Enter_Buildmode.connect(_EnterBuildMode)
-	GlobalVars.GSB.Leave_Buildmode.connect(_LeaveBuildMode)
+	GlobalVars.GSB.Enter_Buildmode.connect(_On_BuildModeEntered)
+	GlobalVars.GSB.Leave_Buildmode.connect(_On_BuildModeLeaved)
 	pass # Replace with function body.
 
 
-func _EnterBuildMode() -> void:
+func _On_BuildModeEntered() -> void:
 	pass
 
 
-func _LeaveBuildMode() -> void:
+func _On_BuildModeLeaved() -> void:
 	pass
 
 
@@ -50,7 +50,7 @@ func _LeaveBuildMode() -> void:
 ## TilePosition = The base Tile Coordnates
 ## TileCnt = Tiles Count in direction
 ## Return Array[Vector2i]
-func get_tile_neighbours(TilePosition : Vector2i, TileCnt) -> Array[Vector2i]:
+func Get_TileNeighbours(TilePosition : Vector2i, TileCnt) -> Array[Vector2i]:
 	var surroundingtiles : Array[Vector2i]= []
 	for a in range(TilePosition.x-TileCnt,TilePosition.x+TileCnt+1):
 		for b in range(TilePosition.y-TileCnt,TilePosition.y+TileCnt+1):
@@ -60,14 +60,14 @@ func get_tile_neighbours(TilePosition : Vector2i, TileCnt) -> Array[Vector2i]:
 	return surroundingtiles
 
 
-func get_tile_neighbours_rect(TilePosition : Vector2i, TileCnt) -> Rect2i:
+func Get_TileNeighboursRect(TilePosition : Vector2i, TileCnt) -> Rect2i:
 	var TileRect : Rect2i
 	TileRect.position = Vector2i(TilePosition.x - TileCnt, TilePosition.y - TileCnt)
 	TileRect.size = Vector2i(TileCnt +2, TileCnt * 2)
 	return TileRect
 
 
-func AddTileRectToMap(TilePosition : Vector2i, TileCnt : int = 0, astarsolid : bool = false, tile2set: Vector3i = _TILE_BUILDING) -> void:
+func Add_TileRectToMap(TilePosition : Vector2i, TileCnt : int = 0, astarsolid : bool = false, tile2set: Vector3i = _TILE_BUILDING) -> void:
 	for x in range(TilePosition.x-TileCnt,TilePosition.x+TileCnt+1):
 		for y in range(TilePosition.y-TileCnt,TilePosition.y+TileCnt+1):
 			set_cell(Vector2i(x, y), tile2set.x, Vector2i(tile2set.y, tile2set.z))
@@ -79,7 +79,7 @@ func AddTileRectToMap(TilePosition : Vector2i, TileCnt : int = 0, astarsolid : b
 	pass
 
 
-func get_empty_cell_positions_in_rect(rect2: Rect2, returnnotemptytiles : bool = true) -> Array[Vector2i]:
+func Get_EmptyCellPositionsInRect(rect2: Rect2, returnnotemptytiles : bool = true) -> Array[Vector2i]:
 	var empty_cell_positions : Array[Vector2i] = []
 
 	for y in rect2.size.y:
