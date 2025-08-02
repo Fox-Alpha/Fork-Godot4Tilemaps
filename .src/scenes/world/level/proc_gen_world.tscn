@@ -518,7 +518,7 @@ node_data = Array[Dictionary]([{
 }, {
 &"arguments": {
 &"range": {
-"max": 0.9500000000000001,
+"max": 0.95,
 "min": 0.15
 }
 },
@@ -543,7 +543,7 @@ node_data = Array[Dictionary]([{
 "salt": 1632532299
 }, {
 &"arguments": {
-&"max": 0.9500000000000001,
+&"max": 0.95,
 &"min": 0.15
 },
 &"enums": [],
@@ -810,7 +810,7 @@ node_data = Array[Dictionary]([{
 }, {
 &"arguments": {
 &"range": {
-"max": 0.9500000000000001,
+"max": 0.95,
 "min": 0.2
 }
 },
@@ -1099,7 +1099,7 @@ text = "TEST"
 script = ExtResource("10_iuhyi")
 
 [node name="Minimap" parent="CanvasLayer" instance=ExtResource("11_3gr1v")]
-anchors_preset = 2
+anchors_preset = -1
 anchor_left = 0.0
 anchor_right = 0.0
 offset_left = 0.0
