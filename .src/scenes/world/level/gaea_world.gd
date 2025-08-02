@@ -7,16 +7,23 @@ var last_grid: GaeaGrid
 
 func _ready() -> void:
 	print("geaea_world => _ready()")
-	GlobalVars.GSB.WORLD_GENERATED.connect(func(mapsize,_l): print("Gaea_World::_ready() => received GlobalSignalBus.World_Generated: MapSize %s" % [mapsize]))
-	gaea_generator.generation_finished.connect(
-		func(grid): 
-			last_grid = grid
-			print("Gaea_World::_ready() => LAMBDA generation_finished: _on_gaea_generator_generation_finished")
-			var ms = _GetMapSize()
-			GlobalVars.GSB.WORLD_GENERATED.emit(ms,0)
-			)
+	GlobalVars.GSB.WORLD_GENERATED.connect(_On_WorldGenerated)
+	gaea_generator.generation_finished.connect(_On_Mapgenerator_GenerationFinished)
 	gaea_generator.generate()
 	await gaea_generator.generation_finished
+	pass
+
+
+func _On_WorldGenerated(mapsize,_l) -> void:
+	print("Gaea_World::_ready() => received GlobalSignalBus.World_Generated: MapSize %s" % [mapsize])
+	pass
+
+
+func _On_Mapgenerator_GenerationFinished(grid) -> void:
+	last_grid = grid
+	print("Gaea_World::_ready() => LAMBDA generation_finished: _on_gaea_generator_generation_finished")
+	var ms = _GetMapSize()
+	GlobalVars.GSB.WORLD_GENERATED.emit(ms,0)
 	pass
 
 
