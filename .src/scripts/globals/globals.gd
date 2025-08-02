@@ -36,7 +36,7 @@ var BuildingMode : bool : set = SetBuildMode, get = GetBuildMode
 
 ## Referenz auf den Globalen Signal Bus
 @onready var GSB : GlobalSignalBus = GlobalSignalBus.new()
-@onready var GBM : ManagerBase = ManagerBase.new()
+@onready var GBM : BuildingManager = BuildingManager.new()
 @onready var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 
@@ -47,6 +47,8 @@ func _init() -> void:
 func _ready() -> void:
 	_Connect_Signals()
 	print("Globals => _ready()")
+	if GBM:
+		add_child(GBM)
 
 
 #func _unhandled_key_input(_event: InputEvent) -> void:
@@ -55,7 +57,20 @@ func _ready() -> void:
 	#pass
 
 
-func _Game_State_Has_Changed(new_gs : GameStates) -> void:
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			pass
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			pass
+
+	# Checking if Building is Placeable
+	if event is InputEventMouseMotion:
+		GlobalMousePosition = get_viewport().get_mouse_position()
+		pass
+
+
+func _On_GameStateHasChanged(new_gs : GameStates) -> void:
 	if GameState == new_gs: return
 
 	GameState = new_gs 
@@ -79,12 +94,15 @@ func _Game_State_Has_Changed(new_gs : GameStates) -> void:
 
 func _Connect_Signals() -> void:
 	get_tree().get_root().size_changed.connect(func(): Game_Window_Size_Changed.emit())
-	Game_State_Changed.connect(_Game_State_Has_Changed, CONNECT_DEFERRED)
+	Game_State_Changed.connect(_On_GameStateHasChanged, CONNECT_DEFERRED)
 	pass
 
 
 func GetBuildMode() -> bool:
-	return GBM.BuildingMode
+	if GBM != null:
+		return GBM.BuildingMode
+	else:
+		return false
 
 
 func SetBuildMode(value) -> void:
