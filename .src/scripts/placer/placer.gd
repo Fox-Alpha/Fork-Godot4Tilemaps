@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var build_ghost: Sprite2D = get_node_or_null("BuildGhost")
 
-var placement_possible : bool = false :
+var placement_possible : bool = true :
 	set(value):
 		if placement_possible != value:
 			placement_possible = value
@@ -48,7 +48,7 @@ func _input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if placement_possible:
 					var instance = load(BuildingToPlace.Path).instantiate()
-					GlobalVars.GSB.Building_Structure_Placed.emit(instance.get_instance_id(), get_global_mouse_position())
+					GlobalVars.GSB.BUILDMODE_STRUCTURE_PLACED.emit(instance.get_instance_id(), get_global_mouse_position())
 				pass
 			if event.button_index == MOUSE_BUTTON_RIGHT:
 				GlobalVars.BuildingMode = false
