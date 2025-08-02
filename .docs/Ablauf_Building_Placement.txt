@@ -1,16 +1,14 @@
-> Globals -> BuildingManager
+>DONE: Globals -> BuildingManager
 	Tastendruck [1-5]
-		-Emit Signal REQUEST_BUILD_MODE(BuildingID | Building IID | Building Dictionary)
+		-Emit Signal BUILDMODE_REQUESTED(Building Dictionary)
 
 > Placer Node
-	Event: - Receive Signal REQUEST_BUILD_MODE
+	Event: - Receive Signal BUILDMODE_REQUESTED
 		OnBuildModeRequested (BuildingID | Building IID | Building Dictionary)
 		Load Building Image
-		Calculate|Get Image Size
-		- Emit Signal BUILD_MODE_STARTED(ImageSize)
-		SetGlobalBuildMode = True
+		- Emit Signal BUILD_MODE_STARTED(ImageTexture2D_IID)	# Instance ID of loaded Image Resource
 	Event: InputMouseMove:
-		SetImageToMouseCursor()
+		SetImageToMouseCursorPosition()
 		SetGlobalMousePosition / UpdateGlobalMousePosition
 
 > Building Layer
@@ -29,8 +27,10 @@
 		-Emit Signal BUILD_MODE_CAN_PLACED(True|False)
 
 > BuildingManager
+	Event: - Receive Signal BUILDMODE_REQUESTED
+		Preparing Building Instance
 	Event: - Receive Signal BUILD_MODE_STARTED
-	Preparing Building Instance
+		SetGlobalBuildMode = True
 	AWAIT MouseLeftClick()
 
 > Building Layer
