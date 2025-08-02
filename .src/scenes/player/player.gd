@@ -19,7 +19,7 @@ var direction : Vector2 = Vector2.ZERO
 func _ready():
 	rng.randomize()
 	rng.seed = hash(rng.randi())
-	GlobalVars.GSB.World_Generated.connect(ResetPlayerPosition)
+	GlobalVars.GSB.WORLD_GENERATED.connect(ResetPlayerPosition)
 	animation_tree.active = true
 	tile_map_layer = get_node_or_null("/root/World/LayerGroup").get_children()[LAYERS.navigation_layer] as TileMapLayer
 	seed(rng.randi() + rng.randi())
@@ -68,11 +68,11 @@ func update_animation_parameters():
 
 
 func ResetPlayerPosition(_mapsize, _layer) -> void:
-	var tml : TileMapLayer = tile_map_layer
+	var tml : TileMapLayerExtension = tile_map_layer
 	var newtile := Vector2i.ZERO 
 	var nst : Array[Vector2i] = [] 
 
-	var arr : Array = tml.get_empty_cell_positions_in_rect(tml.get_used_rect(), false)
+	var arr : Array = tml.Get_EmptyCellPositionsInRect(tml.get_used_rect(), false)
 
 	while nst.size() != 4 and arr.size() > 0:
 		newtile = arr[rng.randi_range(0, arr.size())]
@@ -82,7 +82,7 @@ func ResetPlayerPosition(_mapsize, _layer) -> void:
 	global_position = gpp
 	
 	print("Respawn Player Position %s / %s " % [gpp, newtile])
-	GlobalVars.GSB.PLayer_Respawned.emit(gpp)
+	GlobalVars.GSB.PLAYER_RESPAWNED.emit(gpp)
 	pass
 
 

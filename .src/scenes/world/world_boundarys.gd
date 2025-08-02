@@ -14,7 +14,7 @@ class_name WorldBoundarys extends Node2D
 
 
 func _ready() -> void:
-	GlobalVars.GSB.World_Generated.connect(ResetWorldBorderPositions)
+	GlobalVars.GSB.WORLD_GENERATED.connect(ResetWorldBorderPositions)
 	pass
 
 

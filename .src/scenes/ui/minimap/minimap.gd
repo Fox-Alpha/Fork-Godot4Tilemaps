@@ -15,7 +15,7 @@ var gamecamposition : Vector2i
 
 
 func _ready():	
-	GlobalVars.GSB.World_Generated.connect(ResetCamMinimapBorderLimits)
+	GlobalVars.GSB.WORLD_GENERATED.connect(ResetCamMinimapBorderLimits)
 	await RenderingServer.frame_post_draw
 	
 	vpsize = vp.get_visible_rect().size

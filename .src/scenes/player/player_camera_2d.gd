@@ -10,7 +10,7 @@ extends Camera2D
 var tile_map_layers : Array[TileMapLayer] = []
 
 func _ready() -> void:
-	GlobalVars.GSB.World_Generated.connect(ResetCamLimits)
+	GlobalVars.GSB.WORLD_GENERATED.connect(ResetCamLimits)
 
 	if LayerGroupNode:
 		tile_map_layers.append_array(LayerGroupNode.get_children())

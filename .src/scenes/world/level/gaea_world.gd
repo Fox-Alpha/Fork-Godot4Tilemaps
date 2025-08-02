@@ -7,13 +7,13 @@ var last_grid: GaeaGrid
 
 func _ready() -> void:
 	print("geaea_world => _ready()")
-	GlobalVars.GSB.World_Generated.connect(func(mapsize,_l): print("Gaea_World::_ready() => received GlobalSignalBus.World_Generated: MapSize %s" % [mapsize]))
+	GlobalVars.GSB.WORLD_GENERATED.connect(func(mapsize,_l): print("Gaea_World::_ready() => received GlobalSignalBus.World_Generated: MapSize %s" % [mapsize]))
 	gaea_generator.generation_finished.connect(
 		func(grid): 
 			last_grid = grid
 			print("Gaea_World::_ready() => LAMBDA generation_finished: _on_gaea_generator_generation_finished")
 			var ms = _GetMapSize()
-			GlobalVars.GSB.World_Generated.emit(ms,0)
+			GlobalVars.GSB.WORLD_GENERATED.emit(ms,0)
 			)
 	gaea_generator.generate()
 	await gaea_generator.generation_finished

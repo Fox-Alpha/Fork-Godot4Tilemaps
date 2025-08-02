@@ -17,12 +17,12 @@ var idpath : Array[Vector2i] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GlobalVars.GSB.World_Generated.connect(SetNavigationLayer)
-	GlobalVars.GSB.Building_Structure_Placed.connect(
+	GlobalVars.GSB.WORLD_GENERATED.connect(SetNavigationLayer)
+	GlobalVars.GSB.BUILDMODE_STRUCTURE_PLACED.connect(
 		func(_iid:int, coords:Vector2i, cnt : int = 3):
-			AddTileRectToMap(local_to_map(to_local(coords)), cnt, true)
-			var cell_rect := get_tile_neighbours_rect(coords, cnt)
-			var cells := get_empty_cell_positions_in_rect(cell_rect, false).filter(
+			Add_TileRectToMap(local_to_map(to_local(coords)), cnt, true)
+			var cell_rect := Get_TileNeighboursRect(coords, cnt)
+			var cells := Get_EmptyCellPositionsInRect(cell_rect, false).filter(
 				func(tile):
 				var is_buildable : bool = false
 				# Return if tile is empty or is tree tile
@@ -82,7 +82,7 @@ func SetNavigationLayer(_LayerSize : Vector2i, _l) -> void:
 
 	# Getting not empty cells
 	var guc_necp : Array[Vector2i] = []
-	guc_necp = get_empty_cell_positions_in_rect(guc_rect)
+	guc_necp = Get_EmptyCellPositionsInRect(guc_rect)
 
 	# set solid tiles
 	for s in guc_necp.size():
