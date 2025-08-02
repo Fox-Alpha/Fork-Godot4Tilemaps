@@ -67,7 +67,7 @@ func update_animation_parameters():
 		animation_tree["parameters/walk/blend_position"] = direction
 
 
-func ResetPlayerPosition(_mapsize, _layer) -> void:
+func ResetPlayerPosition(_mapsize: Vector2i, _layer : int) -> void:
 	var tml : TileMapLayerExtension = tile_map_layer
 	var newtile := Vector2i.ZERO 
 	var nst : Array[Vector2i] = [] 
@@ -78,7 +78,7 @@ func ResetPlayerPosition(_mapsize, _layer) -> void:
 		newtile = arr[rng.randi_range(0, arr.size())]
 		nst = tml.get_surrounding_cells(newtile).filter(filter_not_solid_tiles)
 
-	var gpp  = tml.to_global(tml.map_to_local(newtile))
+	var gpp  := tml.to_global(tml.map_to_local(newtile))
 	global_position = gpp
 	
 	print("Respawn Player Position %s / %s " % [gpp, newtile])
