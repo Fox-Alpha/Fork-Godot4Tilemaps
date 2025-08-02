@@ -518,7 +518,7 @@ node_data = Array[Dictionary]([{
 }, {
 &"arguments": {
 &"range": {
-"max": 0.95,
+"max": 0.9500000000000001,
 "min": 0.15
 }
 },
@@ -543,7 +543,7 @@ node_data = Array[Dictionary]([{
 "salt": 1632532299
 }, {
 &"arguments": {
-&"max": 0.95,
+&"max": 0.9500000000000001,
 &"min": 0.15
 },
 &"enums": [],
@@ -810,7 +810,7 @@ node_data = Array[Dictionary]([{
 }, {
 &"arguments": {
 &"range": {
-"max": 0.95,
+"max": 0.9500000000000001,
 "min": 0.2
 }
 },
@@ -978,7 +978,7 @@ other = {
 &"autoshrink": true,
 &"name": &"_GraphFrame_205223",
 &"position": Vector2(-1960, 1749),
-&"size": Vector2(973, 498),
+&"size": Vector2(874, 498),
 &"tint_color": Color(0.3, 0.3, 0.3, 0.75),
 &"tint_color_enabled": false,
 &"title": "Title"
