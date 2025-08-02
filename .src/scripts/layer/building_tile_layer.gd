@@ -6,7 +6,11 @@ extends TileMapLayerExtension
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GlobalVars.GSB.Building_Structure_Placed.connect(
+	GlobalVars.GSB.BUILDMODE_REQUESTED.connect(_on_BuildModeRequested)
+	GlobalVars.GSB.BUILDMODE_ENTERED.connect(_On_BuildModeEntered)
+	GlobalVars.GSB.BUILDMODE_LEAVED.connect(_On_BuildModeLeaved)
+	GlobalVars.GSB.BUILDMODE_ERROR.connect(_On_BuildModeError)
+	GlobalVars.GSB.BUILDMODE_STRUCTURE_PLACED.connect(
 		func(iid:int, coords:Vector2i):
 			var instance = instance_from_id(iid)
 			if is_instance_valid(instance):
@@ -22,11 +26,12 @@ func _ready() -> void:
 				#print("Map Coord: %s" % local2map)
 			pass
 	)
-	GlobalVars.GSB.Building_Placement_Possible.connect(
+	GlobalVars.GSB.BUILDMODE_PLACEMENT_POSSIBLE.connect(
 		func(possible : bool):
 			placement_possible = possible
 			pass
 	)
+	child_entered_tree.connect(_On_ChildEnteredTree)
 	pass # Replace with function body.
 
 
@@ -42,12 +47,28 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			pass
 
-	# Checking if Building is Placeable
 	if event is InputEventMouseMotion:
 		if GlobalVars.BuildingMode:
-			# global_position = GlobalVars.GlobalMousePosition
 			pass
 
 
-func _child_entered_tree(_node : Node) -> void:
+## If new Building is added as Child
+func _On_ChildEnteredTree(_node : Node) -> void:
+	print("Building: %s has been placed" % [_node.name])
+	pass
+
+
+func _on_BuildModeRequested(_building : Dictionary) -> void:
+	pass
+
+
+func _On_BuildModeEntered() -> void:
+	pass
+
+
+func _On_BuildModeLeaved() -> void:
+	pass
+
+
+func _On_BuildModeError(_error : String) -> void:
 	pass
