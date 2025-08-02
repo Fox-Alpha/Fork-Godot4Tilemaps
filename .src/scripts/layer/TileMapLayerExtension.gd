@@ -20,9 +20,10 @@ var _astar : AStarGrid2D = null
 
 var placement_possible : bool = true :
 	set(value):
-		if placement_possible != value:
-			placement_possible = value
-			GlobalVars.GSB.Building_Placement_Possible.emit(placement_possible)
+		#if placement_possible != value:
+		placement_possible = value
+		# RECURSION ! 
+		#GlobalVars.GSB.BUILDMODE_PLACEMENT_POSSIBLE.emit(placement_possible)
 	get():
 		return placement_possible
 
