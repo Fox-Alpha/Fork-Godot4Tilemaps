@@ -49,15 +49,16 @@ var BuildingToPlace : String = ""
 
 func _init() -> void:
 	print("BuildingManager => _init()")
-	GlobalVars.GSB.BUILDMODE_REQUESTED.connect(_on_BuildModeRequested)
-	GlobalVars.GSB.BUILDMODE_ENTERED.connect(_On_BuildModeEntered)
-	GlobalVars.GSB.BUILDMODE_LEAVED.connect(_On_BuildModeLeaved)
-	GlobalVars.GSB.BUILDMODE_ERROR.connect(_On_BuildModeError)
+	name = "GlobalBuildingManager"
 	pass
 
 
 func _ready() -> void:
 	print("BuildingManager => _ready()")
+	GlobalVars.GSB.BUILDMODE_REQUESTED.connect(_on_BuildModeRequested)
+	GlobalVars.GSB.BUILDMODE_ENTERED.connect(_On_BuildModeEntered)
+	GlobalVars.GSB.BUILDMODE_LEAVED.connect(_On_BuildModeLeaved)
+	GlobalVars.GSB.BUILDMODE_ERROR.connect(_On_BuildModeError)
 	pass
 
 
