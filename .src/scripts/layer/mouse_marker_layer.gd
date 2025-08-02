@@ -23,6 +23,9 @@ func _input(event: InputEvent) -> void:
 			var buildrect = Get_TileNeighbours(loc_mouse_coord, 3)
 			for t in buildrect.size():
 				set_cell(buildrect[t], _TILE_MARKER.x, Vector2i(_TILE_MARKER.y, _TILE_MARKER.z))
+				#TODO: Set Tile Color to [not]possible
+				var td := get_cell_tile_data(buildrect[t])
+				td.modulate = COLOR_BUILDING_POSSIBLE if placement_possible else COLOR_BUILDING_NOTPOSSIBLE
 			pass
 	pass
 
