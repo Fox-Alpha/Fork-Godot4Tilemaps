@@ -47,6 +47,8 @@ func _init() -> void:
 func _ready() -> void:
 	_Connect_Signals()
 	print("Globals => _ready()")
+	if GSB:
+		add_child(GSB)
 	if GBM:
 		add_child(GBM)
 
