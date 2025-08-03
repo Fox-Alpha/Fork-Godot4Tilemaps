@@ -15,6 +15,7 @@ signal BUILDMODE_LEAVED
 
 signal BUILDMODE_STRUCTURE_PLACED(_structure_iid : int, _MousePos : Vector2i)
 signal BUILDMODE_PLACEMENT_POSSIBLE(_possible : bool)
+signal BUILDMODE_PLACEMENTPOSSIBLE_REQUESTED
 signal BUILDMODE_ERROR(_BUILDMODEERROR : String)
 
 
@@ -33,5 +34,6 @@ func _ready() -> void:
 	BUILDMODE_REQUESTED.connect(func(_requestedbuilding : Dictionary): pass )
 	BUILDMODE_REQUESTED_CHANGED.connect(func(_requestedbuilding : Dictionary): pass )
 	BUILDMODE_PLACEMENT_POSSIBLE.connect(func(_possible : bool): pass )
+	BUILDMODE_PLACEMENTPOSSIBLE_REQUESTED.connect(func(): pass )
 	BUILDMODE_STRUCTURE_PLACED.connect(func(_structure_iid : int, _MousePos : Vector2i): pass )
 	BUILDMODE_ERROR.connect(func(_BUILDMODEERROR : String): pass )
