@@ -3,12 +3,6 @@ extends TileMapLayerExtension
 @onready var path_line_2d: Line2D = $"../AStarPathLine"
 @onready var astar_grid := AStarGrid2D.new()
 
-#var placement_possible : bool = true :
-	#set(value):
-		#placement_possible = value
-		#GlobalVars.GSB.Building_Placement_Possible.emit(placement_possible)
-	#get():
-		#return placement_possible
 
 var ctrl_pressed : bool = false
 var mouse_pos : Vector2i = Vector2i.ZERO
@@ -17,22 +11,13 @@ var idpath : Array[Vector2i] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GlobalVars.GSB.WORLD_GENERATED.connect(SetNavigationLayer)
+	GlobalVars.GSB.WORLD_GENERATED.connect(Set_NavigationLayer, ConnectFlags.CONNECT_DEFERRED)
+	#GlobalVars.GSB.BUILDMODE_PLACEMENTPOSSIBLE_REQUESTED.connect(Get_PlacementPossible)
 	GlobalVars.GSB.BUILDMODE_STRUCTURE_PLACED.connect(
 		func(_iid:int, coords:Vector2i, cnt : int = 3):
-			Add_TileRectToMap(local_to_map(to_local(coords)), cnt, true)
-			var cell_rect := Get_TileNeighboursRect(coords, cnt)
-			var cells := Get_EmptyCellPositionsInRect(cell_rect, false).filter(
-				func(tile):
-				var is_buildable : bool = false
-				# Return if tile is empty or is tree tile
-				is_buildable = get_cell_atlas_coords(tile) != Vector2i(_TILE_EMPTY.y, _TILE_EMPTY.z) or \
-					get_cell_atlas_coords(tile) != Vector2i(_TILE_TREE.y, _TILE_TREE.z)
-				return is_buildable
-				)
-			# TODO: Replace sqrt(3) with size of Building Rectangle
-			placement_possible = cells.size() == cell_rect.size.x * cell_rect.size.y
-			pass
+			Add_TileRectToMap(local_to_map(to_local(coords)), cnt, true, _TILE_BUILDING)
+			Set_NavigationLayer(Vector2i.ZERO, 0)
+			pass, ConnectFlags.CONNECT_DEFERRED
 			)
 	_astar = astar_grid
 	pass # Replace with function body.
@@ -67,12 +52,13 @@ func _unhandled_input(event: InputEvent) -> void:
 					GlobalVars.astarpath.append(to_global(map_to_local(idpath[i])) as Vector2i)
 			idpath.clear()
 		pass
-
+	#if event is InputEventMouseMotion and GlobalVars.GBM.BuildingMode:
+		#GlobalVars.GSB.BUILDMODE_PLACEMENTPOSSIBLE_REQUESTED.emit()
 	pass
 
 
 ## 
-func SetNavigationLayer(_LayerSize : Vector2i, _l) -> void:
+func Set_NavigationLayer(_LayerSize : Vector2i, _l) -> void:
 	var guc_rect := get_used_rect()
 	
 	# creating astargrid2d
@@ -82,9 +68,21 @@ func SetNavigationLayer(_LayerSize : Vector2i, _l) -> void:
 
 	# Getting not empty cells
 	var guc_necp : Array[Vector2i] = []
-	guc_necp = Get_EmptyCellPositionsInRect(guc_rect)
+	guc_necp = Get_EmptyCellPositionsInRect(guc_rect, true)
 
 	# set solid tiles
 	for s in guc_necp.size():
 		astar_grid.set_point_solid(guc_necp[s])
+	pass
+
+# Not Used
+func Get_PlacementPossible() -> void:
+	var coords = local_to_map(to_local(GlobalVars.GlobalMousePosition))
+	var cnt = 3
+	var cell_rect := Get_TileNeighboursRect(coords, cnt)
+	var cells := Get_EmptyCellPositionsInRect(cell_rect, true)
+	var filteredcells := _is_buildable(cells)
+
+	placement_possible = filteredcells.size() == cell_rect.size.x * cell_rect.size.y
+	GlobalVars.GSB.BUILDMODE_PLACEMENT_POSSIBLE.emit(placement_possible)
 	pass
