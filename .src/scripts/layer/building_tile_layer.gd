@@ -1,7 +1,7 @@
 extends TileMapLayerExtension
 #extends TileMapLayer
 
-@export var NavigationLayer : TileMapLayer
+@export var NavigationLayer : TileMapLayerExtension
 
 
 # Called when the node enters the scene tree for the first time.
