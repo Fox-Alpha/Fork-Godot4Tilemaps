@@ -1,0 +1,64 @@
+C&C 3 Control Interface/Side Bar Definitions
+
+1. Objectives / Player Status:
+Click this button to view your primary and bonus objectives during the single player campaign, or view player status and alliances during multiplayer games.
+
+2. Sell Button:
+Use this button to Sell your structures and be refunded a percentage of their build cost.
+
+3. Power Toggle:
+Use this button to shut down an individual structure in trade of freeing up more power for the rest of your base.
+
+4. Repair Button:
+Use this button to Repair your damaged structures.
+
+5. Power Meter:
+Use this meter to determine how much power your base is generating vs. consuming. Moving your cursor over the meter will provide exact numbers.
+
+6. Mini-map:
+The Mini-map provides a strategic overview of the battlefield and allows for instant navigation to any point on the map.
+
+7. Resources:
+This displays the total amount of resources available to purchase items.
+
+8. Contextual Tab:
+The contextual tab provides the commander with a complete listing of all selected units and structures. This allows the commander to quickly view the composition of his forces, add or remove units from his group, give unit specific orders without losing his top level group selection, and a host of other organizational tools.
+
+9. Production Tabs:
+Use these tabs to manage your production queues from anywhere on the battlefield. Each tab represents a unique category, specifically Production Structures, Defensive Structures, Infantry, Vehicles, and Aircraft. By clicking on these tabs, you will be presented with all of your available construction options.
+
+10. Production Sub-Tabs:
+Use the sub tab system to manage your production queues for each individual structure, allowing you to create different units out of each Barracks, War Factory, etc. Each sub-tab represents a production structure under its parent production tab. By double-clicking on a sub-tab, the camera will be taken to that production structure.
+
+11. Build Buttons:
+Use these buttons to queue up, pause, or cancel the building of units and structures. Remember, build times will be longer if your base is low on power.
+
+12. Contextual Window:
+This section displays a portrait and the overall information about the currently selected unit or structure.
+
+13. Health:
+This bar represents the remaining hit points on the selected unit or squad.
+
+14. Upgrades:
+These images display which Upgrades the item can receive and / or if they have already been purchased.
+
+15. Combat Chain:
+These icons indicate where the unit falls in the combat chain. The green section indicates what weapon the unit has (middle icon) and what unit types that weapon is strong against. The red section indicates what unit type it is (middle icon) and what weapons that unit is weak against.
+
+16. Veterancy:
+If the selected unit has earned enough combat experience to gain a rank, their new veterancy level will be displayed here.
+
+17. Special Abilities:
+Use these buttons to activate Special Abilities for the selected unit or structure.
+
+18. Purchase Upgrades:
+Use these buttons to purchase upgrades for the selected unit or structure.
+
+19. Common Command Interface:
+This bottom bar allows quick and easy access to many of the most commonly used commands. Some of these include Attack Move, Force Fire, Stop, and Rules of Engagement.
+
+20. Superpower Timers:
+Has your enemy constructed a devastating superweapon? If so, the weapon name, player color, and countdown timer will be represented here. If the timer has stopped, then they’re low on power and now would be your best time to strike.
+
+21. Player Powers:
+Gained from building certain faction structures, these special powers can range from artillery strikes and bombing runs to radar scans and reinforcements. The left side of the screen will fill up with these powers as you gain them throughout a match.
