@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://bh8qdt70s2epm"]
+[gd_resource type="TileSet" load_steps=21 format=3 uid="uid://bh8qdt70s2epm"]
 
 [ext_resource type="Texture2D" uid="uid://b7xcipud8gli" path="res://assets/tilemap1.png" id="1_4ev2y"]
 [ext_resource type="Texture2D" uid="uid://2oq2uj0iskjh" path="res://assets/tilemap_ground_water.png" id="2_ypgn8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cis2p2hmpx65t" path="res://assets/tilemap_water_to_sand.png" id="4_ypgn8"]
 [ext_resource type="PackedScene" uid="uid://bxgy1tv4vj6gd" path="res://scenes/objects/Buildings/building_base.tscn" id="6_que1i"]
 [ext_resource type="PackedScene" uid="uid://cyf8wf51e50ts" path="res://scenes/objects/env/tree.tscn" id="7_2w5se"]
+[ext_resource type="Texture2D" uid="uid://jbkrspyqk1oo" path="res://assets/buildings/buildings_spritesheet.png" id="8_3avw5"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_4ljc3"]
 tile_data = PackedInt32Array(0, 589826, 4, 65536, 524290, 5)
@@ -2691,6 +2692,35 @@ texture = ExtResource("4_2w5se")
 scenes/1/scene = ExtResource("6_que1i")
 scenes/2/scene = ExtResource("7_2w5se")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mo8xm"]
+texture = ExtResource("8_3avw5")
+0:0/size_in_atlas = Vector2i(6, 6)
+0:0/0 = 0
+6:0/size_in_atlas = Vector2i(6, 6)
+6:0/0 = 0
+12:0/size_in_atlas = Vector2i(6, 6)
+12:0/0 = 0
+18:0/size_in_atlas = Vector2i(6, 6)
+18:0/0 = 0
+14:6/size_in_atlas = Vector2i(10, 6)
+14:6/0 = 0
+14:12/size_in_atlas = Vector2i(8, 8)
+14:12/0 = 0
+8:12/size_in_atlas = Vector2i(6, 8)
+8:12/0 = 0
+0:14/size_in_atlas = Vector2i(8, 6)
+0:14/0 = 0
+0:6/size_in_atlas = Vector2i(8, 8)
+0:6/0 = 0
+8:6/size_in_atlas = Vector2i(4, 4)
+8:6/0 = 0
+25:8/size_in_atlas = Vector2i(4, 1)
+25:8/0 = 0
+28:4/size_in_atlas = Vector2i(1, 4)
+28:4/0 = 0
+26:0/size_in_atlas = Vector2i(4, 4)
+26:0/0 = 0
+
 [resource]
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
@@ -2733,6 +2763,7 @@ sources/2 = SubResource("TileSetAtlasSource_sxpl8")
 sources/4 = SubResource("TileSetAtlasSource_r0jvm")
 sources/3 = SubResource("TileSetAtlasSource_que1i")
 sources/5 = SubResource("TileSetScenesCollectionSource_2w5se")
+sources/6 = SubResource("TileSetAtlasSource_mo8xm")
 pattern_0 = SubResource("TileMapPattern_4ljc3")
 pattern_1 = SubResource("TileMapPattern_r0jvm")
 pattern_2 = SubResource("TileMapPattern_6t0vi")
