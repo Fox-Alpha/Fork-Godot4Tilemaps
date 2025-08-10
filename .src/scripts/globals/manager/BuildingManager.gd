@@ -17,31 +17,51 @@ const Buildings : Dictionary = {
 		"name" : "Soldier Barracks",
 		"Path" : "uid://dijgpdkai6m20",
 		"Image" : "res://assets/buildings/barracks.png",
-		"IID" : -1
+		"IID" : -1,
+		"Preview" : {
+			"TileSetSourve" : 6,
+			"TileSetAtlasCoordnates" : Vector2i(0, 6)
+			},
 		},
 	"COMMAND_CENTER" : {
 		"name" : "Commanding Center",
 		"Path":"uid://c8q5s3mdfbhp0",
 		"Image" : "res://assets/buildings/commandcenter.png",
-		"IID" : -1
+		"IID" : -1,
+		"Preview" : {
+			"TileSetSourve" : 6,
+			"TileSetAtlasCoordnates" : Vector2i(12, 0)
+			},
 		},
 	"RADAR" : {
 		"name" : "Radar Facilitie",
 		"Path":"uid://dryt1143aijbt",
 		"Image" : "res://assets/buildings/radar.png",
-		"IID" : -1
+		"IID" : -1,
+		"Preview" : {
+			"TileSetSourve" : 6,
+			"TileSetAtlasCoordnates" : Vector2i(22, 12)
+			},
 		},
 	"REFINERY" : {
 		"name" : "Resource Refinery",
 		"Path":"uid://bm40tsnfhlvxc",
 		"Image" : "res://assets/buildings/refinery.png",
-		"IID" : -1
+		"IID" : -1,
+		"Preview" : {
+			"TileSetSourve" : 6,
+			"TileSetAtlasCoordnates" : Vector2i(14, 6)
+			},
 		},
 	"POWERPLANT" : {
 		"name" : "Power Plant",
 		"Path":"uid://soue6jtn4lpw",
 		"Image" : "res://assets/buildings/powerplant.png",
-		"IID" : -1
+		"IID" : -1,
+		"Preview" : {
+			"TileSetSourve" : 6,
+			"TileSetAtlasCoordnates" : Vector2i(6, 0)
+			},
 		},
 }
 var BuildingToPlace : String = ""
