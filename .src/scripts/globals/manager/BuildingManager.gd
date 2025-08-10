@@ -15,8 +15,8 @@ var BuildingMode : bool :
 const Buildings : Dictionary = {
 	"BARRACKS" : {
 		"name" : "Soldier Barracks",
-		"Path" : "uid://dijgpdkai6m20",
-		"Resource": "uid://bu3ee4mtll3s4",
+		"Path" : "uid://bxgy1tv4vj6gd",
+		"Resource": "uid://baufmwisatreq",
 		"Image" : "res://assets/buildings/barracks.png",
 		"IID" : -1,
 		"Preview" : {
@@ -28,7 +28,7 @@ const Buildings : Dictionary = {
 	"COMMAND_CENTER" : {
 		"name" : "Commanding Center",
 		"Path":"uid://bxgy1tv4vj6gd",
-		"Resource" : "uid://bu3ee4mtll3s4",
+		"Resource" : "uid://btgor3fybscpk",
 		#"Path":"uid://c8q5s3mdfbhp0",
 		#P:/3. GODOT Projekte/Projekte/GD4-RTS/branch_develope/.src/scenes/objects/Buildings/building_base.tscn
 		"Image" : "res://assets/buildings/commandcenter.png",
