@@ -9,18 +9,13 @@ func _ready() -> void:
 	#if !is_node_ready():
 		#await get_tree().process_frame()
 		#await RenderingServer.frame_post_draw
-	image.texture = BuildingResource.BuildingImage
-	#image.texture = load(BuildingResource.BuildingImage) as Texture2D
-
+	image.texture = load(BuildingResource.ImagePath) as Texture2D 
+	
 	image.region_enabled = true
 	image.region_rect.position = Vector2(BuildingResource.TilesetAtlasCoordnates.x * BuildingResource.TilesetTileSize, BuildingResource.TilesetAtlasCoordnates.y * BuildingResource.TilesetTileSize)
 	image.region_rect.size = Vector2(BuildingResource.TilesetSizeInAtlas.x * BuildingResource.TilesetTileSize, BuildingResource.TilesetSizeInAtlas.y * BuildingResource.TilesetTileSize)
-
-
-	var size_x = BuildingResource.TilesetSizeInAtlas.x
-	var size_y = BuildingResource.TilesetSizeInAtlas.y
-	var tilesize = BuildingResource.TilesetTileSize
-	collision.shape.size = Vector2(size_x * tilesize, size_y * tilesize)
+	
+	collision.shape.size = Vector2(BuildingResource.TilesetSizeInAtlas.x * BuildingResource.TilesetTileSize, BuildingResource.TilesetSizeInAtlas.y * BuildingResource.TilesetTileSize)
 	pass
 
 # Called when the node enters the scene tree for the first time.
