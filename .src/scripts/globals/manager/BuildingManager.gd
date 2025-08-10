@@ -16,21 +16,27 @@ const Buildings : Dictionary = {
 	"BARRACKS" : {
 		"name" : "Soldier Barracks",
 		"Path" : "uid://dijgpdkai6m20",
+		"Resource": "uid://bu3ee4mtll3s4",
 		"Image" : "res://assets/buildings/barracks.png",
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(0, 6)
+			"TileSetAtlasCoordnates" : Vector2i(0, 6),
+			"TileSetSizInAtlas" : Vector2i(6, 6),
 			},
 		},
 	"COMMAND_CENTER" : {
 		"name" : "Commanding Center",
-		"Path":"uid://c8q5s3mdfbhp0",
+		"Path":"uid://bxgy1tv4vj6gd",
+		"Resource" : "uid://bu3ee4mtll3s4",
+		#"Path":"uid://c8q5s3mdfbhp0",
+		#P:/3. GODOT Projekte/Projekte/GD4-RTS/branch_develope/.src/scenes/objects/Buildings/building_base.tscn
 		"Image" : "res://assets/buildings/commandcenter.png",
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(12, 0)
+			"TileSetAtlasCoordnates" : Vector2i(12, 0),
+			"TileSetSizInAtlas" : Vector2i(6, 6),
 			},
 		},
 	"RADAR" : {
@@ -40,7 +46,8 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(22, 12)
+			"TileSetAtlasCoordnates" : Vector2i(22, 12),
+			"TileSetSizInAtlas" : Vector2i(8, 8),
 			},
 		},
 	"REFINERY" : {
@@ -50,7 +57,8 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(14, 6)
+			"TileSetAtlasCoordnates" : Vector2i(14, 6),
+			"TileSetSizInAtlas" : Vector2i(10, 6),
 			},
 		},
 	"POWERPLANT" : {
@@ -60,7 +68,8 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(6, 0)
+			"TileSetAtlasCoordnates" : Vector2i(6, 0),
+			"TileSetSizInAtlas" : Vector2i(6, 6),
 			},
 		},
 }
