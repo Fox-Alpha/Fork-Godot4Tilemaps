@@ -14,7 +14,7 @@ var BuildingMode : bool :
 
 const Buildings : Dictionary = {
 	"BARRACKS" : {
-		"name" : "Soldier Barracks",
+		"name" : "Infantery Barracks",
 		"Path" : "uid://bxgy1tv4vj6gd",
 		"Resource": "uid://baufmwisatreq",
 		"Image" : "res://assets/buildings/barracks.png",
