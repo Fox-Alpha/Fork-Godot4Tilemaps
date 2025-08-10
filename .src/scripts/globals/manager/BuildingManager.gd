@@ -21,8 +21,7 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(0, 6),
-			"TileSetSizInAtlas" : Vector2i(6, 6),
+			"TileSetAtlasCoordnates" : Vector2i(0, 6)
 			},
 		},
 	"COMMAND_CENTER" : {
@@ -35,8 +34,7 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(12, 0),
-			"TileSetSizInAtlas" : Vector2i(6, 6),
+			"TileSetAtlasCoordnates" : Vector2i(12, 0)
 			},
 		},
 	"RADAR" : {
@@ -47,8 +45,7 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(22, 12),
-			"TileSetSizInAtlas" : Vector2i(8, 8),
+			"TileSetAtlasCoordnates" : Vector2i(22, 12)
 			},
 		},
 	"REFINERY" : {
@@ -59,8 +56,7 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(14, 6),
-			"TileSetSizInAtlas" : Vector2i(10, 6),
+			"TileSetAtlasCoordnates" : Vector2i(14, 6)
 			},
 		},
 	"POWERPLANT" : {
@@ -71,8 +67,7 @@ const Buildings : Dictionary = {
 		"IID" : -1,
 		"Preview" : {
 			"TileSetSourve" : 6,
-			"TileSetAtlasCoordnates" : Vector2i(6, 0),
-			"TileSetSizInAtlas" : Vector2i(6, 6),
+			"TileSetAtlasCoordnates" : Vector2i(6, 0)
 			},
 		},
 }
