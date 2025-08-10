@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildingBaseResource" load_steps=3 format=3 uid="uid://belfwl3vg8j51"]
+
+[ext_resource type="Script" uid="uid://b4mlr41hm2mfu" path="res://data/resources/buildings/buildingbase_resource.gd" id="1_o6wqi"]
+[ext_resource type="Texture2D" uid="uid://jbkrspyqk1oo" path="res://assets/buildings/buildings_spritesheet.png" id="1_ognqc"]
+
+[resource]
+script = ExtResource("1_o6wqi")
+BuildingName = "Refinery"
+TilesetAtlasCoordnates = Vector2i(14, 6)
+TilesetSizeInAtlas = Vector2i(10, 6)
+BuildingImage = ExtResource("1_ognqc")
+metadata/_custom_type_script = "uid://b4mlr41hm2mfu"

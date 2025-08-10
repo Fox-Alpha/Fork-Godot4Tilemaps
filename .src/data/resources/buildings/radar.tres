@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_qf1y8")
+BuildingName = "Radar Facilitie"
 health = 1000
 BuildingImage = ExtResource("1_mi87p")
 metadata/_custom_type_script = "uid://b4mlr41hm2mfu"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BuildingBaseResource" load_steps=3 format=3 uid="uid://ctrd2ytutxh4c"]
+
+[ext_resource type="Script" uid="uid://b4mlr41hm2mfu" path="res://data/resources/buildings/buildingbase_resource.gd" id="1_h5qkv"]
+[ext_resource type="Texture2D" uid="uid://jbkrspyqk1oo" path="res://assets/buildings/buildings_spritesheet.png" id="1_ibnkw"]
+
+[resource]
+script = ExtResource("1_h5qkv")
+BuildingImage = ExtResource("1_ibnkw")
+metadata/_custom_type_script = "uid://b4mlr41hm2mfu"
