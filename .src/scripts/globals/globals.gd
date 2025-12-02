@@ -1,5 +1,5 @@
 ## Hallo Welt
-#class_name Globals 
+#class_name Globals
 extends Node
 
 #region GameStates
@@ -75,7 +75,7 @@ func _input(event):
 func _On_GameStateHasChanged(new_gs : GameStates) -> void:
 	if GameState == new_gs: return
 
-	GameState = new_gs 
+	GameState = new_gs
 	print("Global Autoload => _Game_State_Has_Changed(GS:%s)" % GameStates.keys()[new_gs])
 	match new_gs:
 		GameStates.GAMEISLOADING:

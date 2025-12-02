@@ -14,10 +14,10 @@ var gamecamposition : Vector2i
 @onready var gaea_generator: GaeaGenerator = $/root/World/GAEA_World/GaeaGenerator
 
 
-func _ready():	
+func _ready():
 	GlobalVars.GSB.WORLD_GENERATED.connect(ResetCamMinimapBorderLimits)
 	await RenderingServer.frame_post_draw
-	
+
 	vpsize = vp.get_visible_rect().size
 	gamecam = vp.get_camera_2d()
 	cam2dmap.position = gamecam.global_position
