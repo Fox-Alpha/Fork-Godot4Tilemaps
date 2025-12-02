@@ -10,13 +10,13 @@ func _ready() -> void:
 		#await get_tree().process_frame()
 		#await RenderingServer.frame_post_draw
 	image.texture = BuildingResource.BuildingImage
-	#image.texture = load(BuildingResource.BuildingImage) as Texture2D 
-	
+	#image.texture = load(BuildingResource.BuildingImage) as Texture2D
+
 	image.region_enabled = true
 	image.region_rect.position = Vector2(BuildingResource.TilesetAtlasCoordnates.x * BuildingResource.TilesetTileSize, BuildingResource.TilesetAtlasCoordnates.y * BuildingResource.TilesetTileSize)
 	image.region_rect.size = Vector2(BuildingResource.TilesetSizeInAtlas.x * BuildingResource.TilesetTileSize, BuildingResource.TilesetSizeInAtlas.y * BuildingResource.TilesetTileSize)
-	
-	
+
+
 	var size_x = BuildingResource.TilesetSizeInAtlas.x
 	var size_y = BuildingResource.TilesetSizeInAtlas.y
 	var tilesize = BuildingResource.TilesetTileSize
