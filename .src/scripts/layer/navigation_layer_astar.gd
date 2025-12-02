@@ -57,10 +57,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	pass
 
 
-## 
+##
 func Set_NavigationLayer(_LayerSize : Vector2i, _l) -> void:
 	var guc_rect := get_used_rect()
-	
+
 	# creating astargrid2d
 	astar_grid.region = guc_rect
 	astar_grid.cell_size = Vector2(1, 1)

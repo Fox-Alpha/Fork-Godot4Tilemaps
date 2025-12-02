@@ -17,7 +17,7 @@ func _ready() -> void:
 	GlobalVars.GSB.BUILDMODE_LEAVED.connect(_On_BuildModeLeaved)
 	GlobalVars.GSB.BUILDMODE_REQUESTED.connect(_on_BuildModeRequested)
 	GlobalVars.GSB.BUILDMODE_PLACEMENT_POSSIBLE.connect(
-		func(possible : bool): 
+		func(possible : bool):
 			placement_possible = possible
 	)
 	pass # Replace with function body.
@@ -43,8 +43,8 @@ func _input(event: InputEvent) -> void:
 			for t in buildrect.size():
 				var alt = 0
 				if NavigationLayer.Get_IsTilePassable(buildrect[t]):
-					alt = 1 
-				else: 
+					alt = 1
+				else:
 					alt = 2
 				set_cell(buildrect[t], _TILE_MARKER.x, Vector2i(_TILE_MARKER.y, _TILE_MARKER.z), alt)
 				var possible = get_used_cells_by_id(_TILE_MARKER.x, Vector2i(_TILE_MARKER.y, _TILE_MARKER.z), 2).size()
