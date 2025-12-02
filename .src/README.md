@@ -25,7 +25,7 @@ This is now a base for some Kind of games
 
 
 ### Fork of Godot4Tilemaps
- 
+
 *** LISCENSE ***
 * You can only use the assets for non-commercial projects.
 * you can modify the assets
@@ -35,7 +35,7 @@ if you'd like to use the assets for commercial use, you can purchase a liscense 
 
 	ITCH LINK:
 		https://jackie-codes.itch.io/paradise-asset-pack
-		
+
 
 
 ![Alt text](screenshots/game.PNG)
