@@ -10,7 +10,8 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	pass
-	
+
+
 func _GetMapSize() -> Vector2i:
 	var guc = gaea_generator.world_size * gaea_generator.cell_size
 	return Vector2i(guc.x, guc.y)

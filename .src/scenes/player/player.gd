@@ -24,7 +24,7 @@ func _ready():
 	tile_map_layer = get_node_or_null("/root/World/LayerGroup").get_children()[LAYERS.navigation_layer] as TileMapLayer
 	seed(rng.randi() + rng.randi())
 
-	
+
 func _process(_delta):
 	update_animation_parameters()
 
@@ -42,7 +42,7 @@ func _physics_process(_delta):
 		pass
 	else:
 		direction = Input.get_vector("left", "right","up","down").normalized()
-		
+
 	if direction:
 		velocity = direction * SPEED
 		if Input.is_key_pressed(KEY_SHIFT):
@@ -69,8 +69,8 @@ func update_animation_parameters():
 
 func ResetPlayerPosition(_mapsize: Vector2i, _layer : int) -> void:
 	var tml : TileMapLayerExtension = tile_map_layer
-	var newtile := Vector2i.ZERO 
-	var nst : Array[Vector2i] = [] 
+	var newtile := Vector2i.ZERO
+	var nst : Array[Vector2i] = []
 
 	var arr : Array = tml.Get_EmptyCellPositionsInRect(tml.get_used_rect(), false)
 
@@ -80,12 +80,12 @@ func ResetPlayerPosition(_mapsize: Vector2i, _layer : int) -> void:
 
 	var gpp  := tml.to_global(tml.map_to_local(newtile))
 	global_position = gpp
-	
+
 	print("Respawn Player Position %s / %s " % [gpp, newtile])
 	GlobalVars.GSB.PLAYER_RESPAWNED.emit(gpp)
 	pass
 
 
-func filter_not_solid_tiles(coord : Vector2i) -> bool: 
+func filter_not_solid_tiles(coord : Vector2i) -> bool:
 	var atl_coords = tile_map_layer.get_cell_atlas_coords(coord)
 	return atl_coords != Vector2i(11,0)
