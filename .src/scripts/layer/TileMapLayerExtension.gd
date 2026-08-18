@@ -5,11 +5,11 @@ class_name TileMapLayerExtension extends TileMapLayer
 ## X == Source
 ## Y == AtlasCoord_X
 ## Z == AtlasCoord_Y
-const _TILE_EMPTY : Vector3i = Vector3i(-1, -1, -1)		# Empty Tile
-const _TILE_UNPASSABLE : Vector3i = Vector3i(0, 12, 0)	# Sand or Water
-const _TILE_BUILDING : Vector3i = Vector3i(4, 1, 0)		# Placed Building
-const _TILE_MARKER : Vector3i = Vector3i(4, 0, 1)		# Marker for Visualize
-const _TILE_TREE : Vector3i = Vector3i(0, 11, 0)		# Tile Placeholder for trees in Navigation
+const _TILE_EMPTY : Vector3i = Vector3i(-1, -1, -1)		## Empty Tile
+const _TILE_UNPASSABLE : Vector3i = Vector3i(0, 12, 0)	## Sand or Water
+const _TILE_BUILDING : Vector3i = Vector3i(4, 1, 0)		## Placed Building
+const _TILE_MARKER : Vector3i = Vector3i(4, 0, 1)		## Marker for Visualize
+const _TILE_TREE : Vector3i = Vector3i(0, 11, 0)		## Tile Placeholder for trees in Navigation
 
 # Modulate Color for Placeable
 const COLOR_BUILDING_POSSIBLE : Color = Color.LAWN_GREEN
@@ -22,7 +22,7 @@ var placement_possible : bool = false :
 	set(value):
 		#if placement_possible != value:
 		placement_possible = value
-		# RECURSION ! 
+		# RECURSION !
 		#GlobalVars.GSB.BUILDMODE_PLACEMENT_POSSIBLE.emit(placement_possible)
 	get():
 		return placement_possible
@@ -108,7 +108,7 @@ func _is_buildable(tilerect : Array[Vector2i])-> Array[Vector2i]:
 
 func Get_IsTilePassable(tilecoord : Vector2i) -> bool:
 	var ispassable : bool = false
-	
+
 	var source = get_cell_source_id(tilecoord)
 	var tile = get_cell_atlas_coords(tilecoord)
 	var tiletype = Vector3i(source, tile.x, tile.y)
